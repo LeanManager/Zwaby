@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Droid/bin/Debug
+/Droid/obj
+/iOS/obj/iPhoneSimulator/Debug
+/packages
+/Zwaby/bin/Debug
+/Zwaby/obj
+/Zwaby.UWP
+/ZwabyStripe/obj
