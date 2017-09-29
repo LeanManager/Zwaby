@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using XamarinForms.SQLite.SQLite;
+using Zwaby.Interfaces;
 using Zwaby.Models;
 
 namespace Zwaby.ViewModels
@@ -46,20 +48,7 @@ namespace Zwaby.ViewModels
 			{
 				if (SetProperty(ref creditCardName, value))
 				{
-					// Update SQLite
-					var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
-
-					sqLiteConnection.Update(new CustomerPaymentInfo
-					{
-						Id = 1,
-						CreditCardName = value,
-                        CreditCardNumber = creditCardNumber,
-                        ExpirationDate = expirationDate,
-                        SecurityCode = securityCode,
-                        BillingZipCode = billingZipCode
-					});
-
-					sqLiteConnection.Dispose();
+				
 				}
 			}
 			get
@@ -75,20 +64,7 @@ namespace Zwaby.ViewModels
 			{
 				if (SetProperty(ref creditCardNumber, value))
 				{
-					// Update SQLite
-					var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
-
-					sqLiteConnection.Update(new CustomerPaymentInfo
-					{
-						Id = 1,
-						CreditCardName = creditCardName,
-						CreditCardNumber = value,
-						ExpirationDate = expirationDate,
-						SecurityCode = securityCode,
-						BillingZipCode = billingZipCode
-					});
-
-					sqLiteConnection.Dispose();
+					
 				}
 			}
 			get
@@ -104,20 +80,8 @@ namespace Zwaby.ViewModels
 			{
 				if (SetProperty(ref expirationDate, value))
 				{
-					// Update SQLite
-					var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
+				
 
-					sqLiteConnection.Update(new CustomerPaymentInfo
-					{
-						Id = 1,
-						CreditCardName = creditCardName,
-						CreditCardNumber = creditCardNumber,
-						ExpirationDate = value,
-						SecurityCode = securityCode,
-						BillingZipCode = billingZipCode
-					});
-
-					sqLiteConnection.Dispose();
 				}
 			}
 			get
@@ -133,20 +97,7 @@ namespace Zwaby.ViewModels
 			{
 				if (SetProperty(ref securityCode, value))
 				{
-					// Update SQLite
-					var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
-
-					sqLiteConnection.Update(new CustomerPaymentInfo
-					{
-						Id = 1,
-						CreditCardName = creditCardName,
-						CreditCardNumber = creditCardNumber,
-						ExpirationDate = expirationDate,
-						SecurityCode = value,
-						BillingZipCode = billingZipCode
-					});
-
-					sqLiteConnection.Dispose();
+					
 				}
 			}
 			get
@@ -162,20 +113,7 @@ namespace Zwaby.ViewModels
 			{
 				if (SetProperty(ref billingZipCode, value))
 				{
-					// Update SQLite
-					var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
-
-					sqLiteConnection.Update(new CustomerPaymentInfo
-					{
-						Id = 1,
-						CreditCardName = creditCardName,
-						CreditCardNumber = creditCardNumber,
-						ExpirationDate = expirationDate,
-						SecurityCode = securityCode,
-						BillingZipCode = value
-					});
-
-					sqLiteConnection.Dispose();
+					
 				}
 			}
 			get
@@ -184,40 +122,61 @@ namespace Zwaby.ViewModels
 			}
 		}
 
-
-		public PaymentPageViewModel()
+        public async Task ProcessPayment()
         {
+            try
+            {
+                if (string.IsNullOrEmpty(ExpirationDate))
+                    ExpirationDate = "09/18";
+
+                var exp = ExpirationDate.Split('/');
+                var token = _repository.CreateToken(CreditCardNumber, exp[0], exp[1], SecurityCode);
+                await Application.Current.MainPage.DisplayAlert("Test Message", token, "OK");
+                await _api.ChargeCard(token, 5.00M);
+            }
+            catch (Exception ex)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            }
+        }
+        
+        private readonly IStripeRepository _repository;
+        private readonly IAPIRepository _api;
+		public PaymentPageViewModel(IStripeRepository repository, IAPIRepository api)
+        {
+            _repository = repository;
+            _api = api;
 			// TODO: Use BookingCalculations to assign the ViewModel properties
 
 			// generate Approximate Duration for the service 
 			// based on bedrooms, bathrooms, residence type, and *how dirty the residence is
 
-			var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
+			//var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
 
-			var variable = sqLiteConnection.GetTableInfo(typeof(CustomerPaymentInfo).Name);
+			//var variable = sqLiteConnection.GetTableInfo(typeof(CustomerPaymentInfo).Name);
 
-			if (variable.Count == 0)
-			{
-				sqLiteConnection.CreateTable<CustomerPaymentInfo>();
+			//if (variable.Count == 0)
+			//{
+			//	sqLiteConnection.CreateTable<CustomerPaymentInfo>();
 
-				sqLiteConnection.Insert(new CustomerPaymentInfo());
-			}
-			else
-			{
-				var customerPaymentInfo = sqLiteConnection.Table<CustomerPaymentInfo>().First();
+			//	sqLiteConnection.Insert(new CustomerPaymentInfo());
+			//}
+			//else
+			//{
+			//	var customerPaymentInfo = sqLiteConnection.Table<CustomerPaymentInfo>().First();
 
-                CreditCardName = customerPaymentInfo.CreditCardName;
+   //             CreditCardName = customerPaymentInfo.CreditCardName;
 
-                CreditCardNumber = customerPaymentInfo.CreditCardNumber;
+   //             CreditCardNumber = customerPaymentInfo.CreditCardNumber;
 
-                ExpirationDate = customerPaymentInfo.ExpirationDate;
+   //             ExpirationDate = customerPaymentInfo.ExpirationDate;
 
-                SecurityCode = customerPaymentInfo.SecurityCode;
+   //             SecurityCode = customerPaymentInfo.SecurityCode;
 
-                BillingZipCode = customerPaymentInfo.BillingZipCode;
-			}
+   //             BillingZipCode = customerPaymentInfo.BillingZipCode;
+			//}
 
-			sqLiteConnection.Dispose();
+			//sqLiteConnection.Dispose();
         }
     }
 }
