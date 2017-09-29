@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Zwaby.Views.CancelBookingPage"
+             Title="Cancellation">
+    
+	<ScrollView>
+
+        <Grid Padding="15,20,15,15" RowSpacing="15">
+            <!-- X rows -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="45" />
+                <RowDefinition Height="155" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="Please tell us why you would like to cancel your cleaning service:"
+                   TextColor="Blue" FontAttributes="Bold"
+                   Grid.Row="0"/>
+
+            <Editor x:Name="cancellationNotes" Margin="0,0,0,25"
+                    Grid.Row="1"/>
+
+            <Button Text="Finish Cancellation" BackgroundColor="White"
+                    FontAttributes="Bold" FontSize="20"
+                    Clicked="OnFinishCancellationClicked"
+                    Grid.Row="2"/>
+            
+        </Grid>
+
+    </ScrollView>
+    
+</ContentPage>

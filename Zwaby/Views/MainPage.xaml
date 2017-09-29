@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Zwaby.Views.MainPage"
+             Title="Home">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor"
+                        Value="White" />
+                <Setter Property="FontSize"
+                        Value="20" />
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+    
+	<Grid Padding="0,20,0,15" RowSpacing="25">
+        <!-- 7 rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="250" />
+            <RowDefinition Height="10" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Image x:Name="homeImage" Grid.Row="0" Aspect="AspectFit"/>
+
+        <Label Text="" Grid.Row="1"/>
+
+        <Button Text="Book Cleaning" Grid.Row="2" Style="{StaticResource buttonStyle}"
+                Clicked="OnBookCleaningClicked"/>
+
+        <Button Text="Booking Details" Grid.Row="3" Style="{StaticResource buttonStyle}"
+                Clicked="OnBookingDetailsClicked"/>
+
+        <Button Text="Profile" Grid.Row="4" Style="{StaticResource buttonStyle}"
+                Clicked="OnProfileClicked"/>
+
+    </Grid>
+
+    </ScrollView>
+        
+</ContentPage>

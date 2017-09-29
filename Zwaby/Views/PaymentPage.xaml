@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Zwaby.Views.PaymentPage"
+             Title="Payment">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="Blue" />
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+    
+	<Grid Padding="20,20,20,20" RowSpacing="17">
+        <Grid.RowDefinitions>
+            <!-- 10 rows -->    
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" /> 
+            <RowDefinition Height="40" /> 
+            <RowDefinition Height="50" /> 
+            <RowDefinition Height="*" />     
+        </Grid.RowDefinitions>    
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>  
+
+        <Label Text="Approximate duration: " Style="{StaticResource labelStyle}"
+               Grid.Row="0"/>  
+
+        <Label Text="Total price: " Style="{StaticResource labelStyle}"
+               Grid.Row="1"/>   
+
+        <Label Text="Please enter payment information: " VerticalTextAlignment="Center"
+               Style="{StaticResource labelStyle}"
+               Grid.Row="2"/> 
+
+        <Entry Placeholder="Name on card" x:Name="cardName"
+               Text="{Binding CreditCardName, Mode=TwoWay}" 
+               Grid.Row="3"/>  
+            
+        <Entry Placeholder="Card number" x:Name="cardNumber"
+               Text="{Binding CreditCardNumber, Mode=TwoWay}"  
+               Grid.Row="4"/>
+
+        <Entry Placeholder="Expiration date" x:Name="expirationDate"
+               Text="{Binding ExpirationDate, Mode=TwoWay}"  
+               Grid.Row="5"/>     
+
+        <Entry Placeholder="Security code" x:Name="securityCode"
+               Text="{Binding SecurityCode, Mode=TwoWay}"  
+               Grid.Row="6"/>  
+
+        <Entry Placeholder="Billing zip code" x:Name="billingZipCode"
+               Text="{Binding BillingZipCode, Mode=TwoWay}"  
+               Grid.Row="7"/> 
+
+        <Button Text="Finish Booking" FontSize="20" FontAttributes="Bold" BackgroundColor="White"
+                Grid.Row="8" Clicked="OnFinishBookingClicked"/>    
+
+    </Grid>
+
+    </ScrollView>    
+    
+</ContentPage>

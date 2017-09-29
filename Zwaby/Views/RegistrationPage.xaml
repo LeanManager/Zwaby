@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Zwaby.Views.RegistrationPage"
+             Title="Registration">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor"
+                        Value="White" />
+                <Setter Property="FontSize"
+                        Value="20" />
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+            </Style>
+
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="Blue" />
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+    
+	<Grid Padding="25,15,20,15" RowSpacing="20">
+        <!-- 10 rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="30" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <Label Text="Please enter the following information:" Style="{StaticResource labelStyle}"
+               Grid.Row="0" VerticalTextAlignment="End"/>
+
+        <Entry x:Name="firstName" Placeholder="First Name" Text="{Binding FirstName}"
+               Grid.Row="1"/>
+
+        <Entry x:Name="lastName" Placeholder="Last Name" Text="{Binding LastName}"
+               Grid.Row="2"/>
+
+        <Entry x:Name="emailAddress" Placeholder="Email Address" Text="{Binding EmailAddress}"
+               Grid.Row="3"/>
+
+        <Entry x:Name="phoneNumber" Placeholder="Phone Number" Text="{Binding PhoneNumber}"
+               Grid.Row="4"/>
+
+        <Button Text="Submit" Style="{StaticResource buttonStyle}"
+                Grid.Row="5" Clicked="OnSubmitClicked"/>
+
+        <Label Text="Please enter one-time password:" Style="{StaticResource labelStyle}"
+               Grid.Row="6" VerticalTextAlignment="End"/>
+
+        <Entry Placeholder="Password"
+               Grid.Row="7"/>
+
+        <Button Text="Finish Registration" Style="{StaticResource buttonStyle}"
+                Grid.Row="8" Clicked="OnFinishRegistrationClicked"/>
+
+    </Grid>
+
+    </ScrollView>
+        
+</ContentPage>

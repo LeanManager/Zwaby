@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:converters="clr-namespace:Zwaby.Converters;assembly=Zwaby"
+             x:Class="Zwaby.Views.ServiceLocationPage"
+             Title="Location">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="Blue" />
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+                <Setter Property="VerticalTextAlignment"
+                        Value="Center"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        
+	<Grid Padding="20,17,20,15" RowSpacing="15">
+        <!-- 11 rows -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="25" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />
+            <RowDefinition Height="40" />    
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120" />
+            <ColumnDefinition Width="45" />
+            <ColumnDefinition Width="*" />    
+        </Grid.ColumnDefinitions>
+
+        <Label Text="Please enter service location:" TextColor="Blue" FontAttributes="Bold"
+               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+        <Entry Placeholder="Street Address" Text="{Binding Street, Mode=TwoWay}"
+               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+        <Entry Placeholder="City" Text="{Binding City, Mode=TwoWay}"
+               Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+        <Entry Placeholder="State" Text="{Binding State, Mode=TwoWay}"
+               Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+        <Entry Placeholder="Zip Code" Text="{Binding ZipCode, Mode=TwoWay}"
+               Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+        <Label Text="Please select residence type:" TextColor="Blue" FontAttributes="Bold" VerticalTextAlignment="End"
+               Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"/>
+
+        <Picker Title="House or Apartment"
+                Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3">
+            <Picker.Items>
+                <x:String>House</x:String>
+                <x:String>Apartment</x:String>
+            </Picker.Items>
+
+            <Picker.SelectedIndex>
+                <Binding Path="ResidenceType">
+                    <Binding.Converter>
+                        <converters:ObjectToIndexConverter x:TypeArguments="x:String">
+                            <x:String>House</x:String>
+                            <x:String>Apartment</x:String>
+                        </converters:ObjectToIndexConverter>
+                    </Binding.Converter>
+                </Binding>        
+            </Picker.SelectedIndex>
+        </Picker> 
+
+        <Label Text="Bedrooms:" Style="{StaticResource labelStyle}"
+               Grid.Row="7" Grid.Column="0"/>  
+
+        <Picker Title="Bedrooms"
+                Grid.Row="7" Grid.Column="1">
+            <Picker.Items>
+                <x:String>1</x:String>
+                <x:String>2</x:String>
+                <x:String>3</x:String>
+                <x:String>4</x:String>
+                <x:String>5</x:String>    
+            </Picker.Items>
+
+            <Picker.SelectedIndex>
+                <Binding Path="Bedrooms">
+                    <Binding.Converter>
+                        <converters:ObjectToIndexConverter x:TypeArguments="x:Double">
+                            <x:Double>1</x:Double>
+                            <x:Double>2</x:Double>
+                            <x:Double>3</x:Double>
+                            <x:Double>4</x:Double>
+                            <x:Double>5</x:Double>   
+                        </converters:ObjectToIndexConverter>
+                    </Binding.Converter>
+                </Binding>        
+            </Picker.SelectedIndex>
+        </Picker>
+
+        <Label Text="Bathrooms:" Style="{StaticResource labelStyle}"
+               Grid.Row="8" Grid.Column="0"/>  
+
+        <Picker Title="Bathrooms"
+                Grid.Row="8" Grid.Column="1">
+            <Picker.Items>
+                <x:String>1</x:String>
+                <x:String>2</x:String>
+                <x:String>3</x:String>
+                <x:String>4</x:String>
+                <x:String>5</x:String>    
+            </Picker.Items>
+
+            <Picker.SelectedIndex>
+                <Binding Path="Bathrooms">
+                    <Binding.Converter>
+                        <converters:ObjectToIndexConverter x:TypeArguments="x:Double">
+                            <x:Double>1</x:Double>
+                            <x:Double>2</x:Double>
+                            <x:Double>3</x:Double>
+                            <x:Double>4</x:Double>
+                            <x:Double>5</x:Double>    
+                        </converters:ObjectToIndexConverter>
+                    </Binding.Converter>
+                </Binding>        
+            </Picker.SelectedIndex>
+        </Picker>    
+
+        <Button Text="Next" FontAttributes="Bold" BackgroundColor="White" FontSize="20"
+                Grid.Row="9"  Grid.Column="0" Grid.ColumnSpan="3"
+                Clicked="OnNextClicked"/>
+        
+    </Grid>
+    </ScrollView>
+</ContentPage>

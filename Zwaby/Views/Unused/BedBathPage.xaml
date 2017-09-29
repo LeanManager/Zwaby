@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Zwaby.Views.BedBathPage"
+             Title="Details">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="Blue" />
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+	<ScrollView>
+
+    <Grid Padding="20,20,20,20" RowSpacing="25" ColumnSpacing="20">
+        <!-- 6 rows -->    
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="100" />  
+            <RowDefinition Height="50" />    
+            <RowDefinition Height="*" />    
+        </Grid.RowDefinitions>   
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="40" />    
+        </Grid.ColumnDefinitions>  
+
+        <Label Text="Please select number of bedrooms:" Style="{StaticResource labelStyle}"
+               Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+        <Picker Grid.Row="0" Grid.Column="2">
+            <Picker.Items>
+                <x:String> 1</x:String>
+                <x:String> 2</x:String>
+                <x:String> 3</x:String>
+                <x:String> 4</x:String>
+                <x:String> 5</x:String>    
+            </Picker.Items>
+        </Picker>    
+
+        <Label Text="Please select number of bathrooms:" Style="{StaticResource labelStyle}"
+               Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"/>
+
+        <Picker Grid.Row="1" Grid.Column="2">
+            <Picker.Items>
+                <x:String> 1</x:String>
+                <x:String> 2</x:String>
+                <x:String> 3</x:String>
+                <x:String> 4</x:String>
+                <x:String> 5</x:String>    
+            </Picker.Items>
+        </Picker>   
+
+        <Label Text="Instructions for cleaning professional (optional):" Style="{StaticResource labelStyle}"
+               Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" VerticalTextAlignment="End"/> 
+
+        <Editor Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3" />  
+
+        <Button Text="Next" BackgroundColor="White" FontAttributes="Bold" FontSize="20"
+                Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"
+                Clicked="OnNextClicked"/>    
+
+    </Grid>    
+        
+    </ScrollView>
+    
+</ContentPage>

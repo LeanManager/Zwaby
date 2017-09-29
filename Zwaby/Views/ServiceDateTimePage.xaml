@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Zwaby.Views.ServiceDateTimePage"
+             Title="Date and Time">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="Blue" />
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <ScrollView>
+        
+	<Grid Padding="20,15,20,20" RowSpacing="20">
+        <!-- 9 rows -->    
+        <Grid.RowDefinitions>
+            <RowDefinition Height="25" />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="45" /> 
+            <RowDefinition Height="45" />     
+            <RowDefinition Height="45" />
+            <RowDefinition Height="120" />    
+            <RowDefinition Height="50" />  
+            <RowDefinition Height="*" />    
+        </Grid.RowDefinitions>   
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>   
+
+        <Label Text="Please select day and time:" Style="{StaticResource labelStyle}"
+               Grid.Row="0" VerticalTextAlignment="End"/>
+
+        <DatePicker x:Name="datePicker"
+                    Grid.Row="1" />
+
+        <TimePicker x:Name="timePicker"
+                    Grid.Row="2" />   
+
+        <Label Text="To better prepare for your service, please select the state of your home:" Style="{StaticResource labelStyle}"
+               VerticalTextAlignment="End"
+               Grid.Row="3" />   
+
+        <Picker Title="Dirty - it has not been cleaned recently." x:Name="statePicker"
+                Grid.Row="4">
+            <Picker.Items>
+                <x:String>Somewhat dirty, but not much.</x:String>
+                <x:String>Dirty - it has not been cleaned recently.</x:String>
+                <x:String>Very dirty - it has not been cleaned in a while.</x:String>    
+            </Picker.Items>    
+        </Picker>        
+
+        <Label Text="Instructions for cleaning professional (optional):" Style="{StaticResource labelStyle}"
+               Grid.Row="5" VerticalTextAlignment="End"/> 
+
+        <Editor x:Name="instructions"
+                Grid.Row="6" />     
+
+        <Button Text="Next" BackgroundColor="White" FontAttributes="Bold" FontSize="20"
+                Grid.Row="7" Clicked="OnNextClicked"/> 
+
+    </Grid>
+        
+    </ScrollView>
+    
+</ContentPage>

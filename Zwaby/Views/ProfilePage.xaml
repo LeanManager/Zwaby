@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Zwaby.Views.ProfilePage"
+             Title="Profile">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="buttonStyle" TargetType="Button">
+                <Setter Property="BackgroundColor"
+                        Value="White" />
+                <Setter Property="FontSize"
+                        Value="17" />
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+                <Setter Property="HorizontalOptions"
+                        Value="Center"/>
+            </Style>
+
+            <Style x:Key="entryStyle" TargetType="Entry">
+                <Setter Property="TextColor"
+                        Value="DarkBlue" />
+                <Setter Property="PlaceholderColor"
+                        Value="DarkBlue" />
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+                <Setter Property="FontSize"
+                        Value="20" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
+                <Setter Property="VerticalOptions"
+                        Value="Center" />
+            </Style>
+
+            <Style x:Key="labelStyle" TargetType="Label">
+                <Setter Property="TextColor"
+                        Value="Blue" />
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+                <Setter Property="FontSize"
+                        Value="20" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+    
+	    <Grid Padding="10,20,10,15">   
+            <!-- 10 rows -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="35" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="55" />
+                <RowDefinition Height="35" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Entry x:Name="firstName" Style="{StaticResource entryStyle}"
+                   Text="{Binding FirstName, Mode=TwoWay}"
+                   Grid.Row="0"/>
+
+            <Button Text=" Edit first name " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
+                    Command="{Binding FirstNameCommand}" Clicked="OnFirstNameClicked"
+                    Grid.Row="1"/>
+
+            <Entry x:Name="lastName" Style="{StaticResource entryStyle}"
+                   Text="{Binding LastName, Mode=TwoWay}"
+                   Grid.Row="2"/>
+
+            <Button Text=" Edit last name " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
+                    Command="{Binding LastNameCommand}" Clicked="OnLastNameClicked"
+                    Grid.Row="3"/>
+
+            <Entry x:Name="emailAddress" Style="{StaticResource entryStyle}"
+                   Text="{Binding EmailAddress, Mode=TwoWay}"
+                   Grid.Row="4"/>
+
+            <Button Text=" Edit email address " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
+                    Command="{Binding EmailAddressCommand}" Clicked="OnEmailAddressClicked"
+                    Grid.Row="5"/>
+
+            <Entry x:Name="phoneNumber" Style="{StaticResource entryStyle}"
+                   Text="{Binding PhoneNumber, Mode=TwoWay}"
+                   Grid.Row="6"/>
+
+            <Button Text=" Edit phone number " Style="{StaticResource buttonStyle}" Margin="0,0,0,15"
+                    Command="{Binding PhoneNumberCommand}" Clicked="OnPhoneNumberClicked"
+                    Grid.Row="7"/>
+
+            <Label Text="Zwaby platform rating: 5 stars" Style="{StaticResource labelStyle}"
+                   Grid.Row="8" HorizontalTextAlignment="Center" VerticalTextAlignment="End"/> 
+                   <!-- Binding, StringFormat and add customer rating -->
+
+        </Grid>
+
+    </ScrollView>
+    
+</ContentPage>

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Zwaby.Views.BookingDetailsPage"
+             Title="Booking Details">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="staticLabelStyle" TargetType="Label">
+                <Setter Property="FontSize"
+                        Value="18" />
+                <Setter Property="FontAttributes"
+                        Value="Bold"/>
+                <Setter Property="TextColor"
+                        Value="Blue" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="End" />
+            </Style>
+
+            <Style x:Key="bindingLabelStyle" TargetType="Label">
+                <Setter Property="BackgroundColor"
+                        Value="White" />
+                <Setter Property="TextColor"
+                        Value="Blue" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+    
+        <Grid Padding="10,13,10,25" RowSpacing="15">
+            <!-- 16 rows -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="30" />
+                <RowDefinition Height="200" />
+                <RowDefinition Height="50" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            
+            <Label Text="Service date and time" Style="{StaticResource staticLabelStyle}"
+                   Grid.Row="0"/>
+
+            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+                   Grid.Row="1"/>
+
+            <Label Text="Service location" Style="{StaticResource staticLabelStyle}"
+                   Grid.Row="2"/>
+
+            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+                   Grid.Row="3"/>
+
+            <Label Text="Cleaning service" Style="{StaticResource staticLabelStyle}"
+                   Grid.Row="4"/>
+
+            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+                   Grid.Row="5"/>
+
+            <Label Text="Total price" Style="{StaticResource staticLabelStyle}"
+                   Grid.Row="6"/>
+
+            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+                   Grid.Row="7"/>
+
+            <Label Text="Approximate service duration" Style="{StaticResource staticLabelStyle}"
+                   Grid.Row="8"/>
+
+            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+                   Grid.Row="9"/>
+
+            <Label Text="Cleaning service rating" Style="{StaticResource staticLabelStyle}"
+                   Grid.Row="10"/>
+
+            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+                   Grid.Row="11"/>
+
+            <Label Text="Zwaby platform rating" Style="{StaticResource staticLabelStyle}"
+                   Grid.Row="12"/>
+
+            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+                   Grid.Row="13"/>
+
+            <Image x:Name="bookingImage" Aspect="AspectFit"
+                   Grid.Row="14"/>
+
+            <Button Text="Cancel Booking" FontSize="20" FontAttributes="Bold"
+                    Grid.Row="15" BackgroundColor="White" Clicked="OnCancelBookingClicked"/>
+            <!-- Inside, use command(s) to update CurrentBookingViewModel -->
+            
+        </Grid>
+
+    </ScrollView>
+    
+</ContentPage>
