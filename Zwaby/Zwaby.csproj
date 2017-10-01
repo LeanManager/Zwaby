@@ -17,6 +17,7 @@
     <None Remove="Views\Unused\BedBathPage.xaml" />
     <None Remove="Views\Unused\MessagesPage.xaml" />
     <None Remove="Views\Unused\SelectServicePage.xaml" />
+    <None Remove="Images\child-1245893_1280.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
@@ -32,6 +33,7 @@
     <EmbeddedResource Include="Views\Unused\BedBathPage.xaml" />
     <EmbeddedResource Include="Views\Unused\MessagesPage.xaml" />
     <EmbeddedResource Include="Views\Unused\SelectServicePage.xaml" />
+    <EmbeddedResource Include="Images\child-1245893_1280.jpg" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />

@@ -30,8 +30,9 @@ namespace Zwaby.Views
             //var cardSecurityCode = securityCode.Text;
             //var cardZipCode = billingZipCode.Text;
 
-            // TODO: Stripe integration (or manual)
+            // TODO: Stripe integration
             var viewModel = (PaymentPageViewModel)this.BindingContext;
+
             await viewModel.ProcessPayment();
 
             // use MessagingCenter to tell the ~BookingViewModel that a booking has been made? ChangeCanExecute() for the booking details button

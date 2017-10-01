@@ -16,7 +16,6 @@ namespace Zwaby.Views
         {
             InitializeComponent();
 
-            signupImage.Source = ImageSource.FromResource("Zwaby.Images.child-1245893_1280.jpg");
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
 
             NavigationPage.SetBackButtonTitle(this, "Back");
