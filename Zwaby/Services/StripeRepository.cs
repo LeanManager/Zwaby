@@ -11,7 +11,9 @@ namespace Zwaby.Services
         public string CreateToken(string cardNumber, string cardExpMonth, string cardExpYear, string cardCVC)
         {
             StripeConfiguration.SetApiKey("pk_test_oO54O2GJQQMEjY1BUDVoRZ01");
+
             //TODO: Wireup card information below
+
             var tokenOptions = new StripeTokenCreateOptions()
             {
                 Card = new StripeCreditCardOptions()
@@ -24,6 +26,7 @@ namespace Zwaby.Services
             };
 
             var tokenService = new StripeTokenService();
+
             StripeToken stripeToken = tokenService.Create(tokenOptions);
 
             return stripeToken.Id;

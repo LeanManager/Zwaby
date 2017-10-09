@@ -6,10 +6,13 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="2.0.0" />
+    <PackageReference Include="Stripe.net" Version="10.4.0" />
   </ItemGroup>
 
   <ItemGroup>

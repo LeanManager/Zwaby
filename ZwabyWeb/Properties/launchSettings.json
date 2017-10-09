@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "ZwabyStripe": {
+    "ZwabyWeb": {
       "commandName": "Project",
       "launchBrowser": true,
       "environmentVariables": {

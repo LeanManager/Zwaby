@@ -7,7 +7,7 @@ namespace Zwaby.Services
 {
     public class APIRepository: IAPIRepository
     {
-        const string Url = "https://yourlocalapi.com";
+        const string Url = "http://localhost:5000";
         private string authorizationKey;
 
         private async Task<HttpClient> GetClient()
@@ -35,10 +35,9 @@ namespace Zwaby.Services
 
             var json = JsonConvert.SerializeObject(new { token, amount });
 
-            var response = await client.PostAsync("/api/payment", new StringContent(json));
+            var response = await client.PostAsync("/api/Stripe", new StringContent(json));
 
             return await response.Content.ReadAsStringAsync();
-
         }
     }
 }

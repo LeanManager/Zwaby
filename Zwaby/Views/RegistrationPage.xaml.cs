@@ -23,6 +23,8 @@ namespace Zwaby.Views
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
 
             // Maybe use RegistrationPageViewModel~
+
+            // TODO: Remove the "password verification" step
         }
 
 		async void OnSubmitClicked(object sender, System.EventArgs e)

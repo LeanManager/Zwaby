@@ -24,11 +24,7 @@ namespace Zwaby.Views
         {
             // TODO: Do payment entries Validation
 
-            //var creditCardName = cardName.Text;
-            //var creditCardNumber = cardNumber.Text;
-            //var cardExpirationDate = expirationDate.Text;
-            //var cardSecurityCode = securityCode.Text;
-            //var cardZipCode = billingZipCode.Text;
+            // TODO: Store Stripe token for future payments
 
             // TODO: Stripe integration
             var viewModel = (PaymentPageViewModel)this.BindingContext;

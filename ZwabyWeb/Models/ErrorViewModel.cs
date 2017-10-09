@@ -1,6 +1,6 @@
 using System;
 
-namespace ZwabyStripe.Models
+namespace ZwabyWeb.Models
 {
     public class ErrorViewModel
     {

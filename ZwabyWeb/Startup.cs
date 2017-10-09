@@ -6,9 +6,8 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Stripe;
 
-namespace ZwabyStripe
+namespace ZwabyWeb
 {
     public class Startup
     {
@@ -23,8 +22,6 @@ namespace ZwabyStripe
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-
-            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,8 +44,6 @@ namespace ZwabyStripe
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
-
-            StripeConfiguration.SetApiKey(Configuration.GetSection("Stripe")["SecretKey"]);
         }
     }
 }
