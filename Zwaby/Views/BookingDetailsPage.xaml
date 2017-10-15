@@ -24,6 +24,12 @@
                         Value="White" />
                 <Setter Property="TextColor"
                         Value="Blue" />
+                <Setter Property="VerticalTextAlignment"
+                        Value="Center" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
+                <Setter Property="HorizontalOptions"
+                        Value="Center" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -58,43 +64,43 @@
             <Label Text="Service date and time" Style="{StaticResource staticLabelStyle}"
                    Grid.Row="0"/>
 
-            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+            <Label x:Name="dateTime" Style="{StaticResource bindingLabelStyle}"
                    Grid.Row="1"/>
 
             <Label Text="Service location" Style="{StaticResource staticLabelStyle}"
                    Grid.Row="2"/>
 
-            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+            <Label x:Name="address" Style="{StaticResource bindingLabelStyle}"
                    Grid.Row="3"/>
 
-            <Label Text="Cleaning service" Style="{StaticResource staticLabelStyle}"
+            <Label Text="Total price" Style="{StaticResource staticLabelStyle}"
                    Grid.Row="4"/>
 
-            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+            <Label x:Name="price" Style="{StaticResource bindingLabelStyle}"
                    Grid.Row="5"/>
 
-            <Label Text="Total price" Style="{StaticResource staticLabelStyle}"
+            <Label Text="Approximate service duration" Style="{StaticResource staticLabelStyle}"
                    Grid.Row="6"/>
 
-            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+            <Label x:Name="duration" Style="{StaticResource bindingLabelStyle}"
                    Grid.Row="7"/>
 
-            <Label Text="Approximate service duration" Style="{StaticResource staticLabelStyle}"
+            <Label Text="Cleaning service" Style="{StaticResource staticLabelStyle}"
                    Grid.Row="8"/>
 
-            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+            <Label Text="The Cleaning Authority  " Style="{StaticResource bindingLabelStyle}"
                    Grid.Row="9"/>
-
+            
             <Label Text="Cleaning service rating" Style="{StaticResource staticLabelStyle}"
                    Grid.Row="10"/>
 
-            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+            <Label Text="5 stars - Angie's List  " Style="{StaticResource bindingLabelStyle}"
                    Grid.Row="11"/>
 
             <Label Text="Zwaby platform rating" Style="{StaticResource staticLabelStyle}"
                    Grid.Row="12"/>
 
-            <Label Text="" Style="{StaticResource bindingLabelStyle}"
+            <Label Text="5 stars  " Style="{StaticResource bindingLabelStyle}"
                    Grid.Row="13"/>
 
             <Image x:Name="bookingImage" Aspect="AspectFit"
@@ -102,7 +108,6 @@
 
             <Button Text="Cancel Booking" FontSize="20" FontAttributes="Bold"
                     Grid.Row="15" BackgroundColor="White" Clicked="OnCancelBookingClicked"/>
-            <!-- Inside, use command(s) to update CurrentBookingViewModel -->
             
         </Grid>
 

@@ -56,6 +56,7 @@ namespace Zwaby.Services
 
         // TODO: The Cleaning Authority calculation methods
 
+
         public override string ToString()
         {
             return string.Format("[BookingCalculations]");

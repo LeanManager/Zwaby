@@ -9,6 +9,8 @@ namespace Zwaby.Views
 {
     public partial class PaymentPage : ContentPage
     {
+        string approxDuration, totalBookingPrice;
+
         public PaymentPage()
         {
             InitializeComponent();
@@ -24,9 +26,9 @@ namespace Zwaby.Views
             var residence = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence;
             var homeState = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState;
 
-            var approxDuration = calculations.CalculateDuration(bedrooms, bathrooms, residence, homeState);
+            approxDuration = calculations.CalculateDuration(bedrooms, bathrooms, residence, homeState);
 
-            var totalBookingPrice = calculations.CalculatePrice(approxDuration, residence);
+            totalBookingPrice = calculations.CalculatePrice(approxDuration, residence);
 
             approximateDuration.Text = approxDuration + " hours";
 
@@ -46,18 +48,22 @@ namespace Zwaby.Views
             // TODO: Store Stripe token for future payments
 
             // TODO: Stripe integration
+
             var viewModel = (PaymentPageViewModel)this.BindingContext;
 
             await viewModel.ProcessPayment();
 
-			//await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Current Booking'", "OK");
+
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = approxDuration + " hours";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = totalBookingPrice + " USD";
+
+			await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Booking Details'", "OK");
 
             // TODO: Initiliaze the MainPage and assign the collected values for the booking to the static ViewModel instance's properties
 
-            // TODO: Perhaps have a static instance of a ViewModel (like FanReact)
-            //       and use SaveState and RestoreState methods
+            // TODO: Static instance of a ViewModel (like FanReact) and use SaveState and RestoreState methods
 
-            // await Navigation.PushAsync(new MainPage());
+            await Navigation.PushAsync(new MainPage());
         }
     }
 }

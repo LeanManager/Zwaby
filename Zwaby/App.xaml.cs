@@ -23,7 +23,9 @@ namespace Zwaby
 
             // BookingDetailsViewModel "singleton"
             BookingDetailsViewModel.BookingDetailsViewModelInstance = new BookingDetailsViewModel();
-            // TODO: Restore ViewModel State in this App class
+
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.RestoreState(Current.Properties);
+
 
             var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
 
@@ -48,7 +50,26 @@ namespace Zwaby
 
         protected override void OnSleep()
         {
-			// Handle when your app sleeps
+            // Handle when your app sleeps
+
+            var date = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate;
+            var time = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime;
+            var price = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice;
+            var duration = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration;
+            var street = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet;
+            var city = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity;
+            var state = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState;
+            var zip = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode;
+            var residence = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence;
+            var bedrooms = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms;
+            var bathrooms = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms;
+            var homeState = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState;
+            var notes = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes;
+
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.SaveState(Current.Properties, date, time,
+                                                                             price, duration, street, city,
+                                                                             state, zip, residence, bedrooms,
+                                                                             bathrooms, homeState, notes);
         }
 
         protected override void OnResume()

@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 
 using Xamarin.Forms;
+using Zwaby.ViewModels;
 
 namespace Zwaby.Views
 {
     public partial class MainPage : ContentPage
     {
-        // TODO: ViewModel property. PaymentPage initializes BookingDetailsViewModel and assigns values statically (SQLite, etc.)
-
         public MainPage()
         {
             InitializeComponent();
@@ -27,9 +26,21 @@ namespace Zwaby.Views
 
         async void OnBookingDetailsClicked(object sender, System.EventArgs e)
         {
-            // TODO: change to Commands - canExecute returns true only if the user has completed a booking
-
-            await Navigation.PushAsync(new BookingDetailsPage());
+            if (string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate) ||
+                string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime) ||
+                string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice) ||
+                string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration) ||
+                string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet) ||
+                string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity) ||
+                string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState) ||
+                string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode))
+            {
+                await DisplayAlert("", "Please complete a booking first.", "OK");
+            }
+            else
+            {
+                await Navigation.PushAsync(new BookingDetailsPage());
+            }
 
 			// if DisplayAlert Please complete a booking first
 		}
