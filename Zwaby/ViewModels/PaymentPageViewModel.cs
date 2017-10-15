@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using XamarinForms.SQLite.SQLite;
@@ -39,6 +40,7 @@ namespace Zwaby.ViewModels
 			}
 			catch (Exception ex)
 			{
+                Debug.WriteLine(ex.Message);
 				await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
 			}
 		}

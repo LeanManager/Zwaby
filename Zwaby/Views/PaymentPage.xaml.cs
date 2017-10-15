@@ -13,6 +13,25 @@ namespace Zwaby.Views
         {
             InitializeComponent();
 
+            // TODO: Generate values for approximate service duration, and total service price
+            // parameters for duration: bedrooms, bathrooms, residence type, state of home (pull from ViewModel instance)
+            // parameter for total service price: duration
+
+            var calculations = new BookingCalculations();
+
+            var bedrooms = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms;
+            var bathrooms = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms;
+            var residence = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence;
+            var homeState = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState;
+
+            var approxDuration = calculations.CalculateDuration(bedrooms, bathrooms, residence, homeState);
+
+            var totalBookingPrice = calculations.CalculatePrice(approxDuration, residence);
+
+            approximateDuration.Text = approxDuration + " hours";
+
+            totalPrice.Text = "$ " + totalBookingPrice;
+
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
 
             var viewModel = new PaymentPageViewModel(new StripeRepository(), new APIRepository());
@@ -31,18 +50,14 @@ namespace Zwaby.Views
 
             await viewModel.ProcessPayment();
 
-            // use MessagingCenter to tell the ~BookingViewModel that a booking has been made? ChangeCanExecute() for the booking details button
-
 			//await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Current Booking'", "OK");
 
-            // Initiliaze the MainPage passing the collected values for the booking
-           // Navigation.InsertPageBefore(new MainPage(), this);
+            // TODO: Initiliaze the MainPage and assign the collected values for the booking to the static ViewModel instance's properties
 
-           // await Navigation.PopAsync();
+            // TODO: Perhaps have a static instance of a ViewModel (like FanReact)
+            //       and use SaveState and RestoreState methods
 
-            //await Navigation.PopToRootAsync();
-
-            // pop to root async will work once the conditional MainPage setting in App.cs is ready
+            // await Navigation.PushAsync(new MainPage());
         }
     }
 }

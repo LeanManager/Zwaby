@@ -21,6 +21,10 @@ namespace Zwaby
         {
             InitializeComponent();
 
+            // BookingDetailsViewModel "singleton"
+            BookingDetailsViewModel.BookingDetailsViewModelInstance = new BookingDetailsViewModel();
+            // TODO: Restore ViewModel State in this App class
+
             var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
 
 			var variable = sqLiteConnection.GetTableInfo(typeof(Customer).Name);

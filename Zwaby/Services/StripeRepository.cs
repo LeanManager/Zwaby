@@ -31,6 +31,5 @@ namespace Zwaby.Services
 
             return stripeToken.Id;
         }
-
     }
 }

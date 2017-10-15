@@ -46,21 +46,25 @@
                Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"/>
 
         <Entry Placeholder="Street Address" Text="{Binding Street, Mode=TwoWay}"
+               x:Name="street" 
                Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"/>
 
         <Entry Placeholder="City" Text="{Binding City, Mode=TwoWay}"
+               x:Name="city"  
                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
 
         <Entry Placeholder="State" Text="{Binding State, Mode=TwoWay}"
+               x:Name="state"  
                Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="3"/>
 
         <Entry Placeholder="Zip Code" Text="{Binding ZipCode, Mode=TwoWay}"
+               x:Name="zipCode"  
                Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="3"/>
 
         <Label Text="Please select residence type:" TextColor="Blue" FontAttributes="Bold" VerticalTextAlignment="End"
                Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3"/>
 
-        <Picker Title="House or Apartment"
+        <Picker Title="House or Apartment" x:Name="residence"
                 Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3">
             <Picker.Items>
                 <x:String>House</x:String>
@@ -82,7 +86,7 @@
         <Label Text="Bedrooms:" Style="{StaticResource labelStyle}"
                Grid.Row="7" Grid.Column="0"/>  
 
-        <Picker Title="Bedrooms"
+        <Picker Title="Bedrooms" x:Name="bedrooms" 
                 Grid.Row="7" Grid.Column="1">
             <Picker.Items>
                 <x:String>1</x:String>
@@ -110,7 +114,7 @@
         <Label Text="Bathrooms:" Style="{StaticResource labelStyle}"
                Grid.Row="8" Grid.Column="0"/>  
 
-        <Picker Title="Bathrooms"
+        <Picker Title="Bathrooms" x:Name="bathrooms"
                 Grid.Row="8" Grid.Column="1">
             <Picker.Items>
                 <x:String>1</x:String>
@@ -120,7 +124,7 @@
                 <x:String>5</x:String>    
             </Picker.Items>
 
-            <Picker.SelectedIndex>
+            <Picker.SelectedIndex >
                 <Binding Path="Bathrooms">
                     <Binding.Converter>
                         <converters:ObjectToIndexConverter x:TypeArguments="x:Double">

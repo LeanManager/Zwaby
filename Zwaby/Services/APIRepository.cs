@@ -7,7 +7,7 @@ namespace Zwaby.Services
 {
     public class APIRepository: IAPIRepository
     {
-        const string Url = "http://localhost:5000";
+        const string Url = "http://10.0.0.14:5000";
         private string authorizationKey;
 
         private async Task<HttpClient> GetClient()

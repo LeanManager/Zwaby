@@ -43,6 +43,12 @@ namespace ZwabyWebServices.Controllers
 		//    return CreatedAtRoute("GetStripe", new { id = item.Id }, item);
 		//}
 
+  //      [HttpGet]
+  //      public IActionResult Get(string key)
+  //      {
+		//	// TODO: implement method that returns authorization key
+		//}
+
         [HttpPost]
 		public IActionResult Charge(string stripeToken, decimal amount)
 		{

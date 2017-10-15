@@ -5,6 +5,7 @@ using System.Text;
 using Xamarin.Forms;
 using XamarinForms.SQLite.SQLite;
 using Zwaby.Models;
+using Zwaby.ViewModels;
 
 namespace Zwaby.Views
 {
@@ -33,32 +34,20 @@ namespace Zwaby.Views
 
                 // Booking time in the proper string format
                 string bookingTime = time.ToString("hh:mm tt");
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime = bookingTime;
 
                 // Booking date in the proper string format
                 string bookingDate = datePicker.Date.ToString("MM/dd/yyyy");
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate = bookingDate;
 
                 // State of the home
                 var homeState = statePicker.Items[statePicker.SelectedIndex];
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState = homeState;
 
                 // Service notes
                 var serviceNotes = instructions.Text;
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes = serviceNotes;
 
-                //TODO: Do this in the next PaymentPage after finish booking is clicked
-
-                //var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
-                //var variable = sqLiteConnection.GetTableInfo(typeof(BookingDetails).Name);
-                //if (variable.Count == 0)
-                //{
-                //	sqLiteConnection.CreateTable<BookingDetails>();
-                //	sqLiteConnection.Insert(new BookingDetails
-                //                {
-                //                    ServiceDate = datePicker.Date.ToString("MM/dd/yyyy"),
-                //                    ServiceTime = 
-                //                    HomeState = 
-                //                    ServiceNotes =
-                //                });
-                //}
-                //sqLiteConnection.Dispose();
 
                 await Navigation.PushAsync(new PaymentPage());
             }
