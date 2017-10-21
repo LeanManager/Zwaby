@@ -2,17 +2,21 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using Zwaby.Interfaces;
+using System;
 
 namespace Zwaby.Services
 {
     public class APIRepository: IAPIRepository
     {
-        const string Url = "http://10.0.0.14:5000";
+        const string Url = "http://localhost:5000";
         private string authorizationKey;
 
         private async Task<HttpClient> GetClient()
         {
-            HttpClient client = new HttpClient();
+            HttpClient client = null;
+
+            try { 
+            client = new HttpClient();
 
             if (string.IsNullOrEmpty(authorizationKey))
             {
@@ -23,7 +27,9 @@ namespace Zwaby.Services
             client.DefaultRequestHeaders.Add("Authorization", authorizationKey);
 
             client.DefaultRequestHeaders.Add("Accept", "application/json");
-
+            } catch (Exception ex) {
+                var i = 5;
+            }
             return client;
         }
 
@@ -35,9 +41,17 @@ namespace Zwaby.Services
 
             var json = JsonConvert.SerializeObject(new { token, amount });
 
-            var response = await client.PostAsync("/api/Stripe", new StringContent(json));
+            HttpResponseMessage response = null;
 
-            return await response.Content.ReadAsStringAsync();
+            try
+            {
+                 response = await client.PostAsync("/api/Stripe", new StringContent(json));
+            }
+            catch (Exception ex)
+            {
+                int i = 5;
+            }
+                return await response.Content.ReadAsStringAsync();
         }
     }
 }

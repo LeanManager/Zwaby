@@ -1,13 +1,9 @@
 ﻿using System;
-using SQLite;
 
 namespace Zwaby.Models
 {
     public class BookingDetails
     {
-		[PrimaryKey, AutoIncrement]
-		public int Id { get; set; }
-
         public string ServiceDate
         {
             get;

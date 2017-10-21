@@ -11,7 +11,7 @@
                 <Setter Property="BackgroundColor"
                         Value="White" />
                 <Setter Property="FontSize"
-                        Value="20" />
+                        Value="24" />
                 <Setter Property="FontAttributes"
                         Value="Bold"/>
             </Style>
@@ -26,7 +26,7 @@
             <RowDefinition Height="35" />
             <RowDefinition Height="250" />
             <RowDefinition Height="15" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -34,11 +34,11 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
     
-        <Label Text="Welcome to Zwaby!" TextColor="Blue" FontAttributes="Bold"
+        <Label Text="Welcome to Zwaby!" TextColor="Blue" FontAttributes="Bold" FontSize="Large"
                HorizontalTextAlignment="Center" VerticalOptions="End" VerticalTextAlignment="Center"
                Grid.Row="0"/>
 
-        <Image x:Name="signupImage" Grid.Row="1" Aspect="AspectFit"
+        <Image x:Name="signupImage" Grid.Row="1" Aspect="AspectFit" Margin="0,0,0,10"
                Source="{local:ImageResource Zwaby.Images.child-1245893_1280.jpg}"/>
 
         <Label Text="" Grid.Row="2" /> 

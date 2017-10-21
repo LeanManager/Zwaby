@@ -23,11 +23,11 @@
             <RowDefinition Height="25" />
             <RowDefinition Height="45" />
             <RowDefinition Height="45" />
-            <RowDefinition Height="45" /> 
+            <RowDefinition Height="30" /> 
             <RowDefinition Height="45" />     
             <RowDefinition Height="45" />
             <RowDefinition Height="120" />    
-            <RowDefinition Height="50" />  
+            <RowDefinition Height="60" />  
             <RowDefinition Height="*" />    
         </Grid.RowDefinitions>   
 
@@ -44,16 +44,15 @@
         <TimePicker x:Name="timePicker"
                     Grid.Row="2" />   
 
-        <Label Text="To better prepare for your service, please select the state of your home:" Style="{StaticResource labelStyle}"
+        <Label Text="Please select cleaning service:" Style="{StaticResource labelStyle}"
                VerticalTextAlignment="End"
                Grid.Row="3" />   
 
-        <Picker Title="Dirty - it has not been cleaned recently." x:Name="statePicker"
+        <Picker Title="General Cleaning" x:Name="statePicker"
                 Grid.Row="4">
             <Picker.Items>
-                <x:String>Somewhat dirty, but not much.</x:String>
-                <x:String>Dirty - it has not been cleaned recently.</x:String>
-                <x:String>Very dirty - it has not been cleaned in a while.</x:String>    
+                <x:String>General Cleaning</x:String>
+                <x:String>Deep Cleaning</x:String>   
             </Picker.Items>    
         </Picker>        
 
@@ -63,8 +62,8 @@
         <Editor x:Name="instructions"
                 Grid.Row="6" />     
 
-        <Button Text="Next" BackgroundColor="White" FontAttributes="Bold" FontSize="20"
-                Grid.Row="7" Clicked="OnNextClicked"/> 
+        <Button Text="Next" BackgroundColor="White" FontAttributes="Bold" FontSize="22"
+                Grid.Row="7" Clicked="OnNextClicked" Margin="0,10,0,0"/> 
 
     </Grid>
         

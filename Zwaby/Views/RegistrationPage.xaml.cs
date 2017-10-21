@@ -23,11 +23,10 @@ namespace Zwaby.Views
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
 
             // Maybe use RegistrationPageViewModel~
-
-            // TODO: Remove the "password verification" step
         }
 
-		async void OnSubmitClicked(object sender, System.EventArgs e)
+        // TODO: Somehow DisplayAlert after SMS is sent
+        async void OnFinishRegistrationClicked(object sender, System.EventArgs e)
 		{
             if (firstName.Text == null || 
                 lastName.Text == null || 
@@ -54,37 +53,31 @@ namespace Zwaby.Views
 
                 // TODO: Use Twilio for this? Or Azure? Perhaps just postpone until we have early adopter feedback.
 
-                await DisplayAlert("Verification", "One-time password is on its way!", "OK");
-                await DisplayAlert("Password", "2244", "OK");
+                await DisplayAlert("Confirmation", "Please confirm sending your information to the Zwaby team.", "OK");
+
+                // TODO: Check connectivity first?
+
+                var smsMessenger = CrossMessaging.Current.SmsMessenger;
+
+                if (smsMessenger.CanSendSms)
+                {
+                    smsMessenger.SendSms("4699956899",
+                                         firstName.Text + " " + lastName.Text + " , " + emailAddress.Text + " , " + phoneNumber.Text);
+                }
+
+                //if (smsMessenger.CanSendSmsInBackground)
+                //{
+                //  smsMessenger.SendSmsInBackground("4699956899",
+                //                       firstName.Text + " " + lastName.Text + " , " + emailAddress.Text + " , " + phoneNumber.Text);
+                //}
+
+                //await SendSms();
+
+                await DisplayAlert("Success!", "Your registration has been received. An email confirmation will be sent shortly.", "OK");
+
+                await Navigation.PushAsync(new MainPage());
             }
         }
-
-        async void OnFinishRegistrationClicked(object sender, System.EventArgs e)
-        {
-            await DisplayAlert("Confirmation", "Please confirm sending your information to the Zwaby team.", "OK");
-
-            // TODO: Check connectivity first?
-
-            var smsMessenger = CrossMessaging.Current.SmsMessenger;
-
-            if (smsMessenger.CanSendSms)
-            {
-                smsMessenger.SendSms("4699956899", 
-                                     firstName.Text + " " + lastName.Text + " , " + emailAddress.Text + " , " + phoneNumber.Text);
-            }
-
-			//if (smsMessenger.CanSendSmsInBackground)
-			//{
-			//	smsMessenger.SendSmsInBackground("4699956899",
-			//						 firstName.Text + " " + lastName.Text + " , " + emailAddress.Text + " , " + phoneNumber.Text);
-			//}
-
-            //await SendSms();
-
-            await DisplayAlert("Success!", "Your registration has been received. An email confirmation will be sent shortly.", "OK");
-
-            await Navigation.PushAsync(new MainPage());
-		}
 
    //     async Task SendSms()
    //     {

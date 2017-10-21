@@ -25,7 +25,7 @@ namespace Zwaby.Views
         {
             if (statePicker.SelectedItem == null)
             {
-                await DisplayAlert("", "To better prepare for your service, please select the state of your home.", "OK");
+                await DisplayAlert("", "To better prepare for your service, please select the type of cleaning service.", "OK");
             }
             else
             {

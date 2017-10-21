@@ -25,11 +25,13 @@
                 <Setter Property="FontAttributes"
                         Value="Bold"/>
                 <Setter Property="FontSize"
-                        Value="20" />
+                        Value="22" />
                 <Setter Property="HorizontalOptions"
                         Value="Center" />
                 <Setter Property="VerticalOptions"
                         Value="Center" />
+                <Setter Property="HeightRequest"
+                        Value="40" />
             </Style>
 
             <Style x:Key="labelStyle" TargetType="Label">
@@ -49,16 +51,16 @@
 
     <ScrollView>
     
-	    <Grid Padding="10,20,10,15">   
+	    <Grid Padding="10,25,10,15">   
             <!-- 10 rows -->
             <Grid.RowDefinitions>
-                <RowDefinition Height="35" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="55" />
-                <RowDefinition Height="35" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="55" />
-                <RowDefinition Height="35" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="55" />
-                <RowDefinition Height="35" />
+                <RowDefinition Height="40" />
                 <RowDefinition Height="50" />
                 <RowDefinition Height="45" />
                 <RowDefinition Height="*" />

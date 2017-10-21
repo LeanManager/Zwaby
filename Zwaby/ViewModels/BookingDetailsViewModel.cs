@@ -5,7 +5,7 @@ namespace Zwaby.ViewModels
 {
     public class BookingDetailsViewModel : ViewModelBase
     {
-		// Save the state of this ViewModel
+        // TODO: Use BookingDetails.cs class? To store it in the database
 
         public static BookingDetailsViewModel BookingDetailsViewModelInstance { get; set; }
 

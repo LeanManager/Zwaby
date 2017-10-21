@@ -28,7 +28,7 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" /> 
             <RowDefinition Height="40" /> 
-            <RowDefinition Height="50" /> 
+            <RowDefinition Height="70" /> 
             <RowDefinition Height="*" />     
         </Grid.RowDefinitions>    
 
@@ -78,8 +78,9 @@
                Text="{Binding BillingZipCode, Mode=TwoWay}"  
                Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4"/> 
 
-        <Button Text="Finish Booking" FontSize="20" FontAttributes="Bold" BackgroundColor="White"
-                Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4" Clicked="OnFinishBookingClicked"/>    
+        <Button Text="Finish Booking" FontSize="22" FontAttributes="Bold" BackgroundColor="White"
+                Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4" 
+                Clicked="OnFinishBookingClicked" Margin="0,20,0,0"/>    
 
     </Grid>
 

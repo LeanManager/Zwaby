@@ -19,11 +19,6 @@ namespace Zwaby.ViewModels
 		{
 			_repository = repository;
 			_api = api;
-
-			// TODO: Use BookingCalculations to assign the ViewModel properties
-
-			// generate Approximate Duration for the service 
-			// based on bedrooms, bathrooms, residence type, and how dirty the residence is
 		}
 
 		public async Task ProcessPayment()

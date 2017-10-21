@@ -10,7 +10,7 @@
                 <Setter Property="BackgroundColor"
                         Value="White" />
                 <Setter Property="FontSize"
-                        Value="20" />
+                        Value="22" />
                 <Setter Property="FontAttributes"
                         Value="Bold"/>
             </Style>
@@ -20,24 +20,23 @@
                         Value="Blue" />
                 <Setter Property="FontAttributes"
                         Value="Bold"/>
+                <Setter Property="FontSize"
+                        Value="Medium"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ScrollView>
     
-	<Grid Padding="25,15,20,15" RowSpacing="20">
+	<Grid Padding="25,15,20,15" RowSpacing="25">
         <!-- 10 rows -->
         <Grid.RowDefinitions>
             <RowDefinition Height="30" />
-            <RowDefinition Height="35" />
-            <RowDefinition Height="35" />
-            <RowDefinition Height="35" />
-            <RowDefinition Height="35" />
-            <RowDefinition Height="50" />
-            <RowDefinition Height="30" />
-            <RowDefinition Height="35" />
-            <RowDefinition Height="50" />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="45" />
+            <RowDefinition Height="65" />
+            <RowDefinition Height="60" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
@@ -46,7 +45,7 @@
         </Grid.ColumnDefinitions>
 
         <Label Text="Please enter the following information:" Style="{StaticResource labelStyle}"
-               Grid.Row="0" VerticalTextAlignment="End"/>
+               Grid.Row="0" VerticalTextAlignment="End" Margin="0,5,0,0"/>
 
         <Entry x:Name="firstName" Placeholder="First Name" Text="{Binding FirstName}"
                Grid.Row="1"/>
@@ -58,19 +57,10 @@
                Grid.Row="3"/>
 
         <Entry x:Name="phoneNumber" Placeholder="Phone Number" Text="{Binding PhoneNumber}"
-               Grid.Row="4"/>
-
-        <Button Text="Submit" Style="{StaticResource buttonStyle}"
-                Grid.Row="5" Clicked="OnSubmitClicked"/>
-
-        <Label Text="Please enter one-time password:" Style="{StaticResource labelStyle}"
-               Grid.Row="6" VerticalTextAlignment="End"/>
-
-        <Entry Placeholder="Password"
-               Grid.Row="7"/>
+               Grid.Row="4" Margin="0,0,0,20"/>
 
         <Button Text="Finish Registration" Style="{StaticResource buttonStyle}"
-                Grid.Row="8" Clicked="OnFinishRegistrationClicked"/>
+                Grid.Row="5" Clicked="OnFinishRegistrationClicked"/>
 
     </Grid>
 

@@ -15,11 +15,27 @@ namespace Zwaby.Views
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
 
             NavigationPage.SetHasBackButton(this, false);
+
+            // TODO: Clear BookingDetailsViewModelInstance properties 24 hours after the booking day/time
+
+            // TODO: On Android, Onplatform device Back button is disabled
         }
 
+        // TODO: Fix checking logic - somehow the if statement returns true before clicking Finish Booking
+        // If you navigate back after ServiceDateTimePage constructor, if statement returns true
         async void OnBookCleaningClicked(object sender, System.EventArgs e)
         {
-            await Navigation.PushAsync(new ServiceLocationPage());
+            if (!string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice) ||
+                !string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration))
+            {
+                await DisplayAlert("", "Service must be completed before booking again. " +
+                                   "Alternatively, you may cancel your current booking. " +
+                                   "Please call 469-995-6899 if you have any questions.", "OK");
+            }
+            else
+            {
+                await Navigation.PushAsync(new ServiceLocationPage());
+            }
 
             // if DisplayAlert You can only book one service at a time. You may book again once your current booking is done~
         }
