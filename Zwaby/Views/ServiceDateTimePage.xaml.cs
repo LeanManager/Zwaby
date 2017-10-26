@@ -32,6 +32,8 @@ namespace Zwaby.Views
                 TimeSpan timespan = timePicker.Time;
                 DateTime time = datePicker.Date.Add(timespan);
 
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = time;
+
                 // Booking time in the proper string format
                 string bookingTime = time.ToString("hh:mm tt");
                 BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime = bookingTime;

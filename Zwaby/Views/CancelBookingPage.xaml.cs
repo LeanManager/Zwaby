@@ -40,12 +40,14 @@ namespace Zwaby.Views
                     BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms = "";
                     BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState = "";
                     BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes = "";
+                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = DateTime.Now;
 
 					// TODO: Send SMS with cancellation notes
 
 					await DisplayAlert("Confirmation", "Your booking has been cancelled.", "OK");
 
                     await Navigation.PopAsync();
+                    // TODO: Or just new MainPage(); ?
                 }
             }
         }

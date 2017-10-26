@@ -27,7 +27,7 @@
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" /> 
-            <RowDefinition Height="40" /> 
+            <RowDefinition Height="40" />    
             <RowDefinition Height="70" /> 
             <RowDefinition Height="*" />     
         </Grid.RowDefinitions>    
@@ -77,6 +77,11 @@
         <Entry Placeholder="Billing zip code" x:Name="billingZipCode"
                Text="{Binding BillingZipCode, Mode=TwoWay}"  
                Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4"/> 
+
+
+        <!--<WebView Source="http://zwaby.azurewebsites.net"  
+                 Grid.Row="3" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="4"/>-->
+            
 
         <Button Text="Finish Booking" FontSize="22" FontAttributes="Bold" BackgroundColor="White"
                 Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4" 

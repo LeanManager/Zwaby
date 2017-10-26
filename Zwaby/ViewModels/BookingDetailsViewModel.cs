@@ -7,6 +7,8 @@ namespace Zwaby.ViewModels
     {
         // TODO: Use BookingDetails.cs class? To store it in the database
 
+        // TODO: Cleaning service type property (general vs deep)
+
         public static BookingDetailsViewModel BookingDetailsViewModelInstance { get; set; }
 
         public string ServiceDate { get; set; }
@@ -35,13 +37,15 @@ namespace Zwaby.ViewModels
 
         public string ServiceNotes { get; set; }
 
+        public DateTime ServiceDateTime { get; set; }
+
 		public BookingDetailsViewModel()
 		{
 		}
 
         public void SaveState(IDictionary<string, object> dictionary, string date, string time, string price, string duration,
                              string street, string city, string state, string zip, string residence, string bedrooms,
-                             string bathrooms, string homeState, string notes)
+                             string bathrooms, string homeState, string notes, DateTime serviceTime)
         {
             dictionary["ServiceDate"] = date;
             dictionary["ServiceTime"] = time;
@@ -56,6 +60,7 @@ namespace Zwaby.ViewModels
             dictionary["ServiceBathrooms"] = bathrooms;
             dictionary["ServiceHomeState"] = homeState;
             dictionary["ServiceNotes"] = notes;
+            dictionary["ServiceDateTime"] = serviceTime;
         }
 
         public void RestoreState(IDictionary<string, object> dictionary)
@@ -73,6 +78,7 @@ namespace Zwaby.ViewModels
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms = GetDictionaryEntry(dictionary, "ServiceBathrooms", "");
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState = GetDictionaryEntry(dictionary, "ServiceHomeState", "");
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes = GetDictionaryEntry(dictionary, "ServiceNotes", "");
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = GetDictionaryEntry(dictionary, "ServiceDateTime", DateTime.Now);
         }
 
         public T GetDictionaryEntry<T>(IDictionary<string, object> dictionary, string key, T defaultValue)

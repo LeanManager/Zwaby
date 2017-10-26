@@ -16,13 +16,9 @@ namespace Zwaby.Views
 
             NavigationPage.SetHasBackButton(this, false);
 
-            // TODO: Clear BookingDetailsViewModelInstance properties 24 hours after the booking day/time
-
-            // TODO: On Android, Onplatform device Back button is disabled
+            // TODO: On Android, OnPlatform device Back button is disabled
         }
 
-        // TODO: Fix checking logic - somehow the if statement returns true before clicking Finish Booking
-        // If you navigate back after ServiceDateTimePage constructor, if statement returns true
         async void OnBookCleaningClicked(object sender, System.EventArgs e)
         {
             if (!string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice) ||
@@ -64,6 +60,31 @@ namespace Zwaby.Views
         async void OnProfileClicked(object sender, System.EventArgs e)
         {
             await Navigation.PushAsync(new ProfilePage());
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            if (DateTime.Now > BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime.AddHours(8))
+            {
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes = "";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = DateTime.Now;
+
+                Navigation.PushModalAsync(new ReviewPage());
+            }
         }
     }
 }

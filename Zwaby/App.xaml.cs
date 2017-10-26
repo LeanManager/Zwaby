@@ -65,11 +65,12 @@ namespace Zwaby
             var bathrooms = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms;
             var homeState = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState;
             var notes = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes;
+            var serviceTime = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime;
 
             BookingDetailsViewModel.BookingDetailsViewModelInstance.SaveState(Current.Properties, date, time,
                                                                              price, duration, street, city,
                                                                              state, zip, residence, bedrooms,
-                                                                             bathrooms, homeState, notes);
+                                                                             bathrooms, homeState, notes, serviceTime);
         }
 
         protected override void OnResume()

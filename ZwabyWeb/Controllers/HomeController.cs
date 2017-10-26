@@ -24,8 +24,8 @@ namespace ZwabyWeb.Controllers
 
             var charge = charges.Create(new StripeChargeCreateOptions
             {
-                Amount = 500,
-                Description = "Sample Charge",
+                Amount = 500, // in cents
+                Description = "Booking price",
                 Currency = "usd",
                 CustomerId = customer.Id
             });

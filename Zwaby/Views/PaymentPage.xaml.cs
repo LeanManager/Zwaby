@@ -59,9 +59,7 @@ namespace Zwaby.Views
 
 			await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Booking Details'", "OK");
 
-            // TODO: Initiliaze the MainPage and assign the collected values for the booking to the static ViewModel instance's properties
-
-            // TODO: Static instance of a ViewModel (like FanReact) and use SaveState and RestoreState methods
+            // TODO: Fix Android back OS button issue
 
             await Navigation.PushAsync(new MainPage());
         }

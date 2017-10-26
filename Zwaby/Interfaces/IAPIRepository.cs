@@ -7,6 +7,6 @@ namespace Zwaby.Interfaces
 {
     public interface IAPIRepository
     {
-        Task<string> ChargeCard(string token, decimal amount);
+        Task<string> ChargeCard(string token, int amount);
     }
 }

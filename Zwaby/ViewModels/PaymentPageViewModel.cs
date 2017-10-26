@@ -31,7 +31,7 @@ namespace Zwaby.ViewModels
 				var exp = ExpirationDate.Split('/');
 				var token = _repository.CreateToken(CreditCardNumber, exp[0], exp[1], SecurityCode);
 				await Application.Current.MainPage.DisplayAlert("Test Message", token, "OK");
-				await _api.ChargeCard(token, 5.00M);
+				await _api.ChargeCard(token, 500);
 			}
 			catch (Exception ex)
 			{
