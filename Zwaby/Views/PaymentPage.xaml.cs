@@ -9,7 +9,7 @@ namespace Zwaby.Views
 {
     public partial class PaymentPage : ContentPage
     {
-        string approxDuration, totalBookingPrice;
+        string approxDuration, totalBookingPrice, roundedDuration;
 
         public PaymentPage()
         {
@@ -30,7 +30,9 @@ namespace Zwaby.Views
 
             totalBookingPrice = calculations.CalculatePrice(approxDuration, residence);
 
-            approximateDuration.Text = approxDuration + " hours";
+            roundedDuration = (Math.Round(Double.Parse(approxDuration), 1)).ToString();
+
+            approximateDuration.Text = roundedDuration + " hours";
 
             totalPrice.Text = "$ " + totalBookingPrice;
 
@@ -43,23 +45,41 @@ namespace Zwaby.Views
 
         async void OnFinishBookingClicked(object sender, System.EventArgs e)
         {
-            // TODO: Do payment entries Validation
+            // TODO: Do payment entries validation
 
             // TODO: Store Stripe token for future payments
 
-            // TODO: Stripe integration
+            // TODO: Stripe live mode integration
+
+            this.IsBusy = true;
 
             var viewModel = (PaymentPageViewModel)this.BindingContext;
 
-            await viewModel.ProcessPayment();
+            viewModel.ServiceDuration = roundedDuration + " hours";
+            // Stripe charges in cents
+            var doublePrice = Double.Parse(totalBookingPrice) * 100;
+            var servicePrice = (int)doublePrice;
+            viewModel.ServicePrice = servicePrice;
 
+            viewModel.CreditCardName = cardName.Text;
+            viewModel.CreditCardNumber = cardNumber.Text;
+            viewModel.ExpirationDate = expirationDate.Text;
+            viewModel.SecurityCode = securityCode.Text;
+            viewModel.BillingZipCode = billingZipCode.Text;
 
-            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = approxDuration + " hours";
+            try
+            {
+                await viewModel.ProcessPayment();
+            }
+            finally
+            {
+                this.IsBusy = false;
+            }
+
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = roundedDuration + " hours";
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = totalBookingPrice + " USD";
 
 			await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Booking Details'", "OK");
-
-            // TODO: Fix Android back OS button issue
 
             await Navigation.PushAsync(new MainPage());
         }

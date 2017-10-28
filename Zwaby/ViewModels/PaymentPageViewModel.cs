@@ -25,13 +25,13 @@ namespace Zwaby.ViewModels
 		{
 			try
 			{
-				if (string.IsNullOrEmpty(ExpirationDate))
-					ExpirationDate = "09/18";
+				//if (string.IsNullOrEmpty(ExpirationDate))
+					//ExpirationDate = "09/18";
 
 				var exp = ExpirationDate.Split('/');
-				var token = _repository.CreateToken(CreditCardNumber, exp[0], exp[1], SecurityCode);
-				await Application.Current.MainPage.DisplayAlert("Test Message", token, "OK");
-				await _api.ChargeCard(token, 500);
+				var token = _repository.CreateToken(CreditCardNumber, exp[0], "20" + exp[1], SecurityCode);
+				//await Application.Current.MainPage.DisplayAlert("Test Message", token, "OK");
+				await _api.ChargeCard(token, ServicePrice);
 			}
 			catch (Exception ex)
 			{
@@ -43,7 +43,7 @@ namespace Zwaby.ViewModels
 		private string serviceDuration;
 		public string ServiceDuration
 		{
-			private set
+			set
 			{
 				if (SetProperty(ref serviceDuration, value))
 				{
@@ -56,10 +56,10 @@ namespace Zwaby.ViewModels
 			}
 		}
 
-		private string servicePrice;
-		public string ServicePrice
+		private int servicePrice;
+		public int ServicePrice
 		{
-			private set
+			set
 			{
 				if (SetProperty(ref servicePrice, value))
 				{
@@ -75,7 +75,7 @@ namespace Zwaby.ViewModels
 		private string creditCardName;
 		public string CreditCardName
 		{
-			private set
+			set
 			{
 				if (SetProperty(ref creditCardName, value))
 				{
@@ -91,7 +91,7 @@ namespace Zwaby.ViewModels
 		private string creditCardNumber;
 		public string CreditCardNumber
 		{
-			private set
+			set
 			{
 				if (SetProperty(ref creditCardNumber, value))
 				{
@@ -107,7 +107,7 @@ namespace Zwaby.ViewModels
 		private string expirationDate;
 		public string ExpirationDate
 		{
-			private set
+			set
 			{
 				if (SetProperty(ref expirationDate, value))
 				{
@@ -124,7 +124,7 @@ namespace Zwaby.ViewModels
 		private string securityCode;
 		public string SecurityCode
 		{
-			private set
+			set
 			{
 				if (SetProperty(ref securityCode, value))
 				{
@@ -140,7 +140,7 @@ namespace Zwaby.ViewModels
 		private string billingZipCode;
 		public string BillingZipCode
 		{
-			private set
+			set
 			{
 				if (SetProperty(ref billingZipCode, value))
 				{

@@ -83,8 +83,16 @@ namespace Zwaby.Views
                 BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes = "";
                 BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = DateTime.Now;
 
-                Navigation.PushModalAsync(new ReviewPage());
+                // TODO: ReviewPage
+
+                //Navigation.PushModalAsync(new ReviewPage());
             }
+        }
+
+        // Disable Android hardware Back button functionality on this page
+        protected override bool OnBackButtonPressed()
+        {
+            return true;
         }
     }
 }

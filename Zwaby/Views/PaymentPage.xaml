@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Zwaby.Views.PaymentPage"
-             Title="Payment">
+             Title="Payment"
+             x:Name="paymentPage">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -59,33 +60,33 @@
                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"/> 
 
         <Entry Placeholder="Name on card" x:Name="cardName"
-               Text="{Binding CreditCardName, Mode=TwoWay}" 
-               Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"/>  
+               Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"/> 
+            <!-- Text="{Binding CreditCardName, Mode=TwoWay}" -->
             
-        <Entry Placeholder="Card number" x:Name="cardNumber"
-               Text="{Binding CreditCardNumber, Mode=TwoWay}"  
+        <Entry Placeholder="Card number" x:Name="cardNumber" 
                Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"/>
+            <!-- Text="{Binding CreditCardNumber, Mode=TwoWay}" -->
 
         <Entry Placeholder="Expiration date" x:Name="expirationDate"
-               Text="{Binding ExpirationDate, Mode=TwoWay}"  
-               Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4"/>     
+               Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4"/> 
+            <!-- Text="{Binding ExpirationDate, Mode=TwoWay}" -->
 
         <Entry Placeholder="Security code" x:Name="securityCode"
-               Text="{Binding SecurityCode, Mode=TwoWay}"  
-               Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"/>  
+               Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"/> 
+            <!-- Text="{Binding SecurityCode, Mode=TwoWay}" -->
 
         <Entry Placeholder="Billing zip code" x:Name="billingZipCode"
-               Text="{Binding BillingZipCode, Mode=TwoWay}"  
                Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4"/> 
-
-
-        <!--<WebView Source="http://zwaby.azurewebsites.net"  
-                 Grid.Row="3" Grid.RowSpan="10" Grid.Column="0" Grid.ColumnSpan="4"/>-->
-            
+            <!-- Text="{Binding BillingZipCode, Mode=TwoWay}" -->
 
         <Button Text="Finish Booking" FontSize="22" FontAttributes="Bold" BackgroundColor="White"
                 Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4" 
-                Clicked="OnFinishBookingClicked" Margin="0,20,0,0"/>    
+                Clicked="OnFinishBookingClicked" Margin="0,20,0,0"/>   
+
+        <ActivityIndicator IsVisible="{Binding Source={x:Reference paymentPage}, Path=IsBusy}"
+                           IsRunning="{Binding Source={x:Reference paymentPage}, Path=IsBusy}"
+                           Grid.Row="0" Grid.Column="0" Grid.RowSpan="10" Grid.ColumnSpan="4"
+                           VerticalOptions="Center" HorizontalOptions="Center" Color="Accent"/>    
 
     </Grid>
 

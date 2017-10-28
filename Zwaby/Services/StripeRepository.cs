@@ -12,16 +12,19 @@ namespace Zwaby.Services
         {
             StripeConfiguration.SetApiKey("pk_test_oO54O2GJQQMEjY1BUDVoRZ01");
 
-            //TODO: Wireup card information below
-
             var tokenOptions = new StripeTokenCreateOptions()
             {
                 Card = new StripeCreditCardOptions()
                 {
-                    Number = "4242424242424242",
-                    ExpirationYear = 2018,
-                    ExpirationMonth = 10,
-                    Cvc = "123"
+                    //Number = "4242424242424242",
+                    //ExpirationYear = 2018,
+                    //ExpirationMonth = 10,
+                    //Cvc = "123"
+
+                    Number = cardNumber,
+                    ExpirationMonth = Int32.Parse(cardExpMonth),
+                    ExpirationYear = Int32.Parse(cardExpYear),
+                    Cvc = cardCVC
                 }
             };
 

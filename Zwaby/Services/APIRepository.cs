@@ -52,15 +52,15 @@ namespace Zwaby.Services
             HttpClient client = new HttpClient();
             HttpResponseMessage response;
 
-            response = await client.PostAsync(Url, 
-                             new StringContent(JsonConvert.SerializeObject(new PaymentModel() 
-                                                                           { 
-                                                                               Email = "zwabyapp@gmail.com", 
-                                                                               Token = token,
-                                                                               Amount = amount
-                                                                           }), 
-                                               Encoding.UTF8, "application/json"));
-            
+            response = await client.PostAsync(Url,
+                                              new StringContent(JsonConvert.SerializeObject(new PaymentModel()
+                                              {
+                                                  Email = "zwabyapp@gmail.com",
+                                                  Token = token,
+                                                  Amount = amount
+                                              }),
+                                              Encoding.UTF8, "application/json"));
+
             return await response.Content.ReadAsStringAsync();
         }
     }

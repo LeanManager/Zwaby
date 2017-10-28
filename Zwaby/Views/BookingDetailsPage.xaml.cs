@@ -27,7 +27,7 @@ namespace Zwaby.Views
 
             dateTime.Text = date + " at " + time + "  ";
 
-            address.Text = street + ", " + city + ", " + state + " " + zip + "  ";
+            address.Text = street + ",\n " + city + ", " + state + " " + zip + "  ";
 
             price.Text = servicePrice + "  ";
 
