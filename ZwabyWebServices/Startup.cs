@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 namespace ZwabyWebServices
 {
     /* In order to inject the database context into the controller, we need to register it 
-       with the dependency injection container.Register the database context with the service 
+       with the dependency injection container. Register the database context with the service 
        container using the built-in support for dependency injection.
      */
 
@@ -25,17 +25,20 @@ namespace ZwabyWebServices
         public void ConfigureServices(IServiceCollection services)
         {
 			// Specifies an in-memory database is injected into the service container.
-			services.AddDbContext<StripeContext>(opt => opt.UseInMemoryDatabase("StripeCharges"));
             services.AddMvc();
 
-            services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
+            var connection = @"Server=zwabydb.database.windows.net;Database=zwabydb;User Id=zwabydb;Password=Zwabyazure00;";
+
+            services.AddDbContext<RegistrationContext>(options => options.UseSqlServer(connection));
+
+            //services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
             app.UseMvc();
-            //StripeConfiguration.SetApiKey("sk_test_t0PxK1ifMhrPBI8LXM8zk6eD");
+
             StripeConfiguration.SetApiKey(Configuration.GetSection("Stripe")["SecretKey"]);
         }
     }

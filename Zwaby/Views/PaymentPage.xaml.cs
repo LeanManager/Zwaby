@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Plugin.Connectivity;
 using Xamarin.Forms;
 using Zwaby.Services;
 using Zwaby.ViewModels;
@@ -67,21 +67,30 @@ namespace Zwaby.Views
             viewModel.SecurityCode = securityCode.Text;
             viewModel.BillingZipCode = billingZipCode.Text;
 
-            try
+            if (CrossConnectivity.Current.IsConnected)
             {
-                await viewModel.ProcessPayment();
+                try
+                {
+                    await viewModel.ProcessPayment();
+                }
+                finally
+                {
+                    this.IsBusy = false;
+                }
+
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = roundedDuration + " hours";
+                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = totalBookingPrice + " USD";
+
+                await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Booking Details'", "OK");
+
+                await Navigation.PushAsync(new MainPage());
             }
-            finally
+            else
             {
                 this.IsBusy = false;
+
+                await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
             }
-
-            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = roundedDuration + " hours";
-            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = totalBookingPrice + " USD";
-
-			await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Booking Details'", "OK");
-
-            await Navigation.PushAsync(new MainPage());
         }
     }
 }

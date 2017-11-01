@@ -44,6 +44,7 @@
     <PackageReference Include="Stripe.net" Version="10.4.0" />
     <PackageReference Include="Xam.Plugins.Messaging" Version="4.0.0" />
     <PackageReference Include="Xamarin.Forms" Version="2.3.4.270" />
+    <PackageReference Include="Xam.Plugin.Connectivity" Version="3.0.3" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\ReviewPage.xaml.cs">

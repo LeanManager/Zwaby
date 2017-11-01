@@ -11,8 +11,7 @@ namespace ZwabyWebServices.Controllers
     [Route("api/[controller]")]
     public class PaymentController : Controller
     {
-
-        // POST api/values
+        // POST api/payment
         [HttpPost]
         public IActionResult Post([FromBody]PaymentModel payment)
         {
@@ -34,6 +33,8 @@ namespace ZwabyWebServices.Controllers
             //    Currency = "usd",
             //    CustomerId = customer.Id
             //});
+
+            // TODO: Get SecretKey from appsettings.json
 
             StripeConfiguration.SetApiKey("sk_test_t0PxK1ifMhrPBI8LXM8zk6eD");
 

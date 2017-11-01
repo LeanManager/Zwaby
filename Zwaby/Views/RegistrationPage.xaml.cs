@@ -7,6 +7,8 @@ using Zwaby.ViewModels;
 using XamarinForms.SQLite.SQLite;
 using Plugin.Messaging;
 using System.Threading.Tasks;
+using Zwaby.Services;
+using System.Diagnostics;
 
 namespace Zwaby.Views
 {
@@ -14,7 +16,7 @@ namespace Zwaby.Views
     {
         private SQLiteConnection _sqLiteConnection;
 
-        public static ContentPage registrationPage;
+        private DatabaseManager manager;
 
         public RegistrationPage()
         {
@@ -22,10 +24,11 @@ namespace Zwaby.Views
 
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
 
-            // Maybe use RegistrationPageViewModel~
+            manager = new DatabaseManager();
+
+            // Ideally use RegistrationPageViewModel~
         }
 
-        // TODO: Somehow DisplayAlert after SMS is sent
         async void OnFinishRegistrationClicked(object sender, System.EventArgs e)
 		{
             if (firstName.Text == null || 
@@ -37,6 +40,16 @@ namespace Zwaby.Views
             }
             else
             {
+                try
+                {
+                    // Asynchronous function that POSTs a new Customer to the RegistrationController
+                    await manager.AddNewCustomer(firstName.Text, lastName.Text, emailAddress.Text, phoneNumber.Text);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+
 				_sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
 
 				_sqLiteConnection.CreateTable<Customer>();
@@ -51,27 +64,20 @@ namespace Zwaby.Views
 
                 _sqLiteConnection.Dispose();
 
-                // TODO: Use Twilio for this? Or Azure? Perhaps just postpone until we have early adopter feedback.
 
+                // TODO: If the above works, remove the following two lines of code
                 await DisplayAlert("Confirmation", "Please confirm sending your information to the Zwaby team.", "OK");
 
-                // TODO: Check connectivity first?
+                // TODO: Check connectivity first
 
-                var smsMessenger = CrossMessaging.Current.SmsMessenger;
-
-                if (smsMessenger.CanSendSms)
-                {
-                    smsMessenger.SendSms("4699956899",
-                                         firstName.Text + " " + lastName.Text + " , " + emailAddress.Text + " , " + phoneNumber.Text);
-                }
-
-                //if (smsMessenger.CanSendSmsInBackground)
+                //var smsMessenger = CrossMessaging.Current.SmsMessenger;
+                //if (smsMessenger.CanSendSms)
                 //{
-                //  smsMessenger.SendSmsInBackground("4699956899",
-                //                       firstName.Text + " " + lastName.Text + " , " + emailAddress.Text + " , " + phoneNumber.Text);
+                //    smsMessenger.SendSms("4699956899",
+                //                         firstName.Text + " " + lastName.Text + " , " + emailAddress.Text + " , " + phoneNumber.Text);
                 //}
 
-                //await SendSms();
+                await SendSms();
 
                 await DisplayAlert("Success!", "Your registration has been received. An email confirmation will be sent shortly.", "OK");
 
@@ -79,17 +85,17 @@ namespace Zwaby.Views
             }
         }
 
-   //     async Task SendSms()
-   //     {
-			//var smsMessenger = CrossMessaging.Current.SmsMessenger;
+        private Task SendSms()
+        {
+			var smsMessenger = CrossMessaging.Current.SmsMessenger;
 
-			//if (smsMessenger.CanSendSms)
-			//{
-			//	smsMessenger.SendSms("4699956899",
-			//						 firstName.Text + " " + lastName.Text + " , " + emailAddress.Text + " , " + phoneNumber.Text);
-			//}
+			if (smsMessenger.CanSendSms)
+			{
+				smsMessenger.SendSms("4699956899",
+									 firstName.Text + " " + lastName.Text + " , " + emailAddress.Text + " , " + phoneNumber.Text);
+			}
 
-        //    return;
-        //}
+            return Task.Delay(1);
+        }
     }
 }
