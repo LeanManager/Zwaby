@@ -15,7 +15,6 @@ namespace ZwabyWebServices.Models
         //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         //{
         //    //base.OnConfiguring(optionsBuilder);
-
         //    optionsBuilder.UseSqlServer(@"Server=zwabydb.database.windows.net;Database=zwabydb;User Id=zwabydb;Password=Zwabyazure00;");
         //}
 

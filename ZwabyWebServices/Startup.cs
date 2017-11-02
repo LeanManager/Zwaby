@@ -31,6 +31,10 @@ namespace ZwabyWebServices
 
             services.AddDbContext<RegistrationContext>(options => options.UseSqlServer(connection));
 
+            services.AddDbContext<BookingsContext>(options => options.UseSqlServer(connection));
+
+            services.AddDbContext<CancellationsContext>(options => options.UseSqlServer(connection));
+
             //services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
         }
 

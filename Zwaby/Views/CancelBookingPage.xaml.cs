@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Plugin.Connectivity;
 using Xamarin.Forms;
+using XamarinForms.SQLite.SQLite;
+using Zwaby.Models;
+using Zwaby.Services;
 using Zwaby.ViewModels;
 
 namespace Zwaby.Views
 {
     public partial class CancelBookingPage : ContentPage
     {
+        private CancellationsManager manager;
+
         public CancelBookingPage()
         {
             InitializeComponent();
 
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
+
+            manager = new CancellationsManager();
 
             // TODO: Cancellation policy check - PushModalAsync (24 hours prior for 50% refund, 48 hours prior for full refund(?))
         }
@@ -25,29 +32,42 @@ namespace Zwaby.Views
             }
             else
             {
-                if (!await DisplayAlert("Confirm", "Are you sure you want to cancel your booking?", "No", "Yes"))
+                if (CrossConnectivity.Current.IsConnected)
                 {
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes = "";
-                    BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = DateTime.Now;
+                    if (!await DisplayAlert("Confirm", "Are you sure you want to cancel your booking?", "No", "Yes"))
+                    {
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes = "";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = DateTime.Now;
 
-					// TODO: Send SMS with cancellation notes
+                        var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
 
-					await DisplayAlert("Confirmation", "Your booking has been cancelled.", "OK");
+                        var customer = sqLiteConnection.Table<Customer>().First();
 
-                    await Navigation.PopAsync();
-                    // TODO: Or just new MainPage(); ?
+                        await manager.AddNewCancellation(cancellationNotes.Text, DateTime.Now, customer.FirstName,
+                                                         customer.LastName, customer.EmailAddress, customer.PhoneNumber);
+
+                        sqLiteConnection.Dispose();
+
+                        await DisplayAlert("Confirmation", "Your booking has been cancelled.", "OK");
+
+                        await Navigation.PushAsync(new MainPage());
+                    }
+                }
+                else
+                {
+                    await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
                 }
             }
         }

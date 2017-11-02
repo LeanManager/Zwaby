@@ -9,6 +9,7 @@ using Plugin.Messaging;
 using System.Threading.Tasks;
 using Zwaby.Services;
 using System.Diagnostics;
+using Plugin.Connectivity;
 
 namespace Zwaby.Views
 {
@@ -40,62 +41,40 @@ namespace Zwaby.Views
             }
             else
             {
-                try
+                if (CrossConnectivity.Current.IsConnected)
                 {
-                    // Asynchronous function that POSTs a new Customer to the RegistrationController
-                    await manager.AddNewCustomer(firstName.Text, lastName.Text, emailAddress.Text, phoneNumber.Text);
+                    try
+                    {
+                        await manager.AddNewCustomer(firstName.Text, lastName.Text, emailAddress.Text, phoneNumber.Text);
+                    }
+                    catch (Exception ex)
+                    {
+                        Debug.WriteLine(ex.Message);
+                    }
+
+                    _sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
+
+                    _sqLiteConnection.CreateTable<Customer>();
+
+                    _sqLiteConnection.Insert(new Customer
+                    {
+                        FirstName = firstName.Text,
+                        LastName = lastName.Text,
+                        EmailAddress = emailAddress.Text,
+                        PhoneNumber = phoneNumber.Text
+                    });
+
+                    _sqLiteConnection.Dispose();
+
+                    await DisplayAlert("Success!", "Your registration has been received. An email confirmation will be sent shortly.", "OK");
+
+                    await Navigation.PushAsync(new MainPage());
                 }
-                catch (Exception ex)
+                else
                 {
-                    Debug.WriteLine(ex.Message);
+                    await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
                 }
-
-				_sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
-
-				_sqLiteConnection.CreateTable<Customer>();
-
-                _sqLiteConnection.Insert(new Customer
-                {
-                    FirstName = firstName.Text,
-                    LastName = lastName.Text,
-                    EmailAddress = emailAddress.Text,
-                    PhoneNumber = phoneNumber.Text
-                });
-
-                _sqLiteConnection.Dispose();
-
-
-                // TODO: If the above works, remove the following two lines of code
-                await DisplayAlert("Confirmation", "Please confirm sending your information to the Zwaby team.", "OK");
-
-                // TODO: Check connectivity first
-
-                //var smsMessenger = CrossMessaging.Current.SmsMessenger;
-                //if (smsMessenger.CanSendSms)
-                //{
-                //    smsMessenger.SendSms("4699956899",
-                //                         firstName.Text + " " + lastName.Text + " , " + emailAddress.Text + " , " + phoneNumber.Text);
-                //}
-
-                await SendSms();
-
-                await DisplayAlert("Success!", "Your registration has been received. An email confirmation will be sent shortly.", "OK");
-
-                await Navigation.PushAsync(new MainPage());
             }
-        }
-
-        private Task SendSms()
-        {
-			var smsMessenger = CrossMessaging.Current.SmsMessenger;
-
-			if (smsMessenger.CanSendSms)
-			{
-				smsMessenger.SendSms("4699956899",
-									 firstName.Text + " " + lastName.Text + " , " + emailAddress.Text + " , " + phoneNumber.Text);
-			}
-
-            return Task.Delay(1);
         }
     }
 }

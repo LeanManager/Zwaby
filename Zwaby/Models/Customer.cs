@@ -35,9 +35,9 @@ namespace Zwaby.Models
             get; set;
 		}
 
-        public DateTime DateAdded
-        {
-            get; set;
-        }
+        //public DateTime DateAdded
+        //{
+        //    get; set;
+        //}
     }
 }

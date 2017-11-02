@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Plugin.Connectivity;
 using Xamarin.Forms;
 using Zwaby.Services;
@@ -10,6 +11,8 @@ namespace Zwaby.Views
     public partial class PaymentPage : ContentPage
     {
         string approxDuration, totalBookingPrice, roundedDuration;
+
+        private BookingsManager manager;
 
         public PaymentPage()
         {
@@ -37,6 +40,8 @@ namespace Zwaby.Views
             totalPrice.Text = "$ " + totalBookingPrice;
 
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
+
+            manager = new BookingsManager();
 
             var viewModel = new PaymentPageViewModel(new StripeRepository(), new APIRepository());
 
@@ -73,13 +78,36 @@ namespace Zwaby.Views
                 {
                     await viewModel.ProcessPayment();
                 }
-                finally
+                catch (Exception ex)
                 {
-                    this.IsBusy = false;
+                    Debug.WriteLine(ex.Message);
                 }
 
                 BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = roundedDuration + " hours";
                 BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = totalBookingPrice + " USD";
+
+                try
+                {
+                    await manager.AddNewBooking(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes,
+                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime);
+                }
+                catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.Message);
+                }
+
+                this.IsBusy = false;
 
                 await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Booking Details'", "OK");
 

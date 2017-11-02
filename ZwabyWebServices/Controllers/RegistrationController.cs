@@ -39,7 +39,6 @@ namespace ZwabyWebServices.Controllers
 
             var customerEntry = new Customer
             {
-                Id = 1,
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 EmailAddress = customer.EmailAddress,
