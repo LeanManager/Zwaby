@@ -24,26 +24,25 @@ namespace ZwabyWebServices
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-			// Specifies an in-memory database is injected into the service container.
             services.AddMvc();
 
-            var connection = @"Server=zwabydb.database.windows.net;Database=zwabydb;User Id=zwabydb;Password=Zwabyazure00;";
+            services.AddSingleton<IConfiguration>(Configuration);
+
+            string databaseString = Configuration.GetSection("Data").GetSection("ConnectionString").Value;
+
+            string connection = @databaseString;
 
             services.AddDbContext<RegistrationContext>(options => options.UseSqlServer(connection));
 
             services.AddDbContext<BookingsContext>(options => options.UseSqlServer(connection));
 
             services.AddDbContext<CancellationsContext>(options => options.UseSqlServer(connection));
-
-            //services.Configure<StripeSettings>(Configuration.GetSection("Stripe"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app)
         {
             app.UseMvc();
-
-            StripeConfiguration.SetApiKey(Configuration.GetSection("Stripe")["SecretKey"]);
         }
     }
 }

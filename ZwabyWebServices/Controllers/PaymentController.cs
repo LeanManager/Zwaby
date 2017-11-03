@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
 using Stripe;
 using ZwabyWebServices.Models;
 
@@ -11,6 +12,13 @@ namespace ZwabyWebServices.Controllers
     [Route("api/[controller]")]
     public class PaymentController : Controller
     {
+        IConfiguration _iconfiguration;
+
+        public PaymentController(IConfiguration iconfiguration)
+        {
+            _iconfiguration = iconfiguration;
+        }
+
         // POST api/payment
         [HttpPost]
         public IActionResult Post([FromBody]PaymentModel payment)
@@ -34,11 +42,11 @@ namespace ZwabyWebServices.Controllers
             //    CustomerId = customer.Id
             //});
 
-            // TODO: Get SecretKey from appsettings.json
+            string secretKey = _iconfiguration["SecretKey"];
 
-            StripeConfiguration.SetApiKey("sk_test_t0PxK1ifMhrPBI8LXM8zk6eD");
+            StripeConfiguration.SetApiKey(secretKey);
 
-            var chargeOptions = new StripeChargeCreateOptions()
+            var chargeOptions = new StripeChargeCreateOptions
             {
                 Amount = payment.Amount,
                 Currency = "usd",

@@ -10,8 +10,6 @@ namespace Zwaby.ViewModels
 {
     public class PaymentPageViewModel : ViewModelBase
     {
-        // TODO: Store Stripe token in SQLite for future payments
-
 		private readonly IStripeRepository _repository;
 		private readonly IAPIRepository _api;
 
@@ -25,18 +23,19 @@ namespace Zwaby.ViewModels
 		{
 			try
 			{
-				//if (string.IsNullOrEmpty(ExpirationDate))
-					//ExpirationDate = "09/18";
-
 				var exp = ExpirationDate.Split('/');
+
+                // TODO: Store Stripe token in SQLite for future payments
 				var token = _repository.CreateToken(CreditCardNumber, exp[0], "20" + exp[1], SecurityCode);
-				//await Application.Current.MainPage.DisplayAlert("Test Message", token, "OK");
+
 				await _api.ChargeCard(token, ServicePrice);
+
+                ExceptionModel.ExceptionModelInstance.PaymentError = "";
 			}
 			catch (Exception ex)
 			{
-                Debug.WriteLine(ex.Message);
-				await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+                ExceptionModel.ExceptionModelInstance.PaymentError = ex.Message;
+				await Application.Current.MainPage.DisplayAlert("Error", "An error ocurred while processing payment. Please try again.", "OK");
 			}
 		}
 

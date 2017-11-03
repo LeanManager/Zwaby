@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Plugin.Connectivity;
 using Xamarin.Forms;
+using Zwaby.Models;
 using Zwaby.Services;
 using Zwaby.ViewModels;
 
@@ -17,6 +18,8 @@ namespace Zwaby.Views
         public PaymentPage()
         {
             InitializeComponent();
+
+            ExceptionModel.ExceptionModelInstance = new ExceptionModel();
 
             // TODO: Generate values for approximate service duration, and total service price
             // parameters for duration: bedrooms, bathrooms, residence type, state of home (pull from ViewModel instance)
@@ -50,74 +53,86 @@ namespace Zwaby.Views
 
         async void OnFinishBookingClicked(object sender, System.EventArgs e)
         {
-            // TODO: Do payment entries validation
-
             // TODO: Store Stripe token for future payments
 
             // TODO: Stripe live mode integration
 
-            this.IsBusy = true;
-
-            var viewModel = (PaymentPageViewModel)this.BindingContext;
-
-            viewModel.ServiceDuration = roundedDuration + " hours";
-            // Stripe charges in cents
-            var doublePrice = Double.Parse(totalBookingPrice) * 100;
-            var servicePrice = (int)doublePrice;
-            viewModel.ServicePrice = servicePrice;
-
-            viewModel.CreditCardName = cardName.Text;
-            viewModel.CreditCardNumber = cardNumber.Text;
-            viewModel.ExpirationDate = expirationDate.Text;
-            viewModel.SecurityCode = securityCode.Text;
-            viewModel.BillingZipCode = billingZipCode.Text;
-
-            if (CrossConnectivity.Current.IsConnected)
+            if (cardNumber.Text == null || expirationDate.Text == null || securityCode.Text == null)
             {
-                try
-                {
-                    await viewModel.ProcessPayment();
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
-
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = roundedDuration + " hours";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = totalBookingPrice + " USD";
-
-                try
-                {
-                    await manager.AddNewBooking(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes,
-                                                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine(ex.Message);
-                }
-
-                this.IsBusy = false;
-
-                await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Booking Details'", "OK");
-
-                await Navigation.PushAsync(new MainPage());
+                await DisplayAlert("", "Please enter valid credit card information.", "OK");
+            }
+            else if ((cardNumber.Text.Length < 15 || string.IsNullOrWhiteSpace(cardNumber.Text))
+                     || (!expirationDate.Text.Contains("/") || string.IsNullOrWhiteSpace(expirationDate.Text) || expirationDate.Text.Length > 5)
+                     || (securityCode.Text.Length < 3 || string.IsNullOrWhiteSpace(securityCode.Text) || securityCode.Text.Length > 4))
+            {
+                await DisplayAlert("", "Card number must have at least 15 digits.\n"
+                                       + "Expiration date must be in the sample format 07/21\n"
+                                       + "Security code must have 3 or 4 digits.", "OK");
             }
             else
             {
-                this.IsBusy = false;
+                this.IsBusy = true;
 
-                await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
+                var viewModel = (PaymentPageViewModel)this.BindingContext;
+
+                viewModel.ServiceDuration = roundedDuration + " hours";
+                // Stripe charges in cents
+                var doublePrice = Double.Parse(totalBookingPrice) * 100;
+                var servicePrice = (int)doublePrice;
+                viewModel.ServicePrice = servicePrice;
+
+                viewModel.CreditCardName = cardName.Text;
+                viewModel.CreditCardNumber = cardNumber.Text;
+                viewModel.ExpirationDate = expirationDate.Text;
+                viewModel.SecurityCode = securityCode.Text;
+                viewModel.BillingZipCode = billingZipCode.Text;
+
+                if (CrossConnectivity.Current.IsConnected)
+                {
+                    await viewModel.ProcessPayment();
+
+                    if (string.IsNullOrWhiteSpace(ExceptionModel.ExceptionModelInstance.PaymentError))
+                    {
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = roundedDuration + " hours";
+                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = totalBookingPrice + " USD";
+
+                        try
+                        {
+                            await manager.AddNewBooking(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime);
+                        }
+                        // catch (Exception ex) { TODO: handle potential exception }
+                        finally
+                        {
+                            this.IsBusy = false;
+
+                            await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Booking Details'", "OK");
+
+                            await Navigation.PushAsync(new MainPage());
+                        }
+                    }
+                    else
+                    {
+                        this.IsBusy = false;
+                    }
+                }
+                else
+                {
+                    this.IsBusy = false;
+
+                    await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
+                }
             }
         }
     }

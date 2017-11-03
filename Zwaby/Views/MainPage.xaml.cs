@@ -15,8 +15,6 @@ namespace Zwaby.Views
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
 
             NavigationPage.SetHasBackButton(this, false);
-
-            // TODO: On Android, OnPlatform device Back button is disabled
         }
 
         async void OnBookCleaningClicked(object sender, System.EventArgs e)
@@ -32,8 +30,6 @@ namespace Zwaby.Views
             {
                 await Navigation.PushAsync(new ServiceLocationPage());
             }
-
-            // if DisplayAlert You can only book one service at a time. You may book again once your current booking is done~
         }
 
         async void OnBookingDetailsClicked(object sender, System.EventArgs e)
@@ -53,8 +49,6 @@ namespace Zwaby.Views
             {
                 await Navigation.PushAsync(new BookingDetailsPage());
             }
-
-			// if DisplayAlert Please complete a booking first
 		}
 
         async void OnProfileClicked(object sender, System.EventArgs e)
@@ -84,7 +78,6 @@ namespace Zwaby.Views
                 BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = DateTime.Now;
 
                 // TODO: ReviewPage
-
                 //Navigation.PushModalAsync(new ReviewPage());
             }
         }

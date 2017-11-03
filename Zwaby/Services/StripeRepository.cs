@@ -16,11 +16,6 @@ namespace Zwaby.Services
             {
                 Card = new StripeCreditCardOptions()
                 {
-                    //Number = "4242424242424242",
-                    //ExpirationYear = 2018,
-                    //ExpirationMonth = 10,
-                    //Cvc = "123"
-
                     Number = cardNumber,
                     ExpirationMonth = Int32.Parse(cardExpMonth),
                     ExpirationYear = Int32.Parse(cardExpYear),
