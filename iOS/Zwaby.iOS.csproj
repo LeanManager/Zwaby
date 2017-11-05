@@ -161,6 +161,25 @@
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo76.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo152.png" />
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo167.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\Contents.json" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosbasesplash320.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosbasesplash640retina.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosbasesplash1242retina.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosbasesplash750retina.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosbasesplash2048ipad.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosbasesplash768ipad.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosbasesplash1536ipad.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosbasesplash768ipad2.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosbasesplash1536ipad2.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosbasesplash768ipad3.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosbasesplash1536ipad3.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\ioslandscapesplash2208.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\ioslandscapesplash1920tv.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\ioslandscapesplash1024ipad.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\ioslandscapesplash2048ipad.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\ioslandscapesplash1024ipad2.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\ioslandscapesplash2048ipad2.png" />
+    <ImageAsset Include="Assets.xcassets\LaunchImage.launchimage\iosnewsplash640.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
@@ -182,6 +201,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="child-1245893_1280.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\storyboardimage.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <Import Project="..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\packages\Xamarin.Forms.2.3.4.270\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />

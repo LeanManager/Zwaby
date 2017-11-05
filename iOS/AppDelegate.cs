@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 using Foundation;
 using HockeyApp.iOS;
 using UIKit;
@@ -23,6 +22,8 @@ namespace Zwaby.iOS
             global::Xamarin.Forms.Forms.Init();
 
             LoadApplication(new App());
+
+            //System.Threading.Thread.Sleep(2000); 
 
             return base.FinishedLaunching(app, options);
         }
