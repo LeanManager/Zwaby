@@ -20,7 +20,7 @@ namespace Zwaby.Droid
         {  
             base.OnCreate(savedInstanceState);  
 
-            //System.Threading.Thread.Sleep(3000);  
+            //System.Threading.Thread.Sleep(7000);  
 
             StartActivity(typeof(MainActivity));  
         }  

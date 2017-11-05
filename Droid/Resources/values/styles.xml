@@ -3,7 +3,7 @@
 
     <style name="Theme.Splash"  
          parent="android:Theme">  
-        <item name="android:windowBackground">@drawable/zwabyicon</item>  
+        <item name="android:windowBackground">@drawable/androidfreshsplash</item>  
         <item name="android:windowNoTitle">true</item>  
     </style>  
 	

@@ -150,16 +150,16 @@
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
     <AndroidResource Include="Resources\layout\Toolbar.axml" />
     <AndroidResource Include="Resources\values\styles.xml" />
-    <AndroidResource Include="Resources\drawable-mdpi\zwabyicon.png" />
-    <AndroidResource Include="Resources\drawable-hdpi\zwabyicon.png" />
-    <AndroidResource Include="Resources\drawable-xhdpi\zwabyicon.png" />
-    <AndroidResource Include="Resources\drawable-xxhdpi\zwabyicon.png" />
     <AndroidResource Include="Resources\drawable-mdpi\zwabyandroidlogo.png" />
     <AndroidResource Include="Resources\drawable-hdpi\zwabyandroidlogo.png" />
     <AndroidResource Include="Resources\drawable-xhdpi\zwabyandroidlogo.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\zwabyandroidlogo.png" />
     <AndroidResource Include="Resources\drawable-xxxhdpi\zwabyandroidlogo.png" />
-    <AndroidResource Include="Resources\drawable-xxxhdpi\zwabyicon.png" />
+    <AndroidResource Include="Resources\drawable-xxxhdpi\androidfreshsplash.png" />
+    <AndroidResource Include="Resources\drawable-xxhdpi\androidfreshsplash.png" />
+    <AndroidResource Include="Resources\drawable-xhdpi\androidfreshsplash.png" />
+    <AndroidResource Include="Resources\drawable-mdpi\androidfreshsplash.png" />
+    <AndroidResource Include="Resources\drawable-hdpi\androidfreshsplash.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="child-1245893_1280.jpg" />
