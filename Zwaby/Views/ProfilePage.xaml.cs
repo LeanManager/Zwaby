@@ -23,21 +23,61 @@ namespace Zwaby.Views
 
         async void OnFirstNameClicked(object sender, System.EventArgs e)
         {
+            HockeyApp.MetricsManager.TrackEvent("OnFirstNameClicked",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
             await DisplayAlert("First Name", "Please click on your first name to edit it.", "OK");
         }
 
 		async void OnLastNameClicked(object sender, System.EventArgs e)
 		{
+            HockeyApp.MetricsManager.TrackEvent("OnLastNameClicked",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
 			await DisplayAlert("Last Name", "Please click on your last name to edit it.", "OK");
 		}
 
 		async void OnEmailAddressClicked(object sender, System.EventArgs e)
 		{
+            HockeyApp.MetricsManager.TrackEvent("OnEmailAddressClicked",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
 			await DisplayAlert("Email Address", "Please click on your email address to edit it.", "OK");
 		}
 
 		async void OnPhoneNumberClicked(object sender, System.EventArgs e)
 		{
+            HockeyApp.MetricsManager.TrackEvent("OnPhoneNumberClicked",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
 			await DisplayAlert("Phone Number", "Please click on your phone number to edit it.", "OK");
 		}
     }

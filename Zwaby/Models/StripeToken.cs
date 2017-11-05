@@ -1,9 +1,9 @@
 ﻿using System;
 namespace Zwaby.Models
 {
-    public class TheCleaningAuthority
+    public class StripeToken
     {
-        public TheCleaningAuthority()
+        public StripeToken()
         {
         }
     }

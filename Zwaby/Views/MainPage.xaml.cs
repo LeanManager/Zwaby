@@ -19,6 +19,16 @@ namespace Zwaby.Views
 
         async void OnBookCleaningClicked(object sender, System.EventArgs e)
         {
+            HockeyApp.MetricsManager.TrackEvent("OnBookCleaningClicked", 
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                }, 
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
             if (!string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice) ||
                 !string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration))
             {
@@ -34,6 +44,16 @@ namespace Zwaby.Views
 
         async void OnBookingDetailsClicked(object sender, System.EventArgs e)
         {
+            HockeyApp.MetricsManager.TrackEvent("OnBookingDetailsClicked",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
             if (string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate) ||
                 string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime) ||
                 string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice) ||
@@ -53,6 +73,16 @@ namespace Zwaby.Views
 
         async void OnProfileClicked(object sender, System.EventArgs e)
         {
+            HockeyApp.MetricsManager.TrackEvent("OnProfileClicked",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
             await Navigation.PushAsync(new ProfilePage());
         }
 
@@ -62,24 +92,28 @@ namespace Zwaby.Views
 
             if (DateTime.Now > BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime.AddHours(8))
             {
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes = "";
-                BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = DateTime.Now;
+                ClearBookingDetailsViewModel();
 
-                // TODO: ReviewPage
-                //Navigation.PushModalAsync(new ReviewPage());
+                // TODO: ReviewPage - Navigation.PushModalAsync(new ReviewPage());
             }
+        }
+
+        private void ClearBookingDetailsViewModel()
+        {
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = DateTime.Now;
         }
 
         // Disable Android hardware Back button functionality on this page

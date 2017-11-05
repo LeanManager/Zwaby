@@ -15,8 +15,6 @@ namespace Zwaby.Views
 {
     public partial class RegistrationPage : ContentPage
     {
-        private SQLiteConnection _sqLiteConnection;
-
         private DatabaseManager manager;
 
         public RegistrationPage()
@@ -27,13 +25,22 @@ namespace Zwaby.Views
 
             manager = new DatabaseManager();
 
-            // Ideally use RegistrationPageViewModel~
+            // TODO: Ideally use RegistrationPageViewModel~
         }
 
         async void OnFinishRegistrationClicked(object sender, System.EventArgs e)
 		{
-            if (firstName.Text == null || 
-                lastName.Text == null || 
+            HockeyApp.MetricsManager.TrackEvent("OnFinishRegistrationClicked",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
+            if (firstName.Text == null || lastName.Text == null || 
                 (emailAddress.Text == null || !emailAddress.Text.Contains("@")) || 
                 (phoneNumber.Text == null || phoneNumber.Text.Length != 10))
             {
@@ -47,34 +54,41 @@ namespace Zwaby.Views
                     {
                         await manager.AddNewCustomer(firstName.Text, lastName.Text, emailAddress.Text, phoneNumber.Text);
                     }
-                    catch (Exception ex)
+                    //catch (Exception ex)
+                    //{
+                    //    Debug.WriteLine(ex.Message);
+                    //}
+                    finally
                     {
-                        Debug.WriteLine(ex.Message);
+                        CreateSQLiteCustomer();
+
+                        await DisplayAlert("Success!", "Your registration has been received. An email confirmation will be sent shortly.", "OK");
+
+                        await Navigation.PushAsync(new MainPage());
                     }
-
-                    _sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
-
-                    _sqLiteConnection.CreateTable<Customer>();
-
-                    _sqLiteConnection.Insert(new Customer
-                    {
-                        FirstName = firstName.Text,
-                        LastName = lastName.Text,
-                        EmailAddress = emailAddress.Text,
-                        PhoneNumber = phoneNumber.Text
-                    });
-
-                    _sqLiteConnection.Dispose();
-
-                    await DisplayAlert("Success!", "Your registration has been received. An email confirmation will be sent shortly.", "OK");
-
-                    await Navigation.PushAsync(new MainPage());
                 }
                 else
                 {
                     await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
                 }
             }
+        }
+
+        private void CreateSQLiteCustomer()
+        {
+            SQLiteConnection _sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
+
+            _sqLiteConnection.CreateTable<Customer>();
+
+            _sqLiteConnection.Insert(new Customer
+            {
+                FirstName = firstName.Text,
+                LastName = lastName.Text,
+                EmailAddress = emailAddress.Text,
+                PhoneNumber = phoneNumber.Text
+            });
+
+            _sqLiteConnection.Dispose();
         }
     }
 }

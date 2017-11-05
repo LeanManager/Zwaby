@@ -128,6 +128,12 @@
     <Reference Include="Plugin.Connectivity">
       <HintPath>..\packages\Xam.Plugin.Connectivity.3.0.3\lib\Xamarin.iOS10\Plugin.Connectivity.dll</HintPath>
     </Reference>
+    <Reference Include="HockeySDK">
+      <HintPath>..\packages\HockeySDK.Xamarin.5.0.0\lib\Xamarin.iOS10\HockeySDK.dll</HintPath>
+    </Reference>
+    <Reference Include="HockeySDK.iOSBindings">
+      <HintPath>..\packages\HockeySDK.Xamarin.5.0.0\lib\Xamarin.iOS10\HockeySDK.iOSBindings.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Zwaby\Zwaby.csproj">
@@ -142,6 +148,19 @@
     <ImageAsset Include="Assets.xcassets\Contents.json">
       <InProject>false</InProject>
     </ImageAsset>
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo1024.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo40.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo60.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo58.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo87.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo80.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo120.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo180.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo20.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo29.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo76.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo152.png" />
+    <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\zwabybarelogo167.png" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

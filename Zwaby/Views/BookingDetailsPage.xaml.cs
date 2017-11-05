@@ -16,6 +16,26 @@ namespace Zwaby.Views
 
 			bookingImage.Source = ImageSource.FromResource("Zwaby.Images.child-1245893_1280.jpg");
 
+            AssignBookingDetails();
+		}
+
+		async void OnCancelBookingClicked(object sender, System.EventArgs e)
+		{
+            HockeyApp.MetricsManager.TrackEvent("OnCancelBookingClicked",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
+			await Navigation.PushAsync(new CancelBookingPage());
+		}
+
+        private void AssignBookingDetails()
+        {
             var date = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate;
             var time = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime;
             var street = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet;
@@ -32,31 +52,6 @@ namespace Zwaby.Views
             price.Text = servicePrice + "  ";
 
             duration.Text = serviceDuration + "  ";
-		}
-
-		async void OnCancelBookingClicked(object sender, System.EventArgs e)
-		{
-			await Navigation.PushAsync(new CancelBookingPage());
-		}
-
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    if (string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate) ||
-        //        string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime) ||
-        //        string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice) ||
-        //        string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration) ||
-        //        string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet) ||
-        //        string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity) ||
-        //        string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState) ||
-        //        string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode) ||
-        //        string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence) ||
-        //        string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms) ||
-        //        string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms) ||
-        //        string.IsNullOrWhiteSpace(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState))
-        //    {
-        //        Navigation.PopAsync();
-        //    }
-        //}
+        }
 	}
 }

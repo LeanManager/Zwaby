@@ -80,7 +80,7 @@
             <!-- Text="{Binding BillingZipCode, Mode=TwoWay}" -->
 
         <Button Text="Finish Booking" FontSize="22" FontAttributes="Bold" BackgroundColor="White"
-                Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4" 
+                Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4" x:Name="finishBookingButton"
                 Clicked="OnFinishBookingClicked" Margin="0,20,0,0"/>   
 
         <ActivityIndicator IsVisible="{Binding Source={x:Reference paymentPage}, Path=IsBusy}"

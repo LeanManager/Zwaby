@@ -31,7 +31,7 @@
                 <Setter Property="VerticalOptions"
                         Value="Center" />
                 <Setter Property="HeightRequest"
-                        Value="40" />
+                        Value="45" />
             </Style>
 
             <Style x:Key="labelStyle" TargetType="Label">
@@ -54,14 +54,14 @@
 	    <Grid Padding="10,25,10,15">   
             <!-- 10 rows -->
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
-                <RowDefinition Height="55" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="55" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="55" />
-                <RowDefinition Height="40" />
-                <RowDefinition Height="50" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="65" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="65" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="65" />
+                <RowDefinition Height="45" />
+                <RowDefinition Height="60" />
                 <RowDefinition Height="45" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
@@ -75,7 +75,7 @@
                    Grid.Row="0"/>
 
             <Button Text=" Edit first name " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
-                    Command="{Binding FirstNameCommand}" Clicked="OnFirstNameClicked"
+                    Clicked="OnFirstNameClicked"
                     Grid.Row="1"/>
 
             <Entry x:Name="lastName" Style="{StaticResource entryStyle}"
@@ -83,7 +83,7 @@
                    Grid.Row="2"/>
 
             <Button Text=" Edit last name " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
-                    Command="{Binding LastNameCommand}" Clicked="OnLastNameClicked"
+                    Clicked="OnLastNameClicked"
                     Grid.Row="3"/>
 
             <Entry x:Name="emailAddress" Style="{StaticResource entryStyle}"
@@ -91,7 +91,7 @@
                    Grid.Row="4"/>
 
             <Button Text=" Edit email address " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
-                    Command="{Binding EmailAddressCommand}" Clicked="OnEmailAddressClicked"
+                    Clicked="OnEmailAddressClicked"
                     Grid.Row="5"/>
 
             <Entry x:Name="phoneNumber" Style="{StaticResource entryStyle}"
@@ -99,7 +99,7 @@
                    Grid.Row="6"/>
 
             <Button Text=" Edit phone number " Style="{StaticResource buttonStyle}" Margin="0,0,0,15"
-                    Command="{Binding PhoneNumberCommand}" Clicked="OnPhoneNumberClicked"
+                    Clicked="OnPhoneNumberClicked"
                     Grid.Row="7"/>
 
             <Label Text="Zwaby platform rating: 5 stars" Style="{StaticResource labelStyle}"

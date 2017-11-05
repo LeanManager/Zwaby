@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
@@ -25,8 +26,9 @@ namespace Zwaby.ViewModels
 			{
 				var exp = ExpirationDate.Split('/');
 
-                // TODO: Store Stripe token in SQLite for future payments
 				var token = _repository.CreateToken(CreditCardNumber, exp[0], "20" + exp[1], SecurityCode);
+
+                // TODO: Store Stripe token in SQLite for future payments
 
 				await _api.ChargeCard(token, ServicePrice);
 
@@ -34,6 +36,17 @@ namespace Zwaby.ViewModels
 			}
 			catch (Exception ex)
 			{
+                HockeyApp.MetricsManager.TrackEvent("OnProcessPayment",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() },
+                                                    {"Error", ex.Message }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
                 ExceptionModel.ExceptionModelInstance.PaymentError = ex.Message;
 				await Application.Current.MainPage.DisplayAlert("Error", "An error ocurred while processing payment. Please try again.", "OK");
 			}

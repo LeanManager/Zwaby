@@ -19,12 +19,21 @@ namespace Zwaby.Views
         {
             InitializeComponent();
 
+            this.BackgroundColor = Color.FromRgb(0, 240, 255);
+
             ExceptionModel.ExceptionModelInstance = new ExceptionModel();
 
-            // TODO: Generate values for approximate service duration, and total service price
-            // parameters for duration: bedrooms, bathrooms, residence type, state of home (pull from ViewModel instance)
-            // parameter for total service price: duration
+            CalculatePriceAndDuration();
 
+            manager = new BookingsManager();
+
+            var viewModel = new PaymentPageViewModel(new StripeRepository(), new APIRepository());
+
+            this.BindingContext = viewModel;
+        }
+
+        private void CalculatePriceAndDuration()
+        {
             var calculations = new BookingCalculations();
 
             var bedrooms = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms;
@@ -41,21 +50,39 @@ namespace Zwaby.Views
             approximateDuration.Text = roundedDuration + " hours";
 
             totalPrice.Text = "$ " + totalBookingPrice;
-
-            this.BackgroundColor = Color.FromRgb(0, 240, 255);
-
-            manager = new BookingsManager();
-
-            var viewModel = new PaymentPageViewModel(new StripeRepository(), new APIRepository());
-
-            this.BindingContext = viewModel;
         }
+
+        private PaymentPageViewModel UpdatePaymentPageViewModel()
+        {
+            var viewModel = (PaymentPageViewModel)this.BindingContext;
+
+            viewModel.ServiceDuration = roundedDuration + " hours";
+            // Stripe charges in cents
+            var doublePrice = Double.Parse(totalBookingPrice) * 100;
+            var servicePrice = (int)doublePrice;
+            viewModel.ServicePrice = servicePrice;
+
+            viewModel.CreditCardName = cardName.Text;
+            viewModel.CreditCardNumber = cardNumber.Text;
+            viewModel.ExpirationDate = expirationDate.Text;
+            viewModel.SecurityCode = securityCode.Text;
+            viewModel.BillingZipCode = billingZipCode.Text;
+
+            return viewModel;
+        }
+
 
         async void OnFinishBookingClicked(object sender, System.EventArgs e)
         {
-            // TODO: Store Stripe token for future payments
-
-            // TODO: Stripe live mode integration
+            HockeyApp.MetricsManager.TrackEvent("OnFinishBookingClicked",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
 
             if (cardNumber.Text == null || expirationDate.Text == null || securityCode.Text == null)
             {
@@ -71,21 +98,10 @@ namespace Zwaby.Views
             }
             else
             {
+                finishBookingButton.IsEnabled = false;
                 this.IsBusy = true;
 
-                var viewModel = (PaymentPageViewModel)this.BindingContext;
-
-                viewModel.ServiceDuration = roundedDuration + " hours";
-                // Stripe charges in cents
-                var doublePrice = Double.Parse(totalBookingPrice) * 100;
-                var servicePrice = (int)doublePrice;
-                viewModel.ServicePrice = servicePrice;
-
-                viewModel.CreditCardName = cardName.Text;
-                viewModel.CreditCardNumber = cardNumber.Text;
-                viewModel.ExpirationDate = expirationDate.Text;
-                viewModel.SecurityCode = securityCode.Text;
-                viewModel.BillingZipCode = billingZipCode.Text;
+                var viewModel = UpdatePaymentPageViewModel();
 
                 if (CrossConnectivity.Current.IsConnected)
                 {
@@ -115,7 +131,18 @@ namespace Zwaby.Views
                         // catch (Exception ex) { TODO: handle potential exception }
                         finally
                         {
+                            HockeyApp.MetricsManager.TrackEvent("BookingCompletedSuccessfully",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
                             this.IsBusy = false;
+                            finishBookingButton.IsEnabled = true;
 
                             await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Booking Details'", "OK");
 
@@ -125,10 +152,12 @@ namespace Zwaby.Views
                     else
                     {
                         this.IsBusy = false;
+                        finishBookingButton.IsEnabled = true;
                     }
                 }
                 else
                 {
+                    finishBookingButton.IsEnabled = true;
                     this.IsBusy = false;
 
                     await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");

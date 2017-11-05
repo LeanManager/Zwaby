@@ -23,6 +23,16 @@ namespace Zwaby.Views
 
         async void OnSignUpClicked(object sender, System.EventArgs e)
         {
+            HockeyApp.MetricsManager.TrackEvent("OnSignUpClicked",
+                                                new Dictionary<string, string>
+                                                {
+                                                    {"Time", DateTime.UtcNow.ToString() }
+                                                },
+                                                new Dictionary<string, double>
+                                                {
+                                                    {"Value", 2.5 }
+                                                });
+
             await Navigation.PushAsync(new RegistrationPage());
         }
     }
