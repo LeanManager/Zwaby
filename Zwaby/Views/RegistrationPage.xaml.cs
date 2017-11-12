@@ -23,6 +23,10 @@ namespace Zwaby.Views
 
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
 
+            PrivacyPolicy.PrivacyPolicyInstance = new PrivacyPolicy();
+
+            PrivacyPolicy.PrivacyPolicyInstance.IsAcknowledged = false;
+
             manager = new DatabaseManager();
 
             // TODO: Ideally use RegistrationPageViewModel~
@@ -42,36 +46,51 @@ namespace Zwaby.Views
 
             if (firstName.Text == null || lastName.Text == null || 
                 (emailAddress.Text == null || !emailAddress.Text.Contains("@")) || 
-                (phoneNumber.Text == null || phoneNumber.Text.Length != 10))
+                (phoneNumber.Text == null || phoneNumber.Text.Length != 10) || password.Text == null)
             {
                 await DisplayAlert("Error", "Please enter the required information.", "OK");
             }
             else
             {
-                if (CrossConnectivity.Current.IsConnected)
+                if (PrivacyPolicy.PrivacyPolicyInstance.IsAcknowledged == true)
                 {
-                    try
+                    submitButton.IsEnabled = false;
+
+                    if (CrossConnectivity.Current.IsConnected)
                     {
-                        await manager.AddNewCustomer(firstName.Text, lastName.Text, emailAddress.Text, phoneNumber.Text);
+                        try
+                        {
+                            await manager.AddNewCustomer(firstName.Text, lastName.Text, emailAddress.Text, phoneNumber.Text, password.Text);
+                        }
+                        //catch (Exception ex)
+                        //{
+                        //    Debug.WriteLine(ex.Message);
+                        //}
+                        finally
+                        {
+                            CreateSQLiteCustomer();
+
+                            await DisplayAlert("Success!", "Your registration has been received. An email confirmation will be sent shortly.", "OK");
+
+                            await Navigation.PushAsync(new MainPage());
+                        }
                     }
-                    //catch (Exception ex)
-                    //{
-                    //    Debug.WriteLine(ex.Message);
-                    //}
-                    finally
+                    else
                     {
-                        CreateSQLiteCustomer();
-
-                        await DisplayAlert("Success!", "Your registration has been received. An email confirmation will be sent shortly.", "OK");
-
-                        await Navigation.PushAsync(new MainPage());
+                        await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
+                        submitButton.IsEnabled = true;
                     }
                 }
                 else
                 {
-                    await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
+                    await DisplayAlert("Privacy Policy", "Please accept the Privacy Policy before continuing.", "OK");
                 }
             }
+        }
+
+        async void OnPrivacyPolicyClicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PushModalAsync(new PrivacyPolicyPage());
         }
 
         private void CreateSQLiteCustomer()

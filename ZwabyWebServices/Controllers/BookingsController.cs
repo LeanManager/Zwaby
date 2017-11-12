@@ -34,8 +34,13 @@ namespace ZwabyWebServices.Controllers
                 ServiceResidence = booking.ServiceResidence,
                 ServiceBedrooms = booking.ServiceBedrooms,
                 ServiceBathrooms = booking.ServiceBathrooms,
+                ServiceType = booking.ServiceType,
                 ServiceNotes = booking.ServiceNotes,
-                ServiceDateTime = booking.ServiceDateTime
+                ServiceDateTime = booking.ServiceDateTime,
+                FirstName = booking.FirstName,
+                LastName = booking.LastName,
+                EmailAddress = booking.EmailAddress,
+                PhoneNumber = booking.PhoneNumber
             };
 
             try
@@ -45,7 +50,7 @@ namespace ZwabyWebServices.Controllers
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                var exception = ex.Message;
             }
 
             return Ok(true);

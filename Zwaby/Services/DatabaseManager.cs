@@ -9,17 +9,17 @@ namespace Zwaby.Services
 {
     public class DatabaseManager
     {
-        const string Url = "http://zwaby.azurewebsites.net/api/registration";
-        //const string Url = "http://localhost:5000/api/registration";
+        const string Url = "https://zwaby.azurewebsites.net/api/registration";
 
-        public async Task<string> AddNewCustomer(string firstName, string lastName, string emailAddress, string phoneNumber)
+        public async Task<string> AddNewCustomer(string firstName, string lastName, string emailAddress, string phoneNumber, string password)
         {
             Customer customer = new Customer
             {
                 FirstName = firstName,
                 LastName = lastName,
                 EmailAddress = emailAddress,
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Password = password
             };
 
             HttpClient client = new HttpClient();

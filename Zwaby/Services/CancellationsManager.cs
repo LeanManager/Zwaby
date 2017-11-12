@@ -9,8 +9,7 @@ namespace Zwaby.Services
 {
     public class CancellationsManager
     {
-        const string Url = "http://zwaby.azurewebsites.net/api/cancellations";
-        //const string Url = "http://localhost:5000/api/bookings";
+        const string Url = "https://zwaby.azurewebsites.net/api/cancellations";
 
         public async Task<string> AddNewCancellation(string cancellationReason, DateTime cancellationDate, string firstName,
                                                      string lastName, string emailAddress, string phoneNumber)

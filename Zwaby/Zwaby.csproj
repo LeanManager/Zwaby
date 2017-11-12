@@ -21,6 +21,7 @@
     <None Remove="Views\Unused\MessagesPage.xaml" />
     <None Remove="Views\Unused\SelectServicePage.xaml" />
     <None Remove="Images\child-1245893_1280.jpg" />
+    <None Remove="Views\PrivacyPolicyPage.xaml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="App.xaml" />
@@ -35,6 +36,10 @@
     <EmbeddedResource Include="Views\SignUpPage.xaml" />
     <EmbeddedResource Include="Views\Unused\SelectServicePage.xaml" />
     <EmbeddedResource Include="Images\child-1245893_1280.jpg" />
+    <EmbeddedResource Include="Views\PrivacyPolicyPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
@@ -44,5 +49,10 @@
     <PackageReference Include="Xamarin.Forms" Version="2.3.4.270" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.0.3" />
     <PackageReference Include="HockeySDK.Xamarin" Version="5.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\PrivacyPolicyPage.xaml.cs">
+      <DependentUpon>PrivacyPolicyPage.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

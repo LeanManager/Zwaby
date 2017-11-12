@@ -21,29 +21,14 @@ namespace ZwabyWebServices.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Customer customer)
         {
-            // TODO: Logic to add row to appropriate Customers table in Azure (using zwabydb.database.windows.net)
-            // Create Customer table beforehand, with appropriate columns
-
-            //using (var db = new RegistrationContext())
-            //{
-            //    var customerEntry = new Customer
-            //    {
-            //        FirstName = customer.FirstName,
-            //        LastName = customer.LastName,
-            //        EmailAddress = customer.EmailAddress,
-            //        PhoneNumber = customer.PhoneNumber
-            //    };
-            //    db.Customers.Add(customerEntry);
-            //    db.SaveChanges();
-            //}
-
             var customerEntry = new Customer
             {
                 FirstName = customer.FirstName,
                 LastName = customer.LastName,
                 EmailAddress = customer.EmailAddress,
                 PhoneNumber = customer.PhoneNumber,
-                DateAdded = DateTime.Now
+                DateAdded = DateTime.Now,
+                Password = customer.Password
             };
 
             try
@@ -53,7 +38,7 @@ namespace ZwabyWebServices.Controllers
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                var exception = ex.Message;
             }
 
             return Ok(true);

@@ -28,8 +28,18 @@ namespace Zwaby.Models
 
         public string ServiceBathrooms { get; set; }
 
+        public string ServiceType { get; set; }
+
         public string ServiceNotes { get; set; }
 
         public DateTime ServiceDateTime { get; set; }
+
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public string EmailAddress { get; set; }
+
+        public string PhoneNumber { get; set; }
     }
 }

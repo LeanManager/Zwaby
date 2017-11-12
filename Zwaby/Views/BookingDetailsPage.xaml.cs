@@ -44,6 +44,7 @@ namespace Zwaby.Views
             var zip = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode;
             var servicePrice = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice;
             var serviceDuration = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration;
+            var service = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType;
 
             dateTime.Text = date + " at " + time + "  ";
 
@@ -52,6 +53,8 @@ namespace Zwaby.Views
             price.Text = servicePrice + "  ";
 
             duration.Text = serviceDuration + "  ";
+
+            serviceType.Text = service;
         }
 	}
 }

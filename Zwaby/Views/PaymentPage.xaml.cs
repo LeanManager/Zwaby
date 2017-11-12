@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using Plugin.Connectivity;
 using Xamarin.Forms;
+using XamarinForms.SQLite.SQLite;
 using Zwaby.Models;
 using Zwaby.Services;
 using Zwaby.ViewModels;
@@ -11,9 +12,11 @@ namespace Zwaby.Views
 {
     public partial class PaymentPage : ContentPage
     {
-        string approxDuration, totalBookingPrice, roundedDuration;
+        string totalBookingPrice, roundedDuration;
 
         private BookingsManager manager;
+
+        private PricingManager pricingManager;
 
         public PaymentPage()
         {
@@ -23,7 +26,7 @@ namespace Zwaby.Views
 
             ExceptionModel.ExceptionModelInstance = new ExceptionModel();
 
-            CalculatePriceAndDuration();
+            pricingManager = new PricingManager();
 
             manager = new BookingsManager();
 
@@ -32,23 +35,37 @@ namespace Zwaby.Views
             this.BindingContext = viewModel;
         }
 
-        private void CalculatePriceAndDuration()
+        protected async override void OnAppearing()
         {
-            var calculations = new BookingCalculations();
+            base.OnAppearing();
 
-            var bedrooms = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms;
-            var bathrooms = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms;
-            var residence = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence;
-            var homeState = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState;
+            if (CrossConnectivity.Current.IsConnected)
+            {
+                try
+                {
+                    AssignPriceAndDuration();
+                }
+                catch (Exception ex)
+                {
+                    string exception = ex.Message;
+                }
+            }
+            else
+            {
+                await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
+                await Navigation.PopAsync();
+            }
+        }
 
-            approxDuration = calculations.CalculateDuration(bedrooms, bathrooms, residence, homeState);
-
-            totalBookingPrice = calculations.CalculatePrice(approxDuration, residence);
-
-            roundedDuration = (Math.Round(Double.Parse(approxDuration), 1)).ToString();
-
+        private async void AssignPriceAndDuration()
+        {
+            var values = await pricingManager.GeneratePriceAndDuration(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms,
+                                                                       BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms,
+                                                                       BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence,
+                                                                       BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType);
+            roundedDuration = values[0];
+            totalBookingPrice = values[1];
             approximateDuration.Text = roundedDuration + " hours";
-
             totalPrice.Text = "$ " + totalBookingPrice;
         }
 
@@ -112,6 +129,10 @@ namespace Zwaby.Views
                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = roundedDuration + " hours";
                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = totalBookingPrice + " USD";
 
+                        var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
+
+                        var customer = sqLiteConnection.Table<Customer>().First();
+
                         try
                         {
                             await manager.AddNewBooking(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate,
@@ -125,12 +146,16 @@ namespace Zwaby.Views
                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence,
                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms,
                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms,
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType,
                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime);
+                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime,
+                                                        customer.FirstName, customer.LastName, customer.EmailAddress, customer.PhoneNumber);
                         }
                         // catch (Exception ex) { TODO: handle potential exception }
                         finally
                         {
+                            sqLiteConnection.Dispose();
+
                             HockeyApp.MetricsManager.TrackEvent("BookingCompletedSuccessfully",
                                                 new Dictionary<string, string>
                                                 {

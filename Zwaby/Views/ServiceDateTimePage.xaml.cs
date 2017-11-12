@@ -60,9 +60,10 @@ namespace Zwaby.Views
             string bookingDate = datePicker.Date.ToString("MM/dd/yyyy");
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate = bookingDate;
 
-            // State of the home TODO: FIX EVERYWHERE
-            var homeState = statePicker.Items[statePicker.SelectedIndex];
-            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState = homeState;
+            // Cleaning service type
+            //var serviceType = statePicker.Items[statePicker.SelectedIndex];
+            var serviceType = statePicker.SelectedItem.ToString();
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType = serviceType;
 
             // Service notes
             var serviceNotes = instructions.Text;

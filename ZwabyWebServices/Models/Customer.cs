@@ -33,5 +33,10 @@ namespace ZwabyWebServices.Models
         {
             get; set;
         }
+
+        public string Password
+        {
+            get; set;
+        }
     }
 }

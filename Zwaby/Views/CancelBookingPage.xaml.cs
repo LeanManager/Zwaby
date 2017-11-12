@@ -78,7 +78,7 @@ namespace Zwaby.Views
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence = "";
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms = "";
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms = "";
-            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState = "";
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType = "";
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes = "";
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = DateTime.Now;
         }

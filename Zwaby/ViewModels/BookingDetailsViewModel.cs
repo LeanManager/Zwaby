@@ -33,7 +33,7 @@ namespace Zwaby.ViewModels
 
         public string ServiceBathrooms { get; set; }
 
-        public string ServiceHomeState { get; set; }
+        public string ServiceType { get; set; }
 
         public string ServiceNotes { get; set; }
 
@@ -45,7 +45,7 @@ namespace Zwaby.ViewModels
 
         public void SaveState(IDictionary<string, object> dictionary, string date, string time, string price, string duration,
                              string street, string city, string state, string zip, string residence, string bedrooms,
-                             string bathrooms, string homeState, string notes, DateTime serviceTime)
+                             string bathrooms, string serviceType, string notes, DateTime serviceTime)
         {
             dictionary["ServiceDate"] = date;
             dictionary["ServiceTime"] = time;
@@ -58,7 +58,7 @@ namespace Zwaby.ViewModels
             dictionary["ServiceResidence"] = residence;
             dictionary["ServiceBedrooms"] = bedrooms;
             dictionary["ServiceBathrooms"] = bathrooms;
-            dictionary["ServiceHomeState"] = homeState;
+            dictionary["ServiceType"] = serviceType;
             dictionary["ServiceNotes"] = notes;
             dictionary["ServiceDateTime"] = serviceTime;
         }
@@ -76,7 +76,7 @@ namespace Zwaby.ViewModels
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence = GetDictionaryEntry(dictionary, "ServiceResidence", "");
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms = GetDictionaryEntry(dictionary, "ServiceBedrooms", "");
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms = GetDictionaryEntry(dictionary, "ServiceBathrooms", "");
-            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState = GetDictionaryEntry(dictionary, "ServiceHomeState", "");
+            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType = GetDictionaryEntry(dictionary, "ServiceType", "");
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes = GetDictionaryEntry(dictionary, "ServiceNotes", "");
             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime = GetDictionaryEntry(dictionary, "ServiceDateTime", DateTime.Now);
         }

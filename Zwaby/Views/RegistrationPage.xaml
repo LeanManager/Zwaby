@@ -35,7 +35,9 @@
             <RowDefinition Height="45" />
             <RowDefinition Height="45" />
             <RowDefinition Height="45" />
-            <RowDefinition Height="65" />
+            <RowDefinition Height="45" />    
+            <RowDefinition Height="45" />
+            <RowDefinition Height="70" />
             <RowDefinition Height="60" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
@@ -57,10 +59,16 @@
                Grid.Row="3"/>
 
         <Entry x:Name="phoneNumber" Placeholder="Phone Number" Text="{Binding PhoneNumber}"
-               Grid.Row="4" Margin="0,0,0,20"/>
+               Grid.Row="4" />
 
-        <Button Text="Finish Registration" Style="{StaticResource buttonStyle}"
-                Grid.Row="5" Clicked="OnFinishRegistrationClicked"/>
+        <Entry x:Name="password" Placeholder="New Password"
+               Grid.Row="5"/> 
+
+        <Button Text="Privacy Policy" Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
+                Grid.Row="6" Clicked="OnPrivacyPolicyClicked"/>   
+
+        <Button Text="Finish Registration" Style="{StaticResource buttonStyle}" x:Name="submitButton"
+                Grid.Row="7" Clicked="OnFinishRegistrationClicked"/>
 
     </Grid>
 

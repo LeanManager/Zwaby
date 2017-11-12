@@ -15,8 +15,6 @@ namespace Zwaby
 
     public partial class App : Application
     {
-        // TODO: Check connectivity in RegistrationPage (and probably each time an SMS must be sent)
-
         public App()
         {
             InitializeComponent();
@@ -63,14 +61,14 @@ namespace Zwaby
             var residence = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence;
             var bedrooms = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms;
             var bathrooms = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms;
-            var homeState = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceHomeState;
+            var serviceType = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType;
             var notes = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes;
             var serviceTime = BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime;
 
             BookingDetailsViewModel.BookingDetailsViewModelInstance.SaveState(Current.Properties, date, time,
                                                                              price, duration, street, city,
                                                                              state, zip, residence, bedrooms,
-                                                                             bathrooms, homeState, notes, serviceTime);
+                                                                             bathrooms, serviceType, notes, serviceTime);
         }
 
         protected override void OnResume()

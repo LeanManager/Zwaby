@@ -9,14 +9,13 @@ namespace Zwaby.Services
 {
     public class BookingsManager
     {
-        const string Url = "http://zwaby.azurewebsites.net/api/bookings";
-        //const string Url = "http://localhost:5000/api/bookings";
+        const string Url = "https://zwaby.azurewebsites.net/api/bookings";
 
-        public async Task<string> AddNewBooking(string serviceDate, string serviceTime, string servicePrice, 
-                                                string serviceApproximateDuration, string serviceStreet, string serviceCity, 
-                                                string serviceState, string serviceZipCode, string serviceResidence, 
-                                                string serviceBedrooms, string serviceBathrooms, string serviceNotes, 
-                                                DateTime serviceDateTime)
+        public async Task<string> AddNewBooking(string serviceDate, string serviceTime, string servicePrice,
+                                                string serviceApproximateDuration, string serviceStreet, string serviceCity,
+                                                string serviceState, string serviceZipCode, string serviceResidence,
+                                                string serviceBedrooms, string serviceBathrooms, string serviceType, string serviceNotes,
+                                                DateTime serviceDateTime, string firstName, string lastName, string email, string phone)
         {
             Booking booking = new Booking
             {
@@ -31,8 +30,13 @@ namespace Zwaby.Services
                 ServiceResidence = serviceResidence,
                 ServiceBedrooms = serviceBedrooms,
                 ServiceBathrooms = serviceBathrooms,
+                ServiceType = serviceType,
                 ServiceNotes = serviceNotes,
-                ServiceDateTime = serviceDateTime
+                ServiceDateTime = serviceDateTime,
+                FirstName = firstName,
+                LastName = lastName,
+                EmailAddress = email,
+                PhoneNumber = phone
             };
 
             HttpClient client = new HttpClient();

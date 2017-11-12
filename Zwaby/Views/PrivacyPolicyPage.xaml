@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Zwaby.Views.PrivacyPolicyPage"
+             Title="Privacy Policy"
+             Padding="5,15,5,20">
+
+    <ScrollView>
+
+        <StackLayout Spacing="10">
+
+            <Label Text="Privacy Policy Agreement" HorizontalTextAlignment="Center" LineBreakMode="WordWrap"
+                   FontSize="22" FontAttributes="Bold"/>
+
+            <Label LineBreakMode="WordWrap" XAlign="Start" x:Name="policyText"/>
+
+            <StackLayout Orientation="Horizontal" Spacing="35" HorizontalOptions="Center">
+                
+                <Button Text="    I Accept    " Clicked="OnAcceptClicked" BorderColor="Black" BorderWidth="1.5" FontAttributes="Bold"
+                        HeightRequest="40" HorizontalOptions="CenterAndExpand"/>
+
+                <Button Text="    I Decline    " Clicked="OnDeclineClicked" BorderColor="Black" BorderWidth="1.5" FontAttributes="Bold"
+                        HeightRequest="40" HorizontalOptions="CenterAndExpand"/>
+
+            </StackLayout>
+
+        </StackLayout>
+
+    </ScrollView>
+    
+</ContentPage>

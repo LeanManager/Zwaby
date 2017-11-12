@@ -38,7 +38,7 @@ namespace ZwabyWebServices.Controllers
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(ex.Message);
+                var exception = ex.Message;
             }
 
             return Ok(true);
