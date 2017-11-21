@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Input;
+using SQLite;
 using Xamarin.Forms;
 using XamarinForms.SQLite.SQLite;
 using Zwaby.Models;
@@ -8,6 +9,51 @@ namespace Zwaby.ViewModels
 {
     public class ProfilePageViewModel : ViewModelBase
     {
+        public ProfilePageViewModel()
+        {
+            SQLiteConnection sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
+
+            var variable = sqLiteConnection.GetTableInfo(typeof(Customer).Name);
+
+            if (variable.Count == 0)
+            {
+                sqLiteConnection.CreateTable<Customer>();
+
+                sqLiteConnection.Insert(new Customer());
+            }
+            else
+            {
+                var customer = sqLiteConnection.Table<Customer>().First();
+
+                FirstName = customer.FirstName;
+
+                LastName = customer.LastName;
+
+                PhoneNumber = customer.PhoneNumber;
+
+                EmailAddress = customer.EmailAddress;
+            }
+
+            sqLiteConnection.Dispose();
+
+            //FirstNameCommand = new Command(
+            //    execute: () =>
+            //    {
+            //    });
+            //LastNameCommand = new Command(
+            //  execute: () =>
+            //  {  
+            //  });
+            //EmailAddressCommand = new Command(
+            //  execute: () =>
+            //  { 
+            //  });
+            //PhoneNumberCommand = new Command(
+            //execute: () =>
+            //{
+            //});
+        }
+
         private string firstName;
 		public string FirstName
 		{
@@ -119,40 +165,6 @@ namespace Zwaby.ViewModels
 				return phoneNumber;
 			}
 		}
-
-        public ProfilePageViewModel()
-        {
-			var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
-
-			var customer = sqLiteConnection.Table<Customer>().First();
-
-			FirstName = customer.FirstName;
-
-			LastName = customer.LastName;
-
-			PhoneNumber = customer.PhoneNumber;
-
-			EmailAddress = customer.EmailAddress;
-
-            sqLiteConnection.Dispose();
-
-            //FirstNameCommand = new Command(
-            //    execute: () =>
-            //    {
-            //    });
-			//LastNameCommand = new Command(
-			//	execute: () =>
-			//	{  
-			//	});
-			//EmailAddressCommand = new Command(
-			//	execute: () =>
-			//	{ 
-			//	});
-			//PhoneNumberCommand = new Command(
-				//execute: () =>
-				//{
-				//});
-        }
 
 		// ICommands~ is private access modifier necessary?
 		//public ICommand FirstNameCommand { private set; get; }

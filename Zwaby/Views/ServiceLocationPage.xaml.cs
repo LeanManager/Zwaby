@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using SQLite;
 using Xamarin.Forms;
+using XamarinForms.SQLite.SQLite;
+using Zwaby.Models;
 using Zwaby.ViewModels;
 
 namespace Zwaby.Views
@@ -31,17 +33,37 @@ namespace Zwaby.Views
                                                     {"Value", 2.5 }
                                                 });
 
-            if (string.IsNullOrWhiteSpace(street.Text) || string.IsNullOrWhiteSpace(city.Text) || string.IsNullOrWhiteSpace(state.Text) 
-                || (string.IsNullOrWhiteSpace(zipCode.Text) || zipCode.Text.Length != 5) || residence.SelectedItem == null 
+            SQLiteConnection sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
+            var variable = sqLiteConnection.GetTableInfo(typeof(Customer).Name);
+
+            if (string.IsNullOrWhiteSpace(street.Text) || string.IsNullOrWhiteSpace(city.Text) || string.IsNullOrWhiteSpace(state.Text)
+                || (string.IsNullOrWhiteSpace(zipCode.Text) || zipCode.Text.Length != 5) || residence.SelectedItem == null
                 || bedrooms.SelectedItem == null || bathrooms.SelectedItem == null)
             {
+                sqLiteConnection.Dispose();
                 await DisplayAlert("", "Please provide all the information before proceeding.", "OK");
             }
-            else
+            else if (variable.Count == 0)
             {
-                AddBookingLocationDetails();
+                sqLiteConnection.Dispose();
+                await DisplayAlert("", "Please provide your information in the 'Profile' section before proceeding.", "OK");
+            }
+            else if (sqLiteConnection.Table<Customer>().First() != null)
+            {
+                var customer = sqLiteConnection.Table<Customer>().First();
 
-                await Navigation.PushAsync(new ServiceDateTimePage());
+                if (string.IsNullOrWhiteSpace(customer.FirstName) || string.IsNullOrWhiteSpace(customer.LastName)
+                     || string.IsNullOrWhiteSpace(customer.EmailAddress) || string.IsNullOrWhiteSpace(customer.PhoneNumber))
+                {
+                    sqLiteConnection.Dispose();
+                    await DisplayAlert("", "Please provide your information in the 'Profile' section before proceeding.", "OK");
+                }
+                else
+                {
+                    AddBookingLocationDetails();
+                    sqLiteConnection.Dispose();
+                    await Navigation.PushAsync(new ServiceDateTimePage());
+                }
             }
         }
 

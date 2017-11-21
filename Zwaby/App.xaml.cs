@@ -10,9 +10,6 @@ using XamarinForms.SQLite.SQLite;
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Zwaby
 {
-    // changed iOS Bundle Identifier in Info.plist - removed .Zwaby to be able to install the app on my phone
-    // check Apple Developer Center
-
     public partial class App : Application
     {
         public App()
@@ -24,21 +21,19 @@ namespace Zwaby
 
             BookingDetailsViewModel.BookingDetailsViewModelInstance.RestoreState(Current.Properties);
 
+            MainPage = new NavigationPage(new MainPage());
 
-            var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
-
-			var variable = sqLiteConnection.GetTableInfo(typeof(Customer).Name);
-
-			if (variable.Count() == 0)
-            {
-                MainPage = new NavigationPage(new SignUpPage());
-            }
-            else
-            {
-                MainPage = new NavigationPage(new MainPage());
-            }
-
-            sqLiteConnection.Dispose();
+            //var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
+			//var variable = sqLiteConnection.GetTableInfo(typeof(Customer).Name);
+			//if (variable.Count() == 0)
+            //{
+            //    MainPage = new NavigationPage(new SignUpPage());
+            //}
+            //else
+            //{
+            //    MainPage = new NavigationPage(new MainPage());
+            //}
+            //sqLiteConnection.Dispose();
         }
 
         protected override void OnStart()

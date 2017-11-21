@@ -21,7 +21,7 @@
                 <Setter Property="TextColor"
                         Value="DarkBlue" />
                 <Setter Property="PlaceholderColor"
-                        Value="DarkBlue" />
+                        Value="Gray" />
                 <Setter Property="FontAttributes"
                         Value="Bold"/>
                 <Setter Property="FontSize"
@@ -32,6 +32,8 @@
                         Value="Center" />
                 <Setter Property="HeightRequest"
                         Value="45" />
+                <Setter Property="HorizontalTextAlignment"
+                        Value="Center" />
             </Style>
 
             <Style x:Key="labelStyle" TargetType="Label">
@@ -62,7 +64,7 @@
                 <RowDefinition Height="65" />
                 <RowDefinition Height="45" />
                 <RowDefinition Height="60" />
-                <RowDefinition Height="45" />
+                <!--<RowDefinition Height="45" />-->
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
@@ -71,7 +73,7 @@
             </Grid.ColumnDefinitions>
 
             <Entry x:Name="firstName" Style="{StaticResource entryStyle}"
-                   Text="{Binding FirstName, Mode=TwoWay}"
+                   Text="{Binding FirstName, Mode=TwoWay}" Placeholder="First Name" 
                    Grid.Row="0"/>
 
             <Button Text=" Edit first name " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
@@ -79,7 +81,7 @@
                     Grid.Row="1"/>
 
             <Entry x:Name="lastName" Style="{StaticResource entryStyle}"
-                   Text="{Binding LastName, Mode=TwoWay}"
+                   Text="{Binding LastName, Mode=TwoWay}" Placeholder="Last Name"
                    Grid.Row="2"/>
 
             <Button Text=" Edit last name " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
@@ -87,7 +89,7 @@
                     Grid.Row="3"/>
 
             <Entry x:Name="emailAddress" Style="{StaticResource entryStyle}"
-                   Text="{Binding EmailAddress, Mode=TwoWay}"
+                   Text="{Binding EmailAddress, Mode=TwoWay}" Placeholder="Email Address"
                    Grid.Row="4"/>
 
             <Button Text=" Edit email address " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
@@ -95,15 +97,15 @@
                     Grid.Row="5"/>
 
             <Entry x:Name="phoneNumber" Style="{StaticResource entryStyle}"
-                   Text="{Binding PhoneNumber, Mode=TwoWay}"
+                   Text="{Binding PhoneNumber, Mode=TwoWay}" Placeholder="Phone Number"
                    Grid.Row="6"/>
 
             <Button Text=" Edit phone number " Style="{StaticResource buttonStyle}" Margin="0,0,0,15"
                     Clicked="OnPhoneNumberClicked"
                     Grid.Row="7"/>
 
-            <Label Text="Zwaby platform rating: 5 stars" Style="{StaticResource labelStyle}"
-                   Grid.Row="8" HorizontalTextAlignment="Center" VerticalTextAlignment="End"/> 
+            <!--<Label Text="Zwaby platform rating: 5 stars" Style="{StaticResource labelStyle}"
+                   Grid.Row="8" HorizontalTextAlignment="Center" VerticalTextAlignment="End"/> -->
                    <!-- Binding, StringFormat and add customer rating -->
 
         </Grid>

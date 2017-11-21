@@ -13,8 +13,8 @@ namespace Zwaby.Views
             InitializeComponent();
 
             policyText.Text = "Zwaby will securely collect and store user information in two places:\n" + "\n" +
-                              "1) Registration Page\n" +
-                              "* In this page, we collect a user's first name, last name, email address, phone number, and a new password. This information will not be shared with anyone and it is stored securely. It is internal to Zwaby for account registration and cleaning service purposes, and personal for users (your registration information will appear in your Profile section within the application).\n" +
+                              "1) Profile Page\n" +
+                              "* In this page, we collect a user's first name, last name, email address, and phone number. This information will not be shared with anyone and it is stored securely. It is internal to Zwaby for account registration and cleaning service purposes, and personal for users.\n" +
                               "\n" + 
                               "2) Service Location Page\n" +
                               "* In this page, we collect home information for cleaning service purposes. Address information lets Zwaby know where the cleaning service will take place. Type of residence (House or apartment), number of bedrooms, and number of bathrooms information is collected to generate the total price for the service. All this information is also stored securely and will not be shared with anyone.\n" +

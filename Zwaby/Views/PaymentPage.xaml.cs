@@ -18,6 +18,8 @@ namespace Zwaby.Views
 
         private PricingManager pricingManager;
 
+        private EmailService emailService;
+
         public PaymentPage()
         {
             InitializeComponent();
@@ -30,6 +32,8 @@ namespace Zwaby.Views
 
             manager = new BookingsManager();
 
+            emailService = new EmailService();
+
             var viewModel = new PaymentPageViewModel(new StripeRepository(), new APIRepository());
 
             this.BindingContext = viewModel;
@@ -38,6 +42,8 @@ namespace Zwaby.Views
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+
+            this.IsBusy = true;
 
             if (CrossConnectivity.Current.IsConnected)
             {
@@ -49,9 +55,14 @@ namespace Zwaby.Views
                 {
                     string exception = ex.Message;
                 }
+                finally
+                {
+                    this.IsBusy = false;
+                }
             }
             else
             {
+                this.IsBusy = false;
                 await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
                 await Navigation.PopAsync();
             }
@@ -150,8 +161,27 @@ namespace Zwaby.Views
                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes,
                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime,
                                                         customer.FirstName, customer.LastName, customer.EmailAddress, customer.PhoneNumber);
+
+                            await emailService.SendEmail(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes,
+                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime,
+                                                         customer.FirstName, customer.LastName, customer.EmailAddress, customer.PhoneNumber);
                         }
-                        // catch (Exception ex) { TODO: handle potential exception }
+                        catch (Exception ex) 
+                        {
+                            var exception = ex.Message;
+                        }
                         finally
                         {
                             sqLiteConnection.Dispose();
