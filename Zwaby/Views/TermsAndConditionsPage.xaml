@@ -1,18 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
-             x:Class="Zwaby.Views.PrivacyPolicyPage"
-             Title="Privacy Policy"
+             x:Class="Zwaby.Views.TermsAndConditionsPage"
+             Title="Terms and Conditions"
              Padding="5,15,5,20">
 
     <ScrollView>
 
         <StackLayout Spacing="10">
 
-            <Label Text="Privacy Policy Agreement" HorizontalTextAlignment="Center" LineBreakMode="WordWrap"
+            <Label Text="Privacy Policy" HorizontalTextAlignment="Center" LineBreakMode="WordWrap"
                    FontSize="22" FontAttributes="Bold"/>
 
-            <Label LineBreakMode="WordWrap" XAlign="Start" x:Name="policyText"/>
+            <Label LineBreakMode="WordWrap" XAlign="Start" x:Name="privacyLabel"/>
+
+            <Label Text="Cancellation Policy" HorizontalTextAlignment="Center" LineBreakMode="WordWrap"
+                   FontSize="22" FontAttributes="Bold"/>
+
+            <Label LineBreakMode="WordWrap" XAlign="Start" x:Name="cancellationLabel"/>
 
             <StackLayout Orientation="Horizontal" Spacing="35" HorizontalOptions="Center">
                 

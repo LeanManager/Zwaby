@@ -23,9 +23,9 @@ namespace Zwaby.Views
 
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
 
-            PrivacyPolicy.PrivacyPolicyInstance = new PrivacyPolicy();
+            //PrivacyPolicy.PrivacyPolicyInstance = new PrivacyPolicy();
 
-            PrivacyPolicy.PrivacyPolicyInstance.IsAcknowledged = false;
+            //PrivacyPolicy.PrivacyPolicyInstance.IsAcknowledged = false;
 
             manager = new DatabaseManager();
 
@@ -52,45 +52,45 @@ namespace Zwaby.Views
             }
             else
             {
-                if (PrivacyPolicy.PrivacyPolicyInstance.IsAcknowledged == true)
-                {
-                    submitButton.IsEnabled = false;
+                //if (PrivacyPolicy.PrivacyPolicyInstance.IsAcknowledged == true)
+                //{
+                //    submitButton.IsEnabled = false;
 
-                    if (CrossConnectivity.Current.IsConnected)
-                    {
-                        try
-                        {
-                            await manager.AddNewCustomer(firstName.Text, lastName.Text, emailAddress.Text, phoneNumber.Text, password.Text);
-                        }
-                        //catch (Exception ex)
-                        //{
-                        //    Debug.WriteLine(ex.Message);
-                        //}
-                        finally
-                        {
-                            CreateSQLiteCustomer();
+                //    if (CrossConnectivity.Current.IsConnected)
+                //    {
+                //        try
+                //        {
+                //            await manager.AddNewCustomer(firstName.Text, lastName.Text, emailAddress.Text, phoneNumber.Text, password.Text);
+                //        }
+                //        //catch (Exception ex)
+                //        //{
+                //        //    Debug.WriteLine(ex.Message);
+                //        //}
+                //        finally
+                //        {
+                //            CreateSQLiteCustomer();
 
-                            await DisplayAlert("Success!", "Your registration has been received. An email confirmation will be sent shortly.", "OK");
+                //            await DisplayAlert("Success!", "Your registration has been received. An email confirmation will be sent shortly.", "OK");
 
-                            await Navigation.PushAsync(new MainPage());
-                        }
-                    }
-                    else
-                    {
-                        await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
-                        submitButton.IsEnabled = true;
-                    }
-                }
-                else
-                {
-                    await DisplayAlert("Privacy Policy", "Please accept the Privacy Policy before continuing.", "OK");
-                }
+                //            await Navigation.PushAsync(new MainPage());
+                //        }
+                //    }
+                //    else
+                //    {
+                //        await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
+                //        submitButton.IsEnabled = true;
+                //    }
+                //}
+                //else
+                //{
+                //    await DisplayAlert("Privacy Policy", "Please accept the Privacy Policy before continuing.", "OK");
+                //}
             }
         }
 
         async void OnPrivacyPolicyClicked(object sender, System.EventArgs e)
         {
-            await Navigation.PushModalAsync(new PrivacyPolicyPage());
+            //await Navigation.PushModalAsync(new PrivacyPolicyPage());
         }
 
         private void CreateSQLiteCustomer()

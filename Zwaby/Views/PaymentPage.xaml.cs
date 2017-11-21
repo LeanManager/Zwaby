@@ -26,6 +26,8 @@ namespace Zwaby.Views
 
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
 
+            TermsAndConditions.TermsAndConditionsInstance = new TermsAndConditions();
+
             ExceptionModel.ExceptionModelInstance = new ExceptionModel();
 
             pricingManager = new PricingManager();
@@ -99,6 +101,10 @@ namespace Zwaby.Views
             return viewModel;
         }
 
+        async void OnTermsAndConditionsClicked(object sender, System.EventArgs e)
+        {
+            await Navigation.PushModalAsync(new TermsAndConditionsPage());
+        }
 
         async void OnFinishBookingClicked(object sender, System.EventArgs e)
         {
@@ -126,96 +132,103 @@ namespace Zwaby.Views
             }
             else
             {
-                finishBookingButton.IsEnabled = false;
-                this.IsBusy = true;
-
-                var viewModel = UpdatePaymentPageViewModel();
-
-                if (CrossConnectivity.Current.IsConnected)
+                if (TermsAndConditions.TermsAndConditionsInstance.IsAcknowledged == true)
                 {
-                    await viewModel.ProcessPayment();
+                    finishBookingButton.IsEnabled = false;
+                    this.IsBusy = true;
 
-                    if (string.IsNullOrWhiteSpace(ExceptionModel.ExceptionModelInstance.PaymentError))
+                    var viewModel = UpdatePaymentPageViewModel();
+
+                    if (CrossConnectivity.Current.IsConnected)
                     {
-                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = roundedDuration + " hours";
-                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = totalBookingPrice + " USD";
+                        await viewModel.ProcessPayment();
 
-                        var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
-
-                        var customer = sqLiteConnection.Table<Customer>().First();
-
-                        try
+                        if (string.IsNullOrWhiteSpace(ExceptionModel.ExceptionModelInstance.PaymentError))
                         {
-                            await manager.AddNewBooking(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes,
-                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime,
-                                                        customer.FirstName, customer.LastName, customer.EmailAddress, customer.PhoneNumber);
+                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration = roundedDuration + " hours";
+                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice = totalBookingPrice + " USD";
 
-                            await emailService.SendEmail(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes,
-                                                         BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime,
-                                                         customer.FirstName, customer.LastName, customer.EmailAddress, customer.PhoneNumber);
-                        }
-                        catch (Exception ex) 
-                        {
-                            var exception = ex.Message;
-                        }
-                        finally
-                        {
-                            sqLiteConnection.Dispose();
+                            var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
 
-                            HockeyApp.MetricsManager.TrackEvent("BookingCompletedSuccessfully",
-                                                new Dictionary<string, string>
-                                                {
+                            var customer = sqLiteConnection.Table<Customer>().First();
+
+                            try
+                            {
+                                await manager.AddNewBooking(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes,
+                                                            BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime,
+                                                            customer.FirstName, customer.LastName, customer.EmailAddress, customer.PhoneNumber);
+
+                                await emailService.SendEmail(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDate,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceTime,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServicePrice,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceApproximateDuration,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceStreet,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceCity,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceState,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceZipCode,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceResidence,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceType,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceNotes,
+                                                             BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceDateTime,
+                                                             customer.FirstName, customer.LastName, customer.EmailAddress, customer.PhoneNumber);
+                            }
+                            catch (Exception ex)
+                            {
+                                var exception = ex.Message;
+                            }
+                            finally
+                            {
+                                sqLiteConnection.Dispose();
+
+                                HockeyApp.MetricsManager.TrackEvent("BookingCompletedSuccessfully",
+                                                    new Dictionary<string, string>
+                                                    {
                                                     {"Time", DateTime.UtcNow.ToString() }
-                                                },
-                                                new Dictionary<string, double>
-                                                {
+                                                    },
+                                                    new Dictionary<string, double>
+                                                    {
                                                     {"Value", 2.5 }
-                                                });
+                                                    });
 
+                                this.IsBusy = false;
+                                finishBookingButton.IsEnabled = true;
+
+                                await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Booking Details'", "OK");
+
+                                await Navigation.PushAsync(new MainPage());
+                            }
+                        }
+                        else
+                        {
                             this.IsBusy = false;
                             finishBookingButton.IsEnabled = true;
-
-                            await DisplayAlert("Success!", "Your booking has been confirmed. You will find details in 'Booking Details'", "OK");
-
-                            await Navigation.PushAsync(new MainPage());
                         }
                     }
                     else
                     {
-                        this.IsBusy = false;
                         finishBookingButton.IsEnabled = true;
+                        this.IsBusy = false;
+
+                        await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
                     }
                 }
                 else
                 {
-                    finishBookingButton.IsEnabled = true;
-                    this.IsBusy = false;
-
-                    await DisplayAlert("Network connection not found", "Please try again with an active network connection.", "OK");
+                    await DisplayAlert("", "Please accept the Terms and Conditions before finishing your booking.", "OK");
                 }
             }
         }

@@ -34,9 +34,8 @@
     <EmbeddedResource Include="Views\ServiceDateTimePage.xaml" />
     <EmbeddedResource Include="Views\ServiceLocationPage.xaml" />
     <EmbeddedResource Include="Views\SignUpPage.xaml" />
-    <EmbeddedResource Include="Views\Unused\SelectServicePage.xaml" />
     <EmbeddedResource Include="Images\child-1245893_1280.jpg" />
-    <EmbeddedResource Include="Views\PrivacyPolicyPage.xaml">
+    <EmbeddedResource Include="Views\TermsAndConditionsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
@@ -52,7 +51,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\PrivacyPolicyPage.xaml.cs">
-      <DependentUpon>PrivacyPolicyPage.xaml</DependentUpon>
+      <DependentUpon>TermsAndConditionsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\TermsAndConditionsPage.xaml.cs">
+      <DependentUpon>TermsAndConditionsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 </Project>
