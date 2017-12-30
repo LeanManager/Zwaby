@@ -37,6 +37,16 @@ namespace Zwaby.Views
             {
                 await DisplayAlert("", "To better prepare for your service, please select the type of cleaning service.", "OK");
             }
+            else if (datePicker.Date.DayOfWeek == DayOfWeek.Sunday)
+            {
+                await DisplayAlert("", "Please select a day from Monday to Saturday.", "OK");
+            }
+            else if ((timePicker.Time.Hours == 8 && timePicker.Time.Minutes < 30) ||
+                     (timePicker.Time.Hours == 15 && timePicker.Time.Minutes != 0) ||
+                      timePicker.Time.Hours > 15 || timePicker.Time.Hours < 8)
+            {
+                await DisplayAlert("", "Please select a time between 8:30 AM and 3:00 PM.", "OK");
+            }
             else
             {
                 AddBookingDateTimeDetails();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Plugin.Connectivity;
 using Xamarin.Forms;
 using XamarinForms.SQLite.SQLite;
@@ -26,8 +27,6 @@ namespace Zwaby.Views
 
             this.BackgroundColor = Color.FromRgb(0, 240, 255);
 
-            TermsAndConditions.TermsAndConditionsInstance = new TermsAndConditions();
-
             ExceptionModel.ExceptionModelInstance = new ExceptionModel();
 
             pricingManager = new PricingManager();
@@ -51,7 +50,7 @@ namespace Zwaby.Views
             {
                 try
                 {
-                    AssignPriceAndDuration();
+                    await AssignPriceAndDuration();
                 }
                 catch (Exception ex)
                 {
@@ -70,7 +69,7 @@ namespace Zwaby.Views
             }
         }
 
-        private async void AssignPriceAndDuration()
+        private async Task AssignPriceAndDuration()
         {
             var values = await pricingManager.GeneratePriceAndDuration(BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBedrooms,
                                                                        BookingDetailsViewModel.BookingDetailsViewModelInstance.ServiceBathrooms,

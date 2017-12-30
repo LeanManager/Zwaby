@@ -7,6 +7,40 @@ namespace Zwaby.ViewModels
 {
     public class ServiceLocationPageViewModel : ViewModelBase
     {
+        public ServiceLocationPageViewModel()
+        {
+            var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
+
+            var variable = sqLiteConnection.GetTableInfo(typeof(CustomerAddress).Name);
+
+            if (variable.Count == 0)
+            {
+                sqLiteConnection.CreateTable<CustomerAddress>();
+
+                sqLiteConnection.Insert(new CustomerAddress());
+            }
+            else
+            {
+                var customerAddress = sqLiteConnection.Table<CustomerAddress>().First();
+
+                Street = customerAddress.Street;
+
+                City = customerAddress.City;
+
+                State = customerAddress.State;
+
+                ZipCode = customerAddress.ZipCode;
+
+                ResidenceType = customerAddress.ResidenceType;
+
+                Bedrooms = customerAddress.Bedrooms;
+
+                Bathrooms = customerAddress.Bathrooms;
+            }
+
+            sqLiteConnection.Dispose();
+        }
+
         private string street;
         public string Street
         {
@@ -223,40 +257,5 @@ namespace Zwaby.ViewModels
 				return bathrooms;
 			}
 		}
-
-
-        public ServiceLocationPageViewModel()
-        {
-			var sqLiteConnection = DependencyService.Get<ISQLite>().GetConnection();
-
-			var variable = sqLiteConnection.GetTableInfo(typeof(CustomerAddress).Name);
-
-			if (variable.Count == 0)
-			{
-				sqLiteConnection.CreateTable<CustomerAddress>();
-
-                sqLiteConnection.Insert(new CustomerAddress());
-			}
-            else
-            {
-				var customerAddress = sqLiteConnection.Table<CustomerAddress>().First();
-
-				Street = customerAddress.Street;
-
-                City = customerAddress.City;
-
-                State = customerAddress.State;
-
-                ZipCode = customerAddress.ZipCode;
-
-                ResidenceType = customerAddress.ResidenceType;
-
-                Bedrooms = customerAddress.Bedrooms;
-
-                Bathrooms = customerAddress.Bathrooms;
-            }
-
-            sqLiteConnection.Dispose();
-        }
     }
 }

@@ -18,8 +18,10 @@ namespace Zwaby
 
             // BookingDetailsViewModel "singleton"
             BookingDetailsViewModel.BookingDetailsViewModelInstance = new BookingDetailsViewModel();
-
             BookingDetailsViewModel.BookingDetailsViewModelInstance.RestoreState(Current.Properties);
+
+            TermsAndConditions.TermsAndConditionsInstance = new TermsAndConditions();
+            TermsAndConditions.TermsAndConditionsInstance.RestoreState(Current.Properties);
 
             MainPage = new NavigationPage(new MainPage());
 
@@ -64,6 +66,9 @@ namespace Zwaby
                                                                              price, duration, street, city,
                                                                              state, zip, residence, bedrooms,
                                                                              bathrooms, serviceType, notes, serviceTime);
+
+            var isAcknowledged = TermsAndConditions.TermsAndConditionsInstance.IsAcknowledged;
+            TermsAndConditions.TermsAndConditionsInstance.SaveState(Current.Properties, isAcknowledged);
         }
 
         protected override void OnResume()

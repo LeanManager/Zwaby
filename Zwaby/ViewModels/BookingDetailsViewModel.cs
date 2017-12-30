@@ -5,10 +5,6 @@ namespace Zwaby.ViewModels
 {
     public class BookingDetailsViewModel : ViewModelBase
     {
-        // TODO: Use BookingDetails.cs class? To store it in the database
-
-        // TODO: Cleaning service type property (general vs deep)
-
         public static BookingDetailsViewModel BookingDetailsViewModelInstance { get; set; }
 
         public string ServiceDate { get; set; }

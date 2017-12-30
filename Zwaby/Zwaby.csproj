@@ -57,4 +57,7 @@
       <DependentUpon>TermsAndConditionsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="CustomControls\" />
+  </ItemGroup>
 </Project>

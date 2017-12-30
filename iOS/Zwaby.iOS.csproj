@@ -187,6 +187,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
+    <Folder Include="CustomRenderers\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -202,6 +203,8 @@
     <Compile Include="FileAccessHelper.cs" />
     <Compile Include="SQLite\SQLite_iOS.cs" />
     <Compile Include="Stripe_iOS.cs" />
+    <Compile Include="CustomRenderers\ExtendedTimePickerRenderer.cs" />
+    <Compile Include="CustomRenderers\NoCaretField.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="child-1245893_1280.jpg" />
