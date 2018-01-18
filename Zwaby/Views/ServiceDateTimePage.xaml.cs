@@ -15,7 +15,7 @@ namespace Zwaby.Views
         {
             InitializeComponent();
 
-            this.BackgroundColor = Color.FromRgb(0, 240, 255);
+            this.BackgroundColor = Color.FromRgb(0, 200, 255);
 
             // Earliest booking for the following day
             datePicker.MinimumDate = DateTime.Now.AddDays(1);

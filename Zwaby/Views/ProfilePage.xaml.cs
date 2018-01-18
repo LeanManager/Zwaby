@@ -4,21 +4,31 @@ using System.Collections.Generic;
 using Xamarin.Forms;
 using XamarinForms.SQLite.SQLite;
 using Zwaby.Models;
+using Zwaby.Services;
 using Zwaby.ViewModels;
 
 namespace Zwaby.Views
 {
     public partial class ProfilePage : ContentPage
     {
+        private NotificationService service;
+
         public ProfilePage()
         {
             InitializeComponent();
 
-            this.BackgroundColor = Color.FromRgb(0, 240, 255);
+            this.BackgroundColor = Color.FromRgb(0, 200, 255);
+
+            service = new NotificationService();
 
             var viewModel = new ProfilePageViewModel();
 
             this.BindingContext = viewModel;
+        }
+
+        async void EntryUnfocused(object sender, Xamarin.Forms.FocusEventArgs e)
+        {
+            await service.SendEmail(firstName.Text, lastName.Text, phoneNumber.Text, emailAddress.Text);
         }
 
         async void OnFirstNameClicked(object sender, System.EventArgs e)

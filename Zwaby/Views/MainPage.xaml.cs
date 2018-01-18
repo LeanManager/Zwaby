@@ -12,7 +12,7 @@ namespace Zwaby.Views
         {
             InitializeComponent();
 
-            this.BackgroundColor = Color.FromRgb(0, 240, 255);
+            this.BackgroundColor = Color.FromRgb(0, 200, 255);
 
             NavigationPage.SetHasBackButton(this, false);
         }

@@ -98,7 +98,7 @@
 
             <Entry x:Name="phoneNumber" Style="{StaticResource entryStyle}"
                    Text="{Binding PhoneNumber, Mode=TwoWay}" Placeholder="Phone Number"
-                   Grid.Row="6"/>
+                   Grid.Row="6" Unfocused="EntryUnfocused"/>
 
             <Button Text=" Edit phone number " Style="{StaticResource buttonStyle}" Margin="0,0,0,15"
                     Clicked="OnPhoneNumberClicked"

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:Zwaby;assembly=Zwaby"
+             xmlns:ef="clr-namespace:Zwaby.Effects" 
              x:Class="Zwaby.Views.MainPage"
              Title="Home">
 
@@ -40,13 +41,25 @@
                Source="{local:ImageResource Zwaby.Images.child-1245893_1280.jpg}"/>
 
         <Button Text="Book Cleaning" Grid.Row="1" Style="{StaticResource buttonStyle}"
-                Clicked="OnBookCleaningClicked" Margin="8,20,8,0"/>
+                Clicked="OnBookCleaningClicked" Margin="8,20,8,0">
+            <Button.Effects>   
+                <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
+            </Button.Effects>      
+        </Button>        
 
         <Button Text="Booking Details" Grid.Row="2" Style="{StaticResource buttonStyle}"
-                Clicked="OnBookingDetailsClicked"/>
+                Clicked="OnBookingDetailsClicked">
+            <Button.Effects>   
+                <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
+            </Button.Effects>      
+        </Button>              
 
         <Button Text="Profile" Grid.Row="3" Style="{StaticResource buttonStyle}"
-                Clicked="OnProfileClicked"/>
+                Clicked="OnProfileClicked">
+            <Button.Effects>   
+                <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
+            </Button.Effects>        
+        </Button>          
 
     </Grid>
 

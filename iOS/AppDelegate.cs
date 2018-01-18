@@ -23,8 +23,6 @@ namespace Zwaby.iOS
 
             LoadApplication(new App());
 
-            //System.Threading.Thread.Sleep(2000); 
-
             return base.FinishedLaunching(app, options);
         }
     }

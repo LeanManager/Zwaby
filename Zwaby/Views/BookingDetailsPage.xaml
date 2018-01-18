@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Zwaby.Views.BookingDetailsPage"
+             xmlns:ef="clr-namespace:Zwaby.Effects" 
              Title="Booking Details">
 
     <ContentPage.Resources>
@@ -93,29 +94,33 @@
             <Label x:Name="serviceType" Style="{StaticResource bindingLabelStyle}"
                    Grid.Row="9"/>
 
-            <Label Text="Cleaning service" Style="{StaticResource staticLabelStyle}"
+            <Label Text="Cleaning service rating" Style="{StaticResource staticLabelStyle}"
                    Grid.Row="10"/>
 
-            <Label Text="The Cleaning Authority  " Style="{StaticResource bindingLabelStyle}"
+            <Label Text="5 stars  " Style="{StaticResource bindingLabelStyle}"
                    Grid.Row="11"/>
             
-            <Label Text="Cleaning service rating" Style="{StaticResource staticLabelStyle}"
+            <Label Text="Contact phone number" Style="{StaticResource staticLabelStyle}"
                    Grid.Row="12"/>
 
-            <Label Text="5 stars  " Style="{StaticResource bindingLabelStyle}"
+            <Label Text="469-995-6899  " Style="{StaticResource bindingLabelStyle}"
                    Grid.Row="13"/>
 
-            <Label Text="Zwaby platform rating" Style="{StaticResource staticLabelStyle}"
+            <Label Text="Contact email" Style="{StaticResource staticLabelStyle}"
                    Grid.Row="14"/>
 
-            <Label Text="5 stars  " Style="{StaticResource bindingLabelStyle}"
+            <Label Text="zwabyapp@gmail.com  " Style="{StaticResource bindingLabelStyle}"
                    Grid.Row="15"/>
 
             <Image x:Name="bookingImage" Aspect="AspectFit"
                    Grid.Row="16"/>
 
             <Button Text="Cancel Booking" FontSize="20" FontAttributes="Bold"
-                    Grid.Row="17" BackgroundColor="White" Clicked="OnCancelBookingClicked"/>
+                    Grid.Row="17" BackgroundColor="White" Clicked="OnCancelBookingClicked">
+                <Button.Effects>   
+                    <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
+                </Button.Effects>     
+            </Button>    
             
         </Grid>
 

@@ -188,6 +188,7 @@
   <ItemGroup>
     <Folder Include="Resources\" />
     <Folder Include="CustomRenderers\" />
+    <Folder Include="Effects\" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
@@ -205,6 +206,7 @@
     <Compile Include="Stripe_iOS.cs" />
     <Compile Include="CustomRenderers\ExtendedTimePickerRenderer.cs" />
     <Compile Include="CustomRenderers\NoCaretField.cs" />
+    <Compile Include="Effects\ButtonShadowEffect.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="child-1245893_1280.jpg" />

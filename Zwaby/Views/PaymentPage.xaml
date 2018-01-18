@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Zwaby.Views.PaymentPage"
+             xmlns:ef="clr-namespace:Zwaby.Effects" 
              Title="Payment"
              x:Name="paymentPage">
 
@@ -87,7 +88,11 @@
 
         <Button Text="Finish Booking" FontSize="22" FontAttributes="Bold" BackgroundColor="White"
                 Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" x:Name="finishBookingButton"
-                Clicked="OnFinishBookingClicked" Margin="0,12,0,0"/>   
+                Clicked="OnFinishBookingClicked" Margin="0,12,0,0">  
+            <Button.Effects>   
+                <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
+            </Button.Effects>         
+        </Button>        
 
         <ActivityIndicator IsVisible="{Binding Source={x:Reference paymentPage}, Path=IsBusy}"
                            IsRunning="{Binding Source={x:Reference paymentPage}, Path=IsBusy}"

@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:converters="clr-namespace:Zwaby.Converters;assembly=Zwaby"
+             xmlns:ef="clr-namespace:Zwaby.Effects" 
              x:Class="Zwaby.Views.ServiceLocationPage"
              Title="Location">
 
@@ -141,7 +142,11 @@
 
         <Button Text="Next" FontAttributes="Bold" BackgroundColor="White" FontSize="22"
                 Grid.Row="9"  Grid.Column="0" Grid.ColumnSpan="3" Margin="0,10,0,0"
-                Clicked="OnNextClicked"/>
+                Clicked="OnNextClicked">
+            <Button.Effects>   
+                <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
+            </Button.Effects> 
+        </Button>        
         
     </Grid>
     </ScrollView>

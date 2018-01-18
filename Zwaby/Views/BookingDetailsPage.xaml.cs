@@ -12,7 +12,7 @@ namespace Zwaby.Views
 		{
 			InitializeComponent();
 
-			this.BackgroundColor = Color.FromRgb(0, 240, 255);
+			this.BackgroundColor = Color.FromRgb(0, 200, 255);
 
 			bookingImage.Source = ImageSource.FromResource("Zwaby.Images.child-1245893_1280.jpg");
 
