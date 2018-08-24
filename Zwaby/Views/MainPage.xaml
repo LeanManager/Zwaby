@@ -3,27 +3,35 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:local="clr-namespace:Zwaby;assembly=Zwaby"
              xmlns:ef="clr-namespace:Zwaby.Effects" 
+             xmlns:custom="clr-namespace:Zwaby.CustomControls"
              x:Class="Zwaby.Views.MainPage"
-             Title="Home">
+             Title="Home"
+             BackgroundColor="White">
 
     <ContentPage.Resources>
-        <ResourceDictionary>
+        <ResourceDictionary> 
             <Style x:Key="buttonStyle" TargetType="Button">
-                <Setter Property="BackgroundColor"
-                        Value="White" />
                 <Setter Property="FontSize"
                         Value="20" />
                 <Setter Property="FontAttributes"
                         Value="Bold"/>
                 <Setter Property="Margin"
                         Value="8,0,8,0"/>
+                <Setter Property="BorderWidth"
+                        Value="1.0"/>
+                <Setter Property="BorderColor"
+                        Value="Black"/>
+                <Setter Property="TextColor"
+                        Value="Black"/> 
+                <Setter Property="BackgroundColor"
+                        Value="White"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ScrollView>
     
-	<Grid Padding="0,20,0,15" RowSpacing="25">
+	<Grid Padding="0,20,0,15" RowSpacing="30">
         <!-- 7 rows -->
         <Grid.RowDefinitions>
             <RowDefinition Height="250" />
@@ -37,29 +45,35 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Image x:Name="homeImage" Grid.Row="0" Aspect="AspectFit"
+        <Image x:Name="homeImage" Grid.Row="0" Aspect="AspectFit" Margin="0,20,0,0"
                Source="{local:ImageResource Zwaby.Images.child-1245893_1280.jpg}"/>
 
-        <Button Text="Book Cleaning" Grid.Row="1" Style="{StaticResource buttonStyle}"
-                Clicked="OnBookCleaningClicked" Margin="8,20,8,0">
-            <Button.Effects>   
+        <StackLayout Grid.Row="1">   
+        <custom:ExtendedButton Text="Book Cleaning" Style="{StaticResource buttonStyle}"
+                Clicked="OnBookCleaningClicked" Margin="8,20,8,0" x:Name="button1">
+            <custom:ExtendedButton.Effects>   
                 <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
-            </Button.Effects>      
-        </Button>        
+            </custom:ExtendedButton.Effects>   
+        </custom:ExtendedButton> 
 
-        <Button Text="Booking Details" Grid.Row="2" Style="{StaticResource buttonStyle}"
-                Clicked="OnBookingDetailsClicked">
-            <Button.Effects>   
-                <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
-            </Button.Effects>      
-        </Button>              
+                <StackLayout.Effects>
+                    <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>
+                </StackLayout.Effects>
+        </StackLayout> 
 
-        <Button Text="Profile" Grid.Row="3" Style="{StaticResource buttonStyle}"
-                Clicked="OnProfileClicked">
-            <Button.Effects>   
+        <custom:ExtendedButton Text="Booking Details" Grid.Row="2" Style="{StaticResource buttonStyle}"
+                Clicked="OnBookingDetailsClicked" x:Name="button2">
+            <custom:ExtendedButton.Effects>   
                 <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
-            </Button.Effects>        
-        </Button>          
+            </custom:ExtendedButton.Effects>      
+        </custom:ExtendedButton>              
+
+        <custom:ExtendedButton Text="Profile" Grid.Row="3" Style="{StaticResource buttonStyle}"
+                Clicked="OnProfileClicked" x:Name="button3">
+            <custom:ExtendedButton.Effects>   
+                <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
+            </custom:ExtendedButton.Effects>      
+        </custom:ExtendedButton>          
 
     </Grid>
 

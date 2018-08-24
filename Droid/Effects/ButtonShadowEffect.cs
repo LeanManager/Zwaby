@@ -19,8 +19,8 @@ namespace Zwaby.Droid.Effects
         {
             // TODO: Shadow customization
 
-            Button button = Element as Button;
-            if (button == null)
+            //Button button = Element as Button;
+            if (Element == null)
                 return;
 
             try
@@ -32,9 +32,19 @@ namespace Zwaby.Droid.Effects
                     float radius = effect.Radius;
                     float distanceX = effect.DistanceX;
                     float distanceY = effect.DistanceY;
-                    //Android.Graphics.Color color = effect.Color.ToAndroid();
-                    Android.Graphics.Color color = Android.Graphics.Color.Silver;
+                    Android.Graphics.Color color = effect.Color.ToAndroid();
+                    //Android.Graphics.Color color = Android.Graphics.Color.LightSlateGray;
                     control.SetShadowLayer(radius, distanceX, distanceY, color);
+                    //control.SetHintTextColor(Android.Graphics.Color.Black);
+
+                    // TODO: Set TranslationZ and Elevation
+
+                    //control.StateListAnimator = new Android.Animation.StateListAnimator();
+                    //Control.Elevation = 12.0f;
+                    //Control.TranslationZ = 14.0f;
+                    //Control.SetBackgroundResource(Resource.Layout.shadow);
+                    //Control.SetBackgroundColor(color);
+                    //control.TranslationZ = 14;);
                 }
             }
             catch (Exception ex)

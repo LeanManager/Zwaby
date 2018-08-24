@@ -13,7 +13,7 @@
                 <Setter Property="FontAttributes"
                         Value="Bold"/>
                 <Setter Property="TextColor"
-                        Value="Blue" />
+                        Value="Black" />
                 <Setter Property="HorizontalTextAlignment"
                         Value="Center" />
                 <Setter Property="VerticalTextAlignment"
@@ -21,10 +21,8 @@
             </Style>
 
             <Style x:Key="bindingLabelStyle" TargetType="Label">
-                <Setter Property="BackgroundColor"
-                        Value="White" />
                 <Setter Property="TextColor"
-                        Value="Blue" />
+                        Value="Black" />
                 <Setter Property="VerticalTextAlignment"
                         Value="Center" />
                 <Setter Property="HorizontalTextAlignment"
@@ -116,6 +114,7 @@
                    Grid.Row="16"/>
 
             <Button Text="Cancel Booking" FontSize="20" FontAttributes="Bold"
+                    BorderWidth="1.0" BorderColor="Black" TextColor="Black"
                     Grid.Row="17" BackgroundColor="White" Clicked="OnCancelBookingClicked">
                 <Button.Effects>   
                     <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    

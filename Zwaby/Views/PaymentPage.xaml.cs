@@ -25,7 +25,8 @@ namespace Zwaby.Views
         {
             InitializeComponent();
 
-            this.BackgroundColor = Color.FromRgb(0, 200, 255);
+            //this.BackgroundColor = Color.FromRgb(0, 200, 255);
+            this.BackgroundColor = Color.White;
 
             ExceptionModel.ExceptionModelInstance = new ExceptionModel();
 

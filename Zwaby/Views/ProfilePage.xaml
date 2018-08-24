@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:ef="clr-namespace:Zwaby.Effects"
+             xmlns:custom="clr-namespace:Zwaby.CustomControls"
              x:Class="Zwaby.Views.ProfilePage"
              Title="Profile">
 
@@ -15,11 +17,15 @@
                         Value="Bold"/>
                 <Setter Property="HorizontalOptions"
                         Value="Center"/>
+                <Setter Property="TextColor"
+                        Value="Black"/>
+                <Setter Property="BorderWidth"
+                        Value="1.0"/>
             </Style>
 
             <Style x:Key="entryStyle" TargetType="Entry">
                 <Setter Property="TextColor"
-                        Value="DarkBlue" />
+                        Value="Black" />
                 <Setter Property="PlaceholderColor"
                         Value="Gray" />
                 <Setter Property="FontAttributes"
@@ -34,6 +40,11 @@
                         Value="45" />
                 <Setter Property="HorizontalTextAlignment"
                         Value="Center" />
+                <!--<Setter Property="Effects">
+                    <Setter.Value>
+                        <ef:BorderEffect Color="Black"/>
+                    </Setter.Value>
+                </Setter>-->
             </Style>
 
             <Style x:Key="labelStyle" TargetType="Label">
@@ -54,7 +65,7 @@
     <ScrollView>
     
 	    <Grid Padding="10,25,10,15">   
-            <!-- 10 rows -->
+            <!-- 9 rows -->
             <Grid.RowDefinitions>
                 <RowDefinition Height="45" />
                 <RowDefinition Height="65" />
@@ -74,35 +85,67 @@
 
             <Entry x:Name="firstName" Style="{StaticResource entryStyle}"
                    Text="{Binding FirstName, Mode=TwoWay}" Placeholder="First Name" 
-                   Grid.Row="0"/>
+                   Grid.Row="0">
+                <Entry.Effects>
+                    <ef:BorderEffect Color="Black" Width="1.0" Radius="6.0"/>
+                </Entry.Effects>    
+            </Entry>    
 
             <Button Text=" Edit first name " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
                     Clicked="OnFirstNameClicked"
-                    Grid.Row="1"/>
+                    Grid.Row="1">
+                <Button.Effects>   
+                    <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
+                </Button.Effects>  
+            </Button>    
 
             <Entry x:Name="lastName" Style="{StaticResource entryStyle}"
                    Text="{Binding LastName, Mode=TwoWay}" Placeholder="Last Name"
-                   Grid.Row="2"/>
+                   Grid.Row="2">
+                <Entry.Effects>
+                    <ef:BorderEffect Color="Black" Width="1.0" Radius="6.0"/>
+                </Entry.Effects>  
+            </Entry>    
 
             <Button Text=" Edit last name " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
                     Clicked="OnLastNameClicked"
-                    Grid.Row="3"/>
+                    Grid.Row="3">
+                <Button.Effects>   
+                    <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
+                </Button.Effects>  
+            </Button>    
 
             <Entry x:Name="emailAddress" Style="{StaticResource entryStyle}"
                    Text="{Binding EmailAddress, Mode=TwoWay}" Placeholder="Email Address"
-                   Grid.Row="4"/>
+                   Grid.Row="4">
+                <Entry.Effects>
+                    <ef:BorderEffect Color="Black" Width="1.0" Radius="6.0"/>
+                </Entry.Effects>  
+            </Entry>    
 
             <Button Text=" Edit email address " Style="{StaticResource buttonStyle}" Margin="0,0,0,20"
                     Clicked="OnEmailAddressClicked"
-                    Grid.Row="5"/>
+                    Grid.Row="5">
+                <Button.Effects>   
+                    <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
+                </Button.Effects>  
+            </Button>    
 
             <Entry x:Name="phoneNumber" Style="{StaticResource entryStyle}"
                    Text="{Binding PhoneNumber, Mode=TwoWay}" Placeholder="Phone Number"
-                   Grid.Row="6" Unfocused="EntryUnfocused"/>
+                   Grid.Row="6" Unfocused="EntryUnfocused">
+                <Entry.Effects>
+                    <ef:BorderEffect Color="Black" Width="1.0" Radius="6.0"/>
+                </Entry.Effects>  
+            </Entry>    
 
             <Button Text=" Edit phone number " Style="{StaticResource buttonStyle}" Margin="0,0,0,15"
                     Clicked="OnPhoneNumberClicked"
-                    Grid.Row="7"/>
+                    Grid.Row="7">
+                <Button.Effects>   
+                    <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
+                </Button.Effects>  
+            </Button>    
 
             <!--<Label Text="Zwaby platform rating: 5 stars" Style="{StaticResource labelStyle}"
                    Grid.Row="8" HorizontalTextAlignment="Center" VerticalTextAlignment="End"/> -->

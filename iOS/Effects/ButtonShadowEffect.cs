@@ -30,7 +30,8 @@ namespace Zwaby.iOS.Effects
                 if (effect != null)
                 {
                     Control.Layer.CornerRadius = effect.Radius;
-                    Control.Layer.ShadowColor = effect.Color.ToCGColor();
+                    //Control.Layer.ShadowColor = effect.Color.ToCGColor();
+                    Control.Layer.ShadowColor = Color.FromRgb(45, 45, 45).ToCGColor();
                     Control.Layer.ShadowOffset = new CGSize(effect.DistanceX, effect.DistanceY);
                     Control.Layer.ShadowOpacity = 1.0f;
                 }

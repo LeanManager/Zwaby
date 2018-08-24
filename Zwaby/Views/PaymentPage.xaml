@@ -2,7 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="Zwaby.Views.PaymentPage"
+             xmlns:local="clr-namespace:Zwaby;assembly=Zwaby"
              xmlns:ef="clr-namespace:Zwaby.Effects" 
+             xmlns:custom="clr-namespace:Zwaby.CustomControls"
              Title="Payment"
              x:Name="paymentPage">
 
@@ -10,7 +12,7 @@
         <ResourceDictionary>
             <Style x:Key="labelStyle" TargetType="Label">
                 <Setter Property="TextColor"
-                        Value="Blue" />
+                        Value="Black" />
                 <Setter Property="FontAttributes"
                         Value="Bold"/>
             </Style>
@@ -19,12 +21,12 @@
 
     <ScrollView>
     
-	<Grid Padding="20,20,20,20" RowSpacing="17">
+	<Grid Padding="20,8,20,20" RowSpacing="17">
         <Grid.RowDefinitions>
-            <!-- 10 rows -->    
+            <!-- 11 rows -->    
             <RowDefinition Height="35" />
             <RowDefinition Height="35" />
-            <RowDefinition Height="35" />
+            <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
             <RowDefinition Height="40" />
@@ -61,38 +63,63 @@
                Style="{StaticResource labelStyle}"
                Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="4"/> 
 
+        <Image Aspect="AspectFit" Grid.Row="2" Grid.Column="3" Margin="20,0,0,0"
+               Source="{local:ImageResource Zwaby.Images.stripelock.png}"/>    
+
         <Entry Placeholder="Name on card" x:Name="cardName"
-               Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"/> 
+               Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="4"> 
+            <Entry.Effects>
+                <ef:BorderEffect Color="Black" Width="1.0" Radius="6.0"/>
+            </Entry.Effects>       
+        </Entry>        
             <!-- Text="{Binding CreditCardName, Mode=TwoWay}" -->
             
         <Entry Placeholder="Card number" x:Name="cardNumber" 
-               Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4"/>
+               Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4">
+            <Entry.Effects>
+                <ef:BorderEffect Color="Black" Width="1.0" Radius="6.0"/>
+            </Entry.Effects>       
+        </Entry>        
             <!-- Text="{Binding CreditCardNumber, Mode=TwoWay}" -->
 
         <Entry Placeholder="Expiration date" x:Name="expirationDate"
-               Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4"/> 
+               Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="4"> 
+            <Entry.Effects>
+                <ef:BorderEffect Color="Black" Width="1.0" Radius="6.0"/>
+            </Entry.Effects>       
+        </Entry>        
             <!-- Text="{Binding ExpirationDate, Mode=TwoWay}" -->
 
         <Entry Placeholder="Security code" x:Name="securityCode"
-               Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"/> 
+               Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="4"> 
+            <Entry.Effects>
+                <ef:BorderEffect Color="Black" Width="1.0" Radius="6.0"/>
+            </Entry.Effects>       
+        </Entry>        
             <!-- Text="{Binding SecurityCode, Mode=TwoWay}" -->
 
         <Entry Placeholder="Billing zip code" x:Name="billingZipCode"
-               Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4"/> 
+               Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4"> 
+            <Entry.Effects>
+                <ef:BorderEffect Color="Black" Width="1.0" Radius="6.0"/>
+            </Entry.Effects>       
+        </Entry>        
             <!-- Text="{Binding BillingZipCode, Mode=TwoWay}" -->
 
         <Button Text="Terms and Conditions" FontSize="19" 
                 FontAttributes="Bold" BackgroundColor="White"
+                BorderColor="Black" BorderWidth="1.0" TextColor="Black"
                 Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="4"
                 Clicked="OnTermsAndConditionsClicked"/>    
 
-        <Button Text="Finish Booking" FontSize="22" FontAttributes="Bold" BackgroundColor="White"
+        <custom:ExtendedButton Text="Finish Booking" FontSize="22" FontAttributes="Bold" BackgroundColor="White"
                 Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="4" x:Name="finishBookingButton"
+                BorderColor="Black" BorderWidth="1.0" TextColor="Black"
                 Clicked="OnFinishBookingClicked" Margin="0,12,0,0">  
-            <Button.Effects>   
+            <custom:ExtendedButton.Effects>   
                 <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
-            </Button.Effects>         
-        </Button>        
+            </custom:ExtendedButton.Effects>         
+        </custom:ExtendedButton>        
 
         <ActivityIndicator IsVisible="{Binding Source={x:Reference paymentPage}, Path=IsBusy}"
                            IsRunning="{Binding Source={x:Reference paymentPage}, Path=IsBusy}"

@@ -21,14 +21,19 @@
             </Grid.ColumnDefinitions>
 
             <Label Text="Please tell us why you would like to cancel your cleaning service:"
-                   TextColor="Blue" FontAttributes="Bold"
+                   TextColor="Black" FontAttributes="Bold"
                    Grid.Row="0"/>
 
             <Editor x:Name="cancellationNotes" Margin="0,0,0,25"
-                    Grid.Row="1"/>
+                    Grid.Row="1">
+                <Editor.Effects>
+                    <ef:EditorOutlineEffect Color="Black" Width="1.0" Radius="6.0" />
+                </Editor.Effects> 
+            </Editor>    
 
             <Button Text="Finish Cancellation" BackgroundColor="White"
                     FontAttributes="Bold" FontSize="20"
+                    BorderColor="Black" BorderWidth="1.0" TextColor="Black"
                     Clicked="OnFinishCancellationClicked"
                     Grid.Row="2">
                 <Button.Effects>   

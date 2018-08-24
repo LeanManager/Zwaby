@@ -17,11 +17,10 @@ namespace Zwaby.Views
         {
             InitializeComponent();
 
-            this.BackgroundColor = Color.FromRgb(0, 200, 255);
+            //this.BackgroundColor = Color.FromRgb(0, 200, 255);
+            this.BackgroundColor = Color.White;
 
             manager = new CancellationsManager();
-
-            // TODO: Cancellation policy check - PushModalAsync (24 hours prior for 50% refund, 48 hours prior for full refund(?))
         }
 
         async void OnFinishCancellationClicked(object sender, System.EventArgs e)

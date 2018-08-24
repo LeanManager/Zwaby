@@ -4,13 +4,14 @@
              x:Class="Zwaby.Views.ServiceDateTimePage"
              xmlns:local="clr-namespace:Zwaby.CustomControls;assembly=Zwaby"
              xmlns:ef="clr-namespace:Zwaby.Effects" 
+             xmlns:custom="clr-namespace:Zwaby.CustomControls"
              Title="Date and Time">
 
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="labelStyle" TargetType="Label">
                 <Setter Property="TextColor"
-                        Value="Blue" />
+                        Value="Black" />
                 <Setter Property="FontAttributes"
                         Value="Bold"/>
             </Style>
@@ -41,10 +42,18 @@
                Grid.Row="0" VerticalTextAlignment="End"/>
 
         <DatePicker x:Name="datePicker"
-                    Grid.Row="1" />
+                    Grid.Row="1" >
+            <DatePicker.Effects>
+                <ef:DateBorderEffect Color="Black" Width="1.0" Radius="6.0"/>    
+            </DatePicker.Effects>        
+        </DatePicker>        
 
         <TimePicker x:Name="timePicker"
-                    Grid.Row="2" /> 
+                    Grid.Row="2" >
+            <TimePicker.Effects>
+                <ef:TimeBorderEffect Color="Black" Width="1.0" Radius="6.0"/>    
+            </TimePicker.Effects>     
+        </TimePicker>        
 
         <!--<Picker>
 
@@ -59,21 +68,30 @@
             <Picker.Items>
                 <x:String>General Cleaning</x:String>
                 <x:String>Deep Cleaning</x:String>   
-            </Picker.Items>    
+            </Picker.Items>  
+
+            <Picker.Effects>
+                <ef:OutlineEffect Color="Black" Width="1.0" Radius="6.0"/>
+            </Picker.Effects>     
         </Picker>        
 
         <Label Text="Instructions for cleaning professional (optional):" Style="{StaticResource labelStyle}"
                Grid.Row="5" VerticalTextAlignment="End"/> 
 
         <Editor x:Name="instructions"
-                Grid.Row="6" />     
+                Grid.Row="6" >
+            <Editor.Effects>
+                <ef:EditorOutlineEffect Color="Black" Width="1.0" Radius="6.0" />
+            </Editor.Effects>       
+        </Editor>        
 
-        <Button Text="Next" BackgroundColor="White" FontAttributes="Bold" FontSize="22"
+        <custom:ExtendedButton Text="Next" BackgroundColor="White" FontAttributes="Bold" FontSize="22"
+                TextColor="Black" BorderColor="Black" BorderWidth="1.0"
                 Grid.Row="7" Clicked="OnNextClicked" Margin="0,10,0,0"> 
-            <Button.Effects>   
+            <custom:ExtendedButton.Effects>   
                 <ef:ShadowEffect Radius="5" DistanceX="5" DistanceY="5" Color="Black"/>    
-            </Button.Effects>      
-        </Button>        
+            </custom:ExtendedButton.Effects>      
+        </custom:ExtendedButton>        
 
     </Grid>
         

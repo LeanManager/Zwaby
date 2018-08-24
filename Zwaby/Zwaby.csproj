@@ -7,7 +7,6 @@
     <DebugType></DebugType>
   </PropertyGroup>
   <ItemGroup>
-    <None Remove="App.xaml" />
     <None Remove="Views\BookingDetailsPage.xaml" />
     <None Remove="Views\CancelBookingPage.xaml" />
     <None Remove="Views\MainPage.xaml" />
@@ -22,9 +21,21 @@
     <None Remove="Views\Unused\SelectServicePage.xaml" />
     <None Remove="Images\child-1245893_1280.jpg" />
     <None Remove="Views\PrivacyPolicyPage.xaml" />
+    <None Remove="Images\stripelock.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="App.xaml" />
+    <EmbeddedResource Remove="Views\CancelBookingPage.xaml" />
+    <EmbeddedResource Remove="Views\MainPage.xaml" />
+    <EmbeddedResource Remove="Views\BookingDetailsPage.xaml" />
+    <EmbeddedResource Remove="Views\PaymentPage.xaml" />
+    <EmbeddedResource Remove="Views\ProfilePage.xaml" />
+    <EmbeddedResource Remove="Views\RegistrationPage.xaml" />
+    <EmbeddedResource Remove="Views\ServiceDateTimePage.xaml" />
+    <EmbeddedResource Remove="Views\ServiceLocationPage.xaml" />
+    <EmbeddedResource Remove="Views\SignUpPage.xaml" />
+    <EmbeddedResource Remove="Views\TermsAndConditionsPage.xaml" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Views\BookingDetailsPage.xaml" />
     <EmbeddedResource Include="Views\CancelBookingPage.xaml" />
     <EmbeddedResource Include="Views\MainPage.xaml" />
@@ -39,21 +50,22 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="Images\stripelock.png" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
     <PackageReference Include="sqlite-net-pcl" Version="1.4.118" />
     <PackageReference Include="Stripe.net" Version="10.4.0" />
     <PackageReference Include="Xam.Plugins.Messaging" Version="4.0.0" />
-    <PackageReference Include="Xamarin.Forms" Version="2.3.4.270" />
     <PackageReference Include="Xam.Plugin.Connectivity" Version="3.0.3" />
     <PackageReference Include="HockeySDK.Xamarin" Version="5.0.0" />
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.583944" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\PrivacyPolicyPage.xaml.cs">
       <DependentUpon>TermsAndConditionsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\TermsAndConditionsPage.xaml.cs">
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'false' " Update="Views\TermsAndConditionsPage.xaml.cs">
       <DependentUpon>TermsAndConditionsPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
