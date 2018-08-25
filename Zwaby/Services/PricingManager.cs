@@ -10,7 +10,7 @@ namespace Zwaby.Services
 {
     public class PricingManager
     {
-        private string Url = "https://zwaby.azurewebsites.net/api/tca";
+        private string Url = "Your_Azure_API_Url";
 
         public async Task<List<string>> GeneratePriceAndDuration(string bedrooms, string bathrooms, string residence, string serviceType)
         { 

@@ -11,7 +11,7 @@ namespace Zwaby.Services
 {
     public class APIRepository: IAPIRepository
     {
-        const string Url = "https://zwaby.azurewebsites.net/api/payment";
+        const string Url = "Your_Azure_API_Url";
         //private string authorizationKey;
 
         //private async Task<HttpClient> GetClient()

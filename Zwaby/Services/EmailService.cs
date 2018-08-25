@@ -9,7 +9,7 @@ namespace Zwaby.Services
 {
     public class EmailService
     {
-        const string Url = "https://zwaby.azurewebsites.net/api/email";
+        const string Url = "Your_Azure_API_Url";
 
         public async Task<string> SendEmail(string serviceDate, string serviceTime, string servicePrice,
                                             string serviceApproximateDuration, string serviceStreet, string serviceCity,

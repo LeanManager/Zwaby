@@ -9,7 +9,7 @@ namespace Zwaby.Services
 {
     public class CancellationsManager
     {
-        const string Url = "https://zwaby.azurewebsites.net/api/cancellations";
+        const string Url = "Your_Azure_API_Url";
 
         public async Task<string> AddNewCancellation(string cancellationReason, DateTime cancellationDate, string firstName,
                                                      string lastName, string emailAddress, string phoneNumber)

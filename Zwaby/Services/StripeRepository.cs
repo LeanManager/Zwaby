@@ -10,7 +10,7 @@ namespace Zwaby.Services
     {
         public string CreateToken(string cardNumber, string cardExpMonth, string cardExpYear, string cardCVC)
         {
-            StripeConfiguration.SetApiKey("pk_live_vC9FTyLvn4F0bW6RYV9mukG1");
+            StripeConfiguration.SetApiKey("your_stripe_live_api_key");
 
             var tokenOptions = new StripeTokenCreateOptions()
             {
